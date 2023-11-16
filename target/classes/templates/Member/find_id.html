@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이슬톡톡 ISULTOKTALK - 아이디 찾기</title>
+<style>
+
+	
+.head{
+	height: 50px; 
+	background-color:pink;
+	text-align: center;
+	font-size: large;
+	color: #fff;
+	padding-top: 20px;
+}
+
+table{
+	margin:auto; 
+	border: 1px solid lightgray;
+	padding: 30px;
+}
+
+.container {
+	margin-left: 650px;
+	width: 600px;
+	height: 200px;
+	background-color: white;
+	border-radius: 10px;
+}
+
+.container1 {
+	margin-left: 650px;
+	margin-top: 200px;
+	width: 600px;
+	height: 200px;
+	background-color: white;
+	border-radius: 10px;
+}
+
+.login_form {
+  width: 400px;
+  height: 32px;
+  font-size: 15px;
+  border: 0.5px solid gray;
+  border-radius: 5px;
+  outline: none;
+  padding-left: 10px;
+  margin-bottom: 2px;
+}
+
+.button {
+   margin-bottom : 2px;
+    background-color: #e86479;
+    width : 100px;
+    height : 25px;
+    font-weight: 900;
+    color: #fff;
+    border:none;
+    border-radius:5px;
+ }
+.button:hover {
+   background-color: #ffb6c4;
+   border: 1px solid #e86479;
+}
+.button:active {
+   background-color: #ffb6c4;
+   border: 2px solid #e86479;
+}
+
+
+</style>
+</head>
+<body style="margin:0px; padding:0px">
+	<div class="head"><b>아이디 비밀번호 찾기</b></div>
+	<form>
+		<hr style="margin:0px; padding:0px">
+		<div class="container">
+			<table>
+			
+				<tr>
+					<td>
+						<span>아이디 찾기</span>
+						<hr>
+					</td>
+				</tr>
+				<div class="find">
+				<tr>
+					<td>
+						<input type="radio" name="id" value=1 checked>본인 확인 휴대전화로 인증
+						<p style="font-size: small">본인 확인 휴대폰 번호로 인증번호가 발송됩니다.</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" class="login_form" placeholder="이름">
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<input type="text" class="login_form" placeholder="전화번호">
+						<input type="button" class="button" style=height:36px value="인증번호 받기">
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<input type="text" class="login_form" placeholder="인증번호 확인">
+					</td>
+				</tr>
+				
+				<tr>
+						<td colspan="3">
+						<input type="submit" style="width:415px; height:36px;" value="아이디 찾기" class="button">
+						</td>
+				</tr>
+				</div>
+				
+				<br>
+			</table>
+			
+			
+		</div>
+		
+		
+		<div class="container1">
+			<table>
+			
+				<tr>
+					<td>
+						<span>비밀번호 찾기</span>
+						<hr>
+					</td>
+				</tr>
+				<div class="find">
+				<tr>
+					<td>
+						<input type="radio" value=1 checked>본인 확인 이메일로 인증
+						<p style="font-size: small">본인 확인 이메일 주소로 인증번호가 발송됩니다.</p>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<input type="text" class="login_form" placeholder="이메일">
+						<input type="button" class="button" style=height:36px value="인증번호 받기">
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<input type="text" class="login_form" placeholder="인증번호 확인">
+					</td>
+				</tr>
+				
+				<tr>
+						<td colspan="3">
+						<input type="submit" style="width:415px; height:36px;" value="비밀번호 찾기" class="button">
+						</td>
+				</tr>
+				</div>
+				
+				<br>
+			</table>
+			
+			
+		</div>
+	</form>
+</body>
+</html>

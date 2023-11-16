@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.body-color{
+	background-color: white;
+}
+
+div, table, th, tr, td {
+	background-color: white;
+}
+
+th {
+	width : 60px;
+} 
+.text1 {
+	text-align: left;
+	font-size: 9px;
+
+}
+.container1 {
+	width : 610px;
+	margin : 10px auto;
+	padding : 6px;
+}
+
