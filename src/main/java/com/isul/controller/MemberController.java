@@ -2,8 +2,15 @@ package com.isul.controller;
 
 
 import java.util.Properties;
-import javax.mail.*;
-import javax.mail.internet.*;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +19,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import com.isul.dto.MemberDTO;
 import com.isul.member.MemberService;
 
 @Controller
@@ -91,6 +99,26 @@ public class MemberController {
 		return "member/find_password";
 	}
 	
+	//회원가입
+	@PostMapping("/join")
+	public String insertMember(MemberDTO dto) {
+		System.out.println(dto);
+		memberService.insertMember(dto);
+		return "redirect:../";
+	}
 	
+	//아이디 중복확인
+	@RequestMapping("/idCheck")
+    @ResponseBody //ajax 값을 보내기 위해 사용
+    public String idCheck(@RequestParam("id") String id) {
+		// result=1 성공, -1 실패
+        String result="1";
+        
+        int flag = memberService.idCheck(id);
+        
+        if(flag == 1) result ="-1"; 
+        //아이디가 있을시 -1 없을시 1 으로 view 로 보냄
+        return result;
+    }
 	
 }

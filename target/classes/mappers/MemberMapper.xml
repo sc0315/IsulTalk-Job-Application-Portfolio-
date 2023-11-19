@@ -9,4 +9,14 @@
    SELECT * FROM member
   </select>		
   
+  <select id="insertMember" parameterType="com.isul.dto.MemberDTO">
+  	INSERT INTO member (id, password, name, phone, email, zipCode, address1, address2) 
+  	VALUES (#{id}, #{password}, #{name}, #{phone}, #{email}, #{zipCode}, #{address1}, #{address2})
+  </select>
+  <select id="idCheck" parameterType="String" resultType="Integer">
+      SELECT COUNT(*) FROM member
+      WHERE id = #{id}
+</select>
+
+  
   </mapper>

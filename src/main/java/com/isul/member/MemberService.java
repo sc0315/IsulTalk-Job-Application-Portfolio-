@@ -16,4 +16,15 @@ public class MemberService {
 	public List<MemberDTO> getMemberList() {
 		return memberDAO.getMemberList();
 	};
+	
+	public void insertMember(MemberDTO memberDTO) {
+		memberDAO.insertMember(memberDTO);
+	}
+	
+	public int idCheck(String id) {
+		int result = 0;
+        
+        result = memberDAO.idCheck(id);
+        return result;
+    }
 }

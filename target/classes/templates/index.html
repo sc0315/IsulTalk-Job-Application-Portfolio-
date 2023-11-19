@@ -78,7 +78,7 @@ a:link, a:visited, a:hover, a:active {
 					</tr>
 					<tr>
 						<td colspan="3">
-							<input type="password" style="width:300px;" class="login_form" placeholder="비밀번호">
+							<input type="password" style="width:300px;" class="login_form" placeholder="비밀번호" autocomplete="off">
 						</td>
 					</tr>
 					<tr>
@@ -106,9 +106,10 @@ a:link, a:visited, a:hover, a:active {
 					</tr>
 					<tr>
 						<td colspan="3" style="text-align: center;">
-							<a href="member/join">회원가입</a>&nbsp;&nbsp;&nbsp;
-							<a href="#" onclick="find_id_form();">아이디찾기</a>&nbsp;&nbsp;&nbsp;
-							<a href="#" onclick="find_password_form();">비밀번호찾기</a>
+							&nbsp;&nbsp;&nbsp;
+							<a href="member/join">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="#" onclick="find_id_form();">아이디/비밀번호찾기</a>
+							
 						</td>
 					</tr>
 				</table>
@@ -116,13 +117,12 @@ a:link, a:visited, a:hover, a:active {
 		</div>	
 	</div>
 	<footer>
-		Developers. Beck sang-hyun & Kim sang-chul <br>
+		Developers. Baek sang-hyun & Kim sang-chul <br>
        Produced as a Team project in 2023.
     </footer>
 <script type="text/javascript">
 function find_id_form() {
-	var url = "member/find_id";
-	 window.open(url, "_blank_", "toolbar=no, menubar=no, scrollbars=no, reszable=yes, width=380px, height=220px");
+	location.href="member/find_id"
 }
 function find_password_form() {
 	var url = "member/find_password";
