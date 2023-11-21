@@ -15,7 +15,6 @@ function send_SMS() {
 }
 
 
-
 function send_email() {
 	var email = document.getElementById("email").value;
 	var randomNum = '';
@@ -24,12 +23,14 @@ function send_email() {
 	};
 	document.form.authorizationKey.value = randomNum;
 	var authorizationKey  = document.getElementById("authorizationKey").value;
+
 	console.log(authorizationKey);
 	console.log(email);
 	var theForm = document.getElementById("form");
 	theForm.action = "emailAuth";
 	theForm.submit();
 }
+
 //------------------ 문자인증/이메일인증/성별테이블 넣어야함
 //회원가입 필수요건
 function join(){
@@ -62,6 +63,9 @@ function join(){
         alert("비밀번호는 8~14자 영문 대문자, 소문자, 숫자를 각 1개 이상 포함해야 합니다.");
         pwd.focus();
         return false;
+	} else if (authorizationKey != emailCheck.value){
+		alert("인증번호가 일치하지 않습니다.");
+		return false;
 	} else if (name.value == "") {
 	    alert("이름을 입력해 주세요.");
 	    name.focus();

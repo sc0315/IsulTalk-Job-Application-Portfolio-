@@ -5,6 +5,9 @@
 
   <mapper namespace="com.isul.member.MemberDAO">
   
+  <select id="getMember" resultType="com.isul.dto.MemberDTO">
+  	SELECT * FROM member WHERE id=#{id}
+  </select>
   <select id="getMemberList" resultType="com.isul.dto.MemberDTO">
    SELECT * FROM member
   </select>		
@@ -16,7 +19,10 @@
   <select id="idCheck" parameterType="String" resultType="Integer">
       SELECT COUNT(*) FROM member
       WHERE id = #{id}
-</select>
+  </select>
+  <select id="confirmID" resultType="String">
+  	SELECT password FROM member WHERE id=#{id} 
+  </select>
 
   
   </mapper>

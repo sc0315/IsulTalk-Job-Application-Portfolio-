@@ -11,15 +11,18 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.isul.dto.MemberDTO;
 import com.isul.member.MemberService;
@@ -31,7 +34,7 @@ public class MemberController {
 	
 	//----- 이메일 발송 --------------------------------------------------------
 	@PostMapping(value = "/emailAuth")
-	public void emailAuth(@RequestParam(value="email") String email,
+	public String emailAuth(@RequestParam(value="email") String email,
 							@RequestParam(value="authorizationKey") String authorizationKey) {
 		 final String username = "rlatkdcjf86@naver.com";
 	     final String password = "Da357159";
@@ -61,25 +64,17 @@ public class MemberController {
 	            // 메시지 전송
 	            Transport.send(message);
 	            System.out.println("메일 보내기 성공 " + email + " 로 인증번호 [" + authorizationKey +"]");
+	            
 	        } catch (MessagingException e) {
 	            e.printStackTrace();
 	        }
-	    
-		//return "redirect:signUp_form";
-		
+	        return "redirect:member/join";
 	}
 	
 	
 	
 	@Autowired
 	MemberService memberService;
-	
-	//테스트용
-	@GetMapping("/memberList")
-	public String getMemberList(Model model){
-		model.addAttribute("memberList", memberService.getMemberList());
-		return "member/memberList";
-	}
 	
 	//회원가입폼 
 	@GetMapping("/join")
@@ -119,6 +114,15 @@ public class MemberController {
         if(flag == 1) result ="-1"; 
         //아이디가 있을시 -1 없을시 1 으로 view 로 보냄
         return result;
-    }
+	}
 	
+	//아이디 중복확인
+		@RequestMapping("/emailCheck")
+	    @ResponseBody //ajax 값을 보내기 위해 사용
+	    public String emailCheck(@RequestParam("email") String email) {
+			// result=1 성공, -1 실패
+	        String result="1";
+	        
+	        return result;
+		}
 }

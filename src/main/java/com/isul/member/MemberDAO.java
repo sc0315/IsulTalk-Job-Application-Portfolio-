@@ -11,7 +11,9 @@ import com.isul.dto.MemberDTO;
 @Repository
 public interface MemberDAO {
 	
+	public MemberDTO getMember(String id);
 	public List<MemberDTO> getMemberList();
 	public void insertMember(MemberDTO memberDTO);
 	public int idCheck(String id);
+	public String conFirmID(MemberDTO memberDTO);
 }

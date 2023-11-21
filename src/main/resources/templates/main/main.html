@@ -2,106 +2,139 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이슬톡톡 ISULTOKTALK</title>
 <style>
-table, tr, td {
-	border:1px solid gray;
+body {
+margin : 0px;
+padding : 0px;
+background-color : #f2f3f6;
+}
+table, th, tr, td {
+	border : 1px solid #949393;
 	border-collapse: collapse;
-	border-spacing: 0}
-	
-div {
-	border : 1px solid black;
+	border-spacing: 0;
+	margin : 0px auto;
+}
+#logout {
+	float : right;
+	margin : 10px right;
+	width : 80px;
+	height : 28px;
+	text-align : right;
+	padding-top :  15px;
+	color : black;
 }
 
-.friendList{
-	transform: translateY(20px);
-	margin:20px 10px 10px 0px; 
-	position: relative; 
-	top:-30px;
-	border: none;
-	float:left;
+a:link, a:visited{
+	color: #eaeaea;
+	text-decoration: none;
 }
 
-.img-wrapper{
-	border: none;
-	width:240px;
-}
-.img-wrapper img {
-    width: 40px;
-    height: 40px;
-    border-radius: 40%;
-    float:left;
-    margin:0px 5px 0px 5px;
+a:hover, a:active {
+	color: #949393;
+	text-decoration: none;
 }
 
-div span{
-	float:left;
-	overflow: hidden;  		
-  text-overflow: ellipsis;  	 
-  white-space: nowrap; 	
-  word-break:break-all;
-  width: 180px;
-  display: block;
+.logo {
+	margin-top : 5px;
 }
-
-.container {
-	margin-top : 10%;
-}
-.main_frame {
-	margin : auto;
-	width : 800px;
-	height : 700px;
-}
-
-.head {
-	width : 800px;
+#header {
+	background-color : white;
 	height : 50px;
 }
-.push {
-	width : 50px;
-	height : 650px; 
+#menubar {
+	background-color : #eaeaea;
+	text-align : center;
 }
-.friend {
-	width : 250px;
-	height : 650px; 
+#talklogo {
+	margin-left : 15px;
 }
-.chat {
-	width : 500px;
-	height : 650px; 
+
+#friendList {
+	background-color : white;
+}
+#chat {
+	background-color : white;
+}
+.mainNavImg {
+	width: 60px;
+    height: 60px;
+    margin : 3px auto;
+    border : 4px solid #eaeaea;
+    border-radius: 40%;
+    
+
+}
+.mainNavImg:hover {
+	border : 4px solid #949393;
+    border-radius: 40%;
+}
+.mainNavImg:active {
+	border : 4px solid #b0b0b0;
+    border-radius: 40%;
+}
+.mainNav {
+	position: relative;
+    top : -160px;
 }
 </style>
-
 </head>
-<body >
-	<div class="container">
-		<table class="main_frame">
-			<!--   해드    -->
-			<tr>
-				<td colspan="3" class="head">
-					<div class="head" th:replace="main/head.html :: div" ></div>
-				</td>
-			</tr>
-			
-			<tr>
-			<!--    알림  -->
-				<td class="push">
-					<div class="push" th:replace="main/push.html :: div"></div>
-				</td>
-				
-				
-			<!--  친구 목록 -->
-				<td class="friend">
-					<div class="friend" th:replace="main/friend.html :: div"></div>
-				</td>
-				
-				
-			<!--  채팅 상세프로필 -->
-				<td class="chat">
-					<div class="chat" th:replace="main/chat.html :: div"></div>
-				</td>
-			</tr>
-		</table>
-		
+<body>
+<header>
+	<div id="header"> 
+		<img id="talklogo" class="logo" src="/images/minimini.png" style="width:40px; height:40px;">
+		<img class="logo" src="/images/isulkor.png" style="width:65px; height:40px;">
+		<div id="logout">로그아웃&nbsp;&nbsp;</div>
+		<div id="logout">상철접속</div>
 	</div>
+</header>
+<table>
+	<tr>
+	
+	 <td style="width : 15px; min-width: 15px; height:90vh; margin:0 auto;">
+	 </td>
+	 
+	 <td id="menubar" style="width : 70px; min-width: 70px;">
+	 	<div class="mainNav">
+		 	<a href="#" >
+		 	<img class="mainNavImg" src="/images/main/friend.png" style="width:60px; height:60px;">
+		 	친구목록</a><br>
+	 	</div>
+	 	
+	 	<div class="mainNav">
+		 	<a href="#" >
+		 	<img  class="mainNavImg" src="/images/main/talk.png" style="width:60px; height:60px;">
+		 	채팅</a><br>
+	 	</div>
+	 	
+	 	<div class="mainNav">
+		 	<a href="#">
+		 	<img  class="mainNavImg" src="/images/main/plus.png" style="width:60px; height:60px;">
+		 	친구추가</a><br>
+	 	</div>
+	 	
+	 	<div class="mainNav">
+		 	<a href="#">
+		 	<img  class="mainNavImg" src="/images/main/set.png" style="width:60px; height:60px;">
+		 	정보설정</a><br>
+	 	</div>
+	 	
+	 	
+	 </td>
+	 
+	 <td id="friendList" style="width : 310px; min-width: 310px;">
+		 <div class="friend" th:replace="main/friend.html :: div"></div>
+	 </td>
+	 
+	 <td id="chat" style="width : 900px;">
+		 <div class="chat" th:replace="main/chat.html :: div"></div>
+	 </td>
+	 
+	 <td style="width : 15px; min-width: 15px;">
+	 </td>
+	<tr>
+</table>
+
+
 </body>
 </html>

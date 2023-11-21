@@ -51,6 +51,41 @@ $(function(){
         });
     }); 
 })
+
+$(function() {
+    $("#sendEmail").click(function() {
+        // 아이디 불러오기
+        let authorizationKey = $("#authorizationKey").val();
+
+        $.ajax({
+            type: 'post',
+            url: "emailCheck",
+            data: {"authorizationKey": authorizationKey},
+            success: function(data) {
+                if (data == "1") {
+                    alert("메일을 성공적으로 전송하였습니다.");
+
+                    // Clear input fields after successful email send
+                    $("#id").val("#id");
+                    $("#password").val("#password");
+                    $("#pwdCheck").val("#pwdCheck");
+                    $("#email").val("#email");
+                    $("#emailCheck").val("#emailCheck");
+                    // ... other input fields
+
+                } else {
+                    alert("메일 전송을 실패하였습니다.");
+                }
+            },
+            error: function() {
+                alert("Error in AJAX request");
+            }
+        });
+        
+        // Prevent the default form submission behavior
+        return false;
+    });
+});
 </script>
 <!-- 주소 API -->
 <script>
@@ -104,7 +139,7 @@ $(function(){
 </script>
 </head>
 <body class="body-color">
-	<form action="join" id="join" method="post">
+	<form action="join" name="form" id="form" method="post">
 
 				<!-- 외곽 컨테이너  -->
 		<div class="container1">
@@ -198,7 +233,7 @@ $(function(){
 						<td colspan='2'>
 							<input type="hidden" id="authorizationKey" name="authorizationKey" value="11">
 							<button class="btn btn-outline-secondary btn-sm" type="button"
-								id="sendEmail" onClick="send_email();">메일전송</button>
+								id="sendEmail" onClick="send_email()">메일전송</button>
 						</td>
 
 						<!-- 이메일 인증번호 입력 -->
@@ -207,7 +242,7 @@ $(function(){
 								<span class="input-group-text" id="inputGroup-sizing-sm">
 									<img src="/images/join/emailkey.png" width="25"
 									height="25">
-								</span> <input type="text" id = "email" class="form-control" placeholder="인증번호">
+								</span> <input type="text" id=emailCheck class="form-control" placeholder="인증번호">
 							</div>
 						</td>
 					<tr>
@@ -446,7 +481,7 @@ QR코드 등록 정보:삭제 시점으로부터6개월 보관
 
 						<td colspan='4'>
 							<button type="submit" class="btn btn-secondary btn-lg" 
-								id="signOk" onClick="return join()"> 회원가입
+								id="signOk" onClick="return join()"> 회원가입 </button>
 						</td>
 						<td></td>
 					</tr>
