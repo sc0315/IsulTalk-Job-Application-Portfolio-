@@ -1,12 +1,237 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<div class="friend" th:fragment="friend">
+		<div class="accordion" id="friendListTable">
+	        <div class="accordion-section">
+	            <div class="accordion-title" onclick="toggleAccordion(this), rotateImage();">
+	            	나를 추가한 친구
+	           		<img src="/images/main/arrow.png" id="rotatingImage" class="arrow">
+	          
+	            </div>
+	            <div class="accordion-content">
+	               
+					
+					 <table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td>
+								대화명
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								상태메세지
+							</td>
+						</tr>
+					</table>
+					 <table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td>
+								대화명
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								상태메세지
+							</td>
+						</tr>
+					</table> 
+					
+					
+					
+	                    
+	            </div>
+	        </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	        <div class="accordion-section">
+	            <div class="accordion-title" onclick="toggleAccordion(this), rotateImage2()">
+	            	친구
+	            	<img src="/images/main/arrow.png" id="rotatingImage2" class="arrow"></div>
+	            <div class="accordion-content">
+	                <table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td>
+								대화명
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								상태메세지
+							</td>
+						</tr>
+					</table>
+					 <table class="friendHover">
+						<tr class="friendListTableRows">
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td>
+								대화명
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								상태메세지
+							</td>
+						</tr>
+					</table>
+					 
+					
+					
+					
+					
+					
+					
+					 <table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td>
+								대화명
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								상태메세지
+							</td>
+						</tr>
+					</table>
+					
+					 <table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td>
+								대화명
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								상태메세지
+							</td>
+						</tr>
+					</table>
+					<table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td>
+								대화명
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								상태메세지
+							</td>
+						</tr>
+					</table>
+					
+					 <table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td>
+								대화명
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								상태메세지
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td>
+								대화명
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								상태메세지
+							</td>
+						</tr>
+					</table>
+					
+					 <table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td>
+								대화명
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								상태메세지
+							</td>
+						</tr>
+					</table>
+	            </div>
+	        </div>
+	
+	        
+	
+	    </div>
 		
 	</div>
+
 </body>
 </html>

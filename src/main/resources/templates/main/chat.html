@@ -6,188 +6,66 @@
 
 </head>
 <body>
-<div th:fragment="chat" class="chatBody" style="height:90vh; width:900px; background-color: white; position: relative;">
-<style>
-.messegeInput {
-	width : 60vw;
-	height: 100px;
-	border: 1px solid lightgray;
-    border-radius:5px;
-    position: absolute;
-    bottom : 10px;
-    left : 19px;
-
-}
-.button {
-	position: absolute;
-    bottom : 0px;
-    right : 5px;
-	margin : 5px;
-    background-color: #e86479;
-    width : 60px;
-    height : 25px;
-    font-weight: 900;
-    color: #fff;
-    border:none;
-    border-radius:5px;
- }
-.button:hover {
-	background-color: #ffb6c4;
-	border: 1px solid #e86479;
-}
-.button:active {
-	background-color: #ffb6c4;
-	border: 2px solid #e86479;
-}
-.messegeInputArea {
-    width: 450px;
-    border: none;
-    outline: none;
-    resize: none;
-    position: absolute;
-    top : 2px;
-    left : 2px;
-}
-
-
-.wrap {
-overflow: scroll;
-overflow-x: hidden;
-border : 1px solid black;
-width:500px;
-height:530px;
-}
-
-.wrap, .chatting, .textbox {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    border: none;
-}
-
-
-.wrap .chatting {
-    display: flex;
-    align-items: flex-start;
-    padding: 10px;
-}
-
-.icon {
-    position: relative;
-    overflow: hidden;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background-color: #f2f2f2;
-}
-
-.wrap .chatting .icon i {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    font-size: 2.5rem;
-    color: white;
-    transform: translateX(-50%);
-}
-
-.wrap .chatting .textbox {
-    position: relative;
-    display: inline-block;
-    max-width: calc(100% - 70px);
-    padding: 10px;
-    margin-top: 7px;
-    font-size: 13px;
-    border-radius: 15px;
-}
-
-.wrap .chatting .textbox::before {
-    position: absolute;
-    display: block;
-    top: 0;
-    font-size: 1.5rem;
-}
-
-.wrap .ch1 .textbox {
-    margin-left: 20px;
-    background-color: #f2f2f2;
-}
-
-.wrap .ch1 .textbox::before {
-    left: -15px;
-    content: "◀";
-    color: #f2f2f2;
-}
-
-.wrap .ch2 {
-    flex-direction: row-reverse;
-}
-
-.wrap .ch2 .textbox {
-    margin-right: 20px;
-    background-color: #e86479;
-    color : white;
-}
-
-.wrap .ch2 .textbox::before {
-    right: -15px;
-    content: "▶";
-    color: #e86479;
-}
-</style>
-	 <div class="wrap" id="wrap">
-        <div class="chatting ch1">
-            <div class="icon"></div>
-            <div class="textbox">안녕하세요. 반갑습니다.</div>
-        </div>
-        <div class="chatting ch2">
-            <div class="icon"></div>
-            <div class="textbox">안녕하세요. </div>
-        </div>
-        <div class="chatting ch1">
-            <div class="icon"></div>
-            <div class="textbox"> 긴대화 어디까지 가능 합니까? 가가가 나나나 다다다 라라라</div>
-        </div>
-        <div class="chatting ch2">
-            <div class="icon"></div>
-            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마 </div>
-        </div>
-        <div class="chatting ch2">
-            <div class="icon"></div>
-            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마 </div>
-        </div>
-        <div class="chatting ch2">
-            <div class="icon"></div>
-            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마 </div>
-        </div>
-        <div class="chatting ch2">
-            <div class="icon"></div>
-            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마 </div>
-        </div>
-        <div class="chatting ch2">
-            <div class="icon"></div>
-            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마 </div>
-        </div>
-         <div class="chatting ch1">
-            <div class="icon"></div>
-            <div class="textbox">안녕하세요. 반갑습니다.</div>
-        </div>
-        <div class="chatting ch2">
-            <div class="icon"></div>
-            <div class="textbox">안녕하세요. </div>
-        </div>
-    </div>
-
-
-	<div class="messegeInput">
-		<textarea rows="4" name="messege" id="messege" placeholder="메시지 입력..." class="messegeInputArea"></textarea>
-		<button type="button" class="button">전송</button>
-	</div>
-	<script type="text/javascript">
-	window.onload=function(){
-		let mySpace = document.getElementById("wrap");
-		mySpace.scrollTop = mySpace.scrollHeight; };
-	</script>
+<div th:fragment="chat" style="height:855px; width:550px; background-color: white; position: relative;">
+ 	<div>
+ 		 <div id="chatHeader"> 참여 인원 내용검색 자리 </div>
+		 <div class="wrap" id="wrap">
+	        <div class="chatting ch1">
+	            <div class="icon"></div>
+	            <div class="textbox">안녕하세요. 반갑습니다.</div>
+	        </div>
+	        <div class="chatting ch2">
+	            <div class="icon"></div>
+	            <div class="textbox">안녕하세요. </div>
+	        </div>
+	        <div class="chatting ch1">
+	            <div class="icon"></div>
+	            <div class="textbox"> 긴대화 어디까지 가능 합니까? 가가가 나나나 다다다 라라라</div>
+	        </div>
+	        <div class="chatting ch2">
+	            <div class="icon"></div>
+	            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마 </div>
+	        </div>
+	        <div class="chatting ch2">
+	            <div class="icon"></div>
+	            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마 </div>
+	        </div>
+	        <div class="chatting ch2">
+	            <div class="icon"></div>
+	            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마 </div>
+	        </div>
+	        <div class="chatting ch2">
+	            <div class="icon"></div>
+	            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마 </div>
+	        </div>
+	        <div class="chatting ch2">
+	            <div class="icon"></div>
+	            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마<span class="chatTime">2023-11-23 오후 12:40</span> </div>
+				<div class="chatTimeBox"></div>	       
+	        </div>
+	         <div class="chatting ch1">
+	            <div class="icon"></div>
+	            <div class="textbox">안녕하세요. 반갑습니다.<span class="chatTime">2023-11-23 오후 12:40</span></div>
+	            <div class="chatTimeBox"></div>
+	        </div>
+	        <div class="chatting ch2">
+	            <div class="icon"></div>
+	            <div class="textbox">안녕하세요. <span class="chatTime">2023-11-23 오후 12:40</span></div>
+	            <div class="chatTimeBox"></div>
+	        </div>
+	    </div>
 	
+	
+		<div class="messegeInput">
+			<textarea rows="4" name="messege" id="messege" placeholder="메세지 입력..." class="messegeInputArea"></textarea>
+			<button type="button" class="button">전송</button>
+		</div>
+		<script type="text/javascript">
+		window.onload=function(){
+			let mySpace = document.getElementById("wrap");
+			mySpace.scrollTop = mySpace.scrollHeight; };
+		</script>
+	</div>
 </div>
 </body>
 </html>
