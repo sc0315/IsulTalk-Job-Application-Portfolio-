@@ -1,0 +1,428 @@
+@charset "UTF-8";
+
+* {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+body {
+	margin : 0px;
+	padding : 0px;
+	background-color : #f2f3f6;
+}
+
+
+
+/* 전체 스크롤바 */
+*::-webkit-scrollbar {
+    width: 4px;
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    height: 1%;
+    background-color: #b0b0b0;
+    border-radius: 10px;
+}
+
+
+
+/* 메인 테이블 테두리 */
+.mainTable {
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin : 0px auto;
+	border-right : 1px solid #dee0e6;
+	border-left : 1px solid #dee0e6;
+	border-bottom : 1px solid #dee0e6;
+}
+#header {
+	background-color : white;
+	height : 50px;
+	border-bottom : 1px solid #dee0e6;
+}
+#menubar {
+	border-right : 1px solid #dee0e6;
+	background-color : #eaebee;
+	text-align : center;
+}
+#talklogo {
+	margin-left : 5px;
+}
+#myProfile {
+	background-color : white;
+	border-bottom : 1px solid #dee0e6;
+}
+#chat {
+	background-color : white;
+	border-left : 1px solid #dee0e6;
+}
+#friendList {
+	background-color : white;
+}
+
+
+
+/* 해더 로고 로그아웃*/
+#logout {
+	float : right;
+	margin : 10px right;
+	width : 80px;
+	height : 28px;
+	text-align : right;
+	padding-top :  15px;
+	color : black;
+}
+a:link, a:visited{
+	color: #eaeaea;
+	text-decoration: none;
+}
+a:hover, a:active {
+	color: #949393;
+	text-decoration: none;
+}
+.logo {
+	margin-top : 5px;
+}
+
+
+
+/*메뉴 아이콘 */
+.mainNavImg {
+	width: 60px;
+    height: 60px;
+    margin : 3px auto;
+    border : 4px solid #eaeaea;
+    border-radius: 40%;
+}
+.mainNavImg:hover {
+	border : 4px solid #949393;
+    border-radius: 40%;
+}
+.mainNavImg:active {
+	border : 4px solid #b0b0b0;
+    border-radius: 40%;
+}
+.mainNav {
+	position: relative;
+    top : -160px;
+}
+
+
+
+/* 내프로필 이미지 */
+.profileImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(50, 50);
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    margin: auto;
+    border : 2px solid #e86479;
+    border-radius: 50%;
+    padding : 3px;
+}
+.profileImageWrap {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin : auto;
+}
+
+
+
+
+/* 친구리스트 */
+.friendProfileImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(50, 50);
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    margin: auto;
+    border : 2px solid rgba(0, 0, 0, .0);
+    border-radius: 50%;
+    padding : 3px;
+}
+.friendProfileImageWrap {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin : auto;
+}
+.profileContentBox {
+	text-align : left;
+	vertical-align : bottom;
+}
+.friendListNickName {
+	font-size : 15px;
+	font-weight: bold;
+}
+.profileStatusBox{
+	text-align : left;
+	vertical-align : top;
+}
+.statusMessage {
+	font-size : 13px;
+	font-weight: normal;
+	padding-bottom : 40px;
+}
+ #friendListTable {
+ 	width : 310px;
+ 	border-top : 1px solid #dee0e6;
+ 	position: absolute;
+    top : 130px;
+}
+.friendListImageTable {
+	width : 80px;
+}
+.friendHover {
+	width : 305px;
+	height : 75px;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.friendHover:hover {
+	background-color : #eaebee;
+}
+/*친구 리스트 아코디언*/
+.accordion {
+	display: flex;
+	flex-direction: column;
+    max-width: 400px;
+}
+.accordion-section {
+            margin-bottom: 8px;      
+}
+.accordion-title {
+            background-color: white;
+            height : 35px;
+            padding-left : 15px;
+			padding-top : 10px;
+}
+.accordion-content {
+            display: none;
+		    overflow-y: auto;
+           	max-height : 500px;
+}
+/* 돌아가는 화살표 */
+.arrow {
+            transition: transform 0.5s ease;
+            width : 13px;
+            height : 13px;
+            float : right;
+            margin-top : 10px;
+            margin-right : 10px;
+}
+
+
+
+/*채팅창 (인풋부터 시작) */
+.messegeInput {
+	width : 510px;
+	height: 100px;
+	border: 1px solid lightgray;
+    border-radius:5px;
+    position: absolute;
+    bottom : 10px;
+    left : 19px;
+}
+/* 버튼 */
+.button {
+	position: absolute;
+    bottom : 0px;
+    right : 5px;
+	margin : 5px;
+    background-color: #e86479;
+    width : 60px;
+    height : 25px;
+    font-weight: 900;
+    color: #fff;
+    border:none;
+    border-radius:5px;
+ }
+.button:hover {
+	background-color: #ffb6c4;
+	border: 1px solid #e86479;
+}
+.button:active {
+	background-color: #ffb6c4;
+	border: 2px solid #e86479;
+}
+/* 채팅메시지 말풍선 등*/
+.messegeInputArea {
+    width: 500px;
+    border: none;
+    outline: none;
+    resize: none;
+    position: absolute;
+    top : 2px;
+    left : 2px;
+}
+.wrap {
+overflow: scroll;
+overflow-x: hidden;
+width: 550px;
+height: 660px;
+}
+.wrap .chatting .textbox {
+    position: relative;
+    display: inline-block;
+    max-width: calc(100% - 70px);
+    padding: 10px;
+    margin-top: 3px;
+    font-size: 13px;
+    border-radius: 15px;
+}
+.wrap .chatting .textbox::before {
+    position: absolute;
+    display: block;
+    top: 0;
+    font-size: 1.5rem;
+}
+.wrap .ch1 .textbox {
+    margin-left: 20px;
+    max-width:300px;
+    background-color: #f2f2f2;
+}
+.wrap .ch1 .textbox::before {
+    left: -15px;
+    content: "◀";
+    color: #f2f2f2;
+}
+.wrap .ch2 {
+    flex-direction: row-reverse;
+}
+.wrap .ch2 .textbox {
+    margin-right: 20px;
+    max-width:300px;
+    background-color: #e86479;
+    color : white;
+}
+.wrap .ch2 .textbox::before {
+    right: -15px;
+    content: "▶";
+    color: #e86479;
+}
+#chatHeader {
+	height : 75px;
+	border-bottom : 1px solid #dee0e6;
+}
+.chatTime {
+	font-size : 10px;
+}
+.timeAlign{
+	vertical-align : bottom;
+}
+.myNick {
+	font-size : 13px;
+	font-weight: bolder;
+	text-align : right;
+	padding-right : 30px;
+	vertical-align : bottom;
+}
+.yourNick {
+	font-size : 13px;
+	font-weight: bolder;
+	text-align : left;
+	padding-left : 30px;
+	vertical-align : bottom;
+}
+.myMessageBox {
+	float : right;
+}
+yourMessageBox {
+	float : left;
+}	
+
+
+
+/*채팅창 상단 드롭다운*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+/* 버튼 */
+.dropdown button {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+/*내용*/
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+/* 내용링크 색변화 */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+/* Change color on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+    
+   
+    
+ /*프로필과 프로필 배경 상태메세지 */   
+.profileBackImage {
+	background-image: url(/images/background/newjeanback.jpg);
+	  background-size : cover;
+	  background-repeat : no-repeat;
+	  background-position: center center;
+	  width: 100%;
+	  height: 100%;
+	  text-align : center;
+	  color : white;
+	  font-size : 25px;
+}    
+.profileSetImageWrap {
+	margin : auto;
+	width: 250px; 
+	height: 250px; 
+	overflow: hidden; 
+	position: relative;
+	top : 450px;
+	border-radius: 90%;
+	box-shadow: 0px 0px 10px black;
+}
+.profileSetImage {
+	position: relative;
+	width: 100%;
+    height: 100%;
+    margin : auto;
+    object-fit: cover; 
+}
+.profileStatusChat {
+	position: relative;
+	top : 20px;
+	left : -200px;
+	text-shadow: -1px 1px gray, 1px 1px gray, 1px 1px gray, 1px -1px gray;
+}
+.profileStatusNick {
+	position: relative;
+	top : 440px;
+	text-shadow: -1px 1px gray, 1px 1px gray, 1px 1px gray, 1px -1px gray;
+}
+.profileStatusMessage {
+	position: relative;
+	top : 455px;
+	text-shadow: -1px 1px gray, 1px 1px gray, 1px 1px gray, 1px -1px gray;
+	
+}

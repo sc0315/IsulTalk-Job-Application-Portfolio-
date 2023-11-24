@@ -7,52 +7,242 @@
 </head>
 <body>
 <div th:fragment="chat" style="height:855px; width:550px; background-color: white; position: relative;">
- 	<div>
- 		 <div id="chatHeader"> 참여 인원 내용검색 자리 </div>
+ 	<div  id="chatHeader">
+ 		 <div class="dropdown">
+			  <button onclick="toggleDropdown()">대화방 참가자</button>
+			  <div id="dropdownContent" class="dropdown-content">
+			    
+			    
+			    <a href="#">
+			    	<div>
+			    		 <table class="friendHover">
+							<tr>
+								<td rowspan='2' class="friendListImageTable">
+									<div class="friendProfileImageWrap">
+										<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+									</div>
+								</td>
+								<td>
+									대화명
+								</td>
+								
+							</tr>
+							<tr>
+								<td>
+									상태메세지
+								</td>
+							</tr>
+						</table>
+	       		 	</div>
+	       		 </a>
+	       		 
+	       		  <a href="#">
+			    	<div>
+			    		 <table class="friendHover">
+							<tr>
+								<td rowspan='2' class="friendListImageTable">
+									<div class="friendProfileImageWrap">
+										<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+									</div>
+								</td>
+								<td>
+									대화명
+								</td>
+								
+							</tr>
+							<tr>
+								<td>
+									상태메세지
+								</td>
+							</tr>
+						</table>
+	       		 	</div>
+	       		 </a> <a href="#">
+			    	<div>
+			    		 <table class="friendHover">
+							<tr>
+								<td rowspan='2' class="friendListImageTable">
+									<div class="friendProfileImageWrap">
+										<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+									</div>
+								</td>
+								<td>
+									대화명
+								</td>
+								
+							</tr>
+							<tr>
+								<td>
+									상태메세지
+								</td>
+							</tr>
+						</table>
+	       		 	</div>
+	       		 </a>
+	       		  <a href="#">
+			    	<div>
+			    		 <table class="friendHover">
+							<tr>
+								<td rowspan='2' class="friendListImageTable">
+									<div class="friendProfileImageWrap">
+										<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+									</div>
+								</td>
+								<td>
+									대화명
+								</td>
+								
+							</tr>
+							<tr>
+								<td>
+									상태메세지
+								</td>
+							</tr>
+						</table>
+	       		 	</div>
+	       		 </a>
+	       		  <a href="#">
+			    	<div>
+			    		 <table class="friendHover">
+							<tr>
+								<td rowspan='2' class="friendListImageTable">
+									<div class="friendProfileImageWrap">
+										<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+									</div>
+								</td>
+								<td>
+									대화명
+								</td>
+								
+							</tr>
+							<tr>
+								<td>
+									상태메세지
+								</td>
+							</tr>
+						</table>
+	       		 	</div>
+	       		 </a>
+	       		 
+	       		 
+	       		
+			   
+			  </div>
+			</div>
+			대화내용 검색
+ 		   <input type="text" style="width:300px;">
+ 		</div>
+ 		
+ 		
+ 		
 		 <div class="wrap" id="wrap">
-	        <div class="chatting ch1">
-	            <div class="icon"></div>
-	            <div class="textbox">안녕하세요. 반갑습니다.</div>
-	        </div>
-	        <div class="chatting ch2">
-	            <div class="icon"></div>
-	            <div class="textbox">안녕하세요. </div>
-	        </div>
-	        <div class="chatting ch1">
-	            <div class="icon"></div>
-	            <div class="textbox"> 긴대화 어디까지 가능 합니까? 가가가 나나나 다다다 라라라</div>
-	        </div>
-	        <div class="chatting ch2">
-	            <div class="icon"></div>
-	            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마 </div>
-	        </div>
-	        <div class="chatting ch2">
-	            <div class="icon"></div>
-	            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마 </div>
-	        </div>
-	        <div class="chatting ch2">
-	            <div class="icon"></div>
-	            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마 </div>
-	        </div>
-	        <div class="chatting ch2">
-	            <div class="icon"></div>
-	            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마 </div>
-	        </div>
-	        <div class="chatting ch2">
-	            <div class="icon"></div>
-	            <div class="textbox">가나다라마 가나다 가나다라마 가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마가나다라마 가나다 가나다라마<span class="chatTime">2023-11-23 오후 12:40</span> </div>
-				<div class="chatTimeBox"></div>	       
-	        </div>
-	         <div class="chatting ch1">
-	            <div class="icon"></div>
-	            <div class="textbox">안녕하세요. 반갑습니다.<span class="chatTime">2023-11-23 오후 12:40</span></div>
-	            <div class="chatTimeBox"></div>
-	        </div>
-	        <div class="chatting ch2">
-	            <div class="icon"></div>
-	            <div class="textbox">안녕하세요. <span class="chatTime">2023-11-23 오후 12:40</span></div>
-	            <div class="chatTimeBox"></div>
-	        </div>
+	     
+	        <table class="yourMessageBox">
+	        	<tr>
+					<td rowspan='2'>
+							<div class="friendProfileImageWrap">
+								<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+							</div>
+					</td>
+					<td class="yourNick">
+							<span style="text-align:left">대화명</span><span>①</span> 
+					</td>
+					<td>
+					</td>
+				</tr>
+				<tr>
+					<td class="chatting ch1">
+							 <div class="textbox">안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.</div>
+					</td>
+					<td class="timeAlign">
+						<span class="chatTime">2023-11-23 오후 12:40</span>
+					</td>
+				</tr>
+	        </table>
+	        
+	        
+	          <table class="myMessageBox">
+	        	<tr>
+	        		<td>
+	        		</td>
+					<td class="myNick">
+					<span>①</span> 
+					<span>대화명</span>
+							
+					</td>
+					<td rowspan='2'>
+						<div class="friendProfileImageWrap">
+								<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+							</div>	
+					</td>
+				</tr>
+				<tr>
+					
+					<td class="timeAlign">
+						<span class="chatTime">2023-11-23 오후 12:40</span>
+					</td>
+					<td class="chatting ch2">
+							 <div class="textbox">안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.</div>
+					</td>
+				</tr>
+	        </table>
+	        
+	        
+	         <table class="yourMessageBox">
+	        	<tr>
+					<td rowspan='2'>
+							<div class="friendProfileImageWrap">
+								<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+							</div>
+					</td>
+					<td class="yourNick">
+							<span>대화명</span><span>①</span> 
+					</td>
+					<td>
+					</td>
+				</tr>
+				<tr>
+					<td class="chatting ch1">
+							 <div class="textbox">안녕하세요.</div>
+					</td>
+					<td class="timeAlign">
+						<span class="chatTime">2023-11-23 오후 12:40</span>
+					</td>
+				</tr>
+	        </table>
+	        
+	        
+	         <table class="myMessageBox">
+	        	<tr>
+	        		<td>
+	        		</td>
+					<td class="myNick">
+					<span>①</span> 
+					<span>대화명</span>
+							
+					</td>
+					<td rowspan='2'>
+						<div class="friendProfileImageWrap">
+								<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+							</div>	
+					</td>
+				</tr>
+				<tr>
+					
+					<td class="timeAlign">
+						<span class="chatTime">2023-11-23 오후 12:40</span>
+					</td>
+					<td class="chatting ch2">
+							 <div class="textbox">안녕하세요.</div>
+					</td>
+				</tr>
+	        </table>
+	        
+	        
+	        
+	        
+	        
+	        
 	    </div>
 	
 	
