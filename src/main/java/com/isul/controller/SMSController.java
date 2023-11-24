@@ -13,7 +13,7 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 public class SMSController {
 
 	@RequestMapping("/member/smsSend")
-	public void sendSMS(@RequestParam(value="phone") String phone,
+	public String sendSMS(@RequestParam(value="phone") String phone,
 						  @RequestParam(value="phoneAuthorizationKey") String phoneAuthorizationKey) {
 		System.out.println("문자 발송 도착");
 		DefaultMessageService messageService =  NurigoApp.INSTANCE.initialize("NCSWMNXARVJESEUB", "NEWRGIN4YBX8HZPCILKZ45N3MDB4WJNO", "https://api.coolsms.co.kr");
@@ -34,5 +34,7 @@ public class SMSController {
 		} catch (Exception exception) {
 		  System.out.println(exception.getMessage());
 		}
+		return "redirect:member/join";
 	}
+	
 }

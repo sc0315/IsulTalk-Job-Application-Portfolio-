@@ -15,5 +15,5 @@ public interface MemberDAO {
 	public List<MemberDTO> getMemberList();
 	public void insertMember(MemberDTO memberDTO);
 	public int idCheck(String id);
-	public String conFirmID(MemberDTO memberDTO);
+	public String confirmID(MemberDTO memberDTO);
 }

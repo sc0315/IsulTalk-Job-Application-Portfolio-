@@ -37,11 +37,9 @@ public class MemberService {
 	    int result = -1; // 리턴 결과 저장 변수
 				
 		// 패스워드를 통해 일치여부 확인
-		String pwd = memberDAO.conFirmID(memberDTO);
+		String password = memberDAO.confirmID(memberDTO);
 		
-		if(pwd == null) {
-			result = 0;
-		} else if (pwd.equals(memberDTO.getPassword())) {
+		if(password != null && password.equals(memberDTO.getPassword())) {
 			result = 1;
 		} else {
 			result = -1;

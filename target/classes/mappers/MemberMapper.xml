@@ -16,11 +16,11 @@
   	INSERT INTO member (id, password, name, phone, email, zipCode, address1, address2) 
   	VALUES (#{id}, #{password}, #{name}, #{phone}, #{email}, #{zipCode}, #{address1}, #{address2})
   </select>
-  <select id="idCheck" parameterType="String" resultType="Integer">
+  <select id="idCheck" resultType="Integer">
       SELECT COUNT(*) FROM member
       WHERE id = #{id}
   </select>
-  <select id="confirmID" resultType="String">
+  <select id="confirmID" resultType="String" parameterType="com.isul.dto.MemberDTO">
   	SELECT password FROM member WHERE id=#{id} 
   </select>
 
