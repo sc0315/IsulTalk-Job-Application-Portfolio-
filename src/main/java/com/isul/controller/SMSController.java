@@ -73,7 +73,9 @@ public class SMSController {
 		}
 		return "redirect:member/find_id";
 	}
-
+/*
+ * 아이디 폰번호로 찾기
+ */
 	@SuppressWarnings("unused")
 	@RequestMapping("member/findphone")
 	public String find_id(@RequestParam(value = "find_phone") String phone,

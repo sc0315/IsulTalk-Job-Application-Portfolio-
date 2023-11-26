@@ -76,8 +76,8 @@ function send_phone() {
         type: "post",
         url: "findsmsSend",
         data: {
-            phone: phone,
-            phoneAuthorizationKey: phoneAuthorizationKey
+            find_phone: phone,
+            findphoneAuthorizationKey: phoneAuthorizationKey
         },
         success: function (data) {
             console.log("success: " + data);
