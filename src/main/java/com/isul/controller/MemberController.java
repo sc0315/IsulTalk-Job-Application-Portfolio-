@@ -11,18 +11,15 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+
 
 import com.isul.dto.MemberDTO;
 import com.isul.member.MemberService;
@@ -30,7 +27,6 @@ import com.isul.member.MemberService;
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
-	
 	
 	//----- 이메일 발송 --------------------------------------------------------
 	@PostMapping(value = "/emailAuth")
@@ -87,13 +83,7 @@ public class MemberController {
 	public String findIdView() {
 		return "member/find_id";
 	}
-	
-	//비밀번호 찾기 폼
-	@GetMapping("/find_password")
-	public String findPasswordView() {
-		return "member/find_password";
-	}
-	
+
 	//회원가입
 	@PostMapping("/join")
 	public String insertMember(MemberDTO dto) {
@@ -116,7 +106,7 @@ public class MemberController {
         return result;
 	}
 	
-	//아이디 중복확인
+	//이메일 중복확인
 		@RequestMapping("/emailCheck")
 	    @ResponseBody //ajax 값을 보내기 위해 사용
 	    public String emailCheck(@RequestParam("email") String email) {

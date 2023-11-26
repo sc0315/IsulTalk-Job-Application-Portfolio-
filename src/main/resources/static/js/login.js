@@ -54,3 +54,103 @@
        return unescape(cookieValue);
    }
    
+ /*
+ * 전화번호 전송 
+ */ 
+var storedfindphoneAuthorizationKey; // 인증코드 전역변수
+function send_phone() {
+	
+	var phone = $("#find_phone").val();
+	var randomNum = '';
+	for( var i = 0; i < 4 ; i ++){
+	 randomNum += Math.floor(Math.random() * 10)
+	};
+	 $("#findphoneAuthorizationKey").val(randomNum);
+	
+	var phoneAuthorizationKey  = document.getElementById("findphoneAuthorizationKey").value;
+	
+	console.log(phoneAuthorizationKey);
+	console.log(phone);
+	
+	    $.ajax({
+        type: "post",
+        url: "findsmsSend",
+        data: {
+            phone: phone,
+            phoneAuthorizationKey: phoneAuthorizationKey
+        },
+        success: function (data) {
+            console.log("success: " + data);
+        },
+        error: function (error) {
+            console.error("Error: " + error);
+        }
+    });
+    alert('인증번호가 전송되었습니다.');
+}
+
+/*
+ * 이메일 전송
+ */
+var storedAuthorizationKey; // 인증코드 전역변수
+function find_send_email() {
+    var email = $("#find_email").val();
+    var charSet = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+                'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+    var str = "";
+
+    // 문자 배열 길이의 값을 랜덤으로 10개를 뽑아 구문을 작성함
+    var idx = 0;
+    for (var i = 0; i < 10; i++) {
+        idx = Math.floor(Math.random() * charSet.length);
+        str += charSet[idx];
+    }
+
+    $("#findauthorizationKey").val(str);
+
+    var authorizationKey = $("#findauthorizationKey").val();
+
+    console.log(authorizationKey);
+    console.log(email);
+
+    $.ajax({
+        type: "post",
+        url: "findEmailAuth",
+        data: {
+            find_email: email,
+            findauthorizationKey: authorizationKey
+        },
+        success: function (data) {
+            console.log("success: " + data);
+            if(data=="success"){
+				window.location.href="/"
+			} else {
+				window.location.href="/"
+			}
+        },
+        error: function (error) {
+            console.error("Error: " + error);
+        }
+    });
+    alert('인증번호가 전송되었습니다.');
+}
+function find_id_phone(){
+	var find_phoneCheck = document.getElementById("find_phoneCheck");
+	var findphoneAuthorizationKey = $("#findphoneAuthorizationKey").val();
+		storedfindphoneAuthorizationKey = findphoneAuthorizationKey; // 인증코드를 전역변수에 저장
+		
+	if(find_phoneCheck.value == ''){
+		alert("인증번호를 입력하세요.");
+		find_phoneCheck.focus();
+		return false;
+		
+	} else if(find_phoneCheck.value != storedfindphoneAuthorizationKey){
+		alert("문자 인증번호가 일치하지 않습니다.");
+		find_phoneCheck.focus();
+		return false;
+		
+	} else {
+		true;
+	}
+}

@@ -31,16 +31,11 @@ function send_SMS() {
         }
     });
     alert('인증번호가 전송되었습니다.');
-
-	//var theForm = document.getElementById("form");
-	//theForm.action = "smsSend";
-	//theForm.submit();
 }
 
 /*
  * 이메일 전송
  */
-
 var storedAuthorizationKey; // 인증코드 전역변수
 function send_email() {
     var email = $("#email").val();

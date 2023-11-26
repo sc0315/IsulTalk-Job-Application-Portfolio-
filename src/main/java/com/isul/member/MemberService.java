@@ -2,8 +2,10 @@ package com.isul.member;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.isul.dto.MemberDTO;
 
@@ -30,6 +32,9 @@ public class MemberService {
 	public MemberDTO getMember(String id) {
 		return memberDAO.getMember(id);
 	}
+	public MemberDTO getMemberByIdEmail(@Param("id") String id, @Param("email")String email) {
+		return memberDAO.getMemberByIdEmail(id, email);
+	}
 	
 	// 로그인
 	// id가 존재하지 않으면 0, 비밀번호 틀린 경우 -1, 정상 입력 1
@@ -45,5 +50,12 @@ public class MemberService {
 			result = -1;
 		}
 		return result;
+	}
+	public void changePassword(MemberDTO memberDTO) {
+		memberDAO.changePassword(memberDTO);
+	}
+	
+	public MemberDTO getMemberByNamePhone(@Param("name") String name, @Param("phone") String phone) {
+		return memberDAO.getMemberByNamePhone(name, phone);
 	}
 }
