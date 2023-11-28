@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.isul.dto.MemberDTO;
+import com.isul.dto.ProfileDTO;
 import com.isul.member.MemberService;
 
 @Controller
@@ -46,14 +47,19 @@ public class HomeController {
 	
 	@PostMapping("/login")
 	public String login(MemberDTO memberDTO, HttpSession session, HttpServletResponse response) throws IOException {
-		MemberDTO loginId = null;
+		String loginId = null;
 		
 		int result = memberService.loginID(memberDTO);
 		System.out.println(result);
 		if(result ==1) { // 1: id가 있음 로그인 성공
-			loginId = memberService.getMember(memberDTO.getId());
+			
+			loginId = memberDTO.getId();
+			
+			ProfileDTO profile = memberService.getMyProfile(loginId);
 			session.setAttribute("loginId", loginId);
+			session.setAttribute("profile", profile);
 			System.out.println(loginId);
+			System.out.println(profile);
 			System.out.println("로그인 성공");
 			
 			return "redirect:/main/";

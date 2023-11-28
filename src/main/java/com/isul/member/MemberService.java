@@ -1,13 +1,12 @@
 package com.isul.member;
 
-import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.isul.dto.MemberDTO;
+import com.isul.dto.ProfileDTO;
 
 @Service
 public class MemberService {
@@ -58,4 +57,13 @@ public class MemberService {
 	public MemberDTO getMemberByNamePhone(@Param("name") String name, @Param("phone") String phone) {
 		return memberDAO.getMemberByNamePhone(name, phone);
 	}
-}
+	
+	
+	
+	// 내 프로필 블러오기
+	public ProfileDTO getMyProfile(String id) {
+		return memberDAO.getMyProfile(id);
+	}
+	
+	
+}	
