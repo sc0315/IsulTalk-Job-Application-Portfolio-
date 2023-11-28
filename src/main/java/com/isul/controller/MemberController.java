@@ -92,6 +92,7 @@ public class MemberController {
 		return "redirect:../";
 	}
 	
+
 	//아이디 중복확인
 	@RequestMapping("/idCheck")
     @ResponseBody //ajax 값을 보내기 위해 사용
@@ -105,6 +106,7 @@ public class MemberController {
         //아이디가 있을시 -1 없을시 1 으로 view 로 보냄
         return result;
 	}
+
 	
 	//이메일 중복확인
 		@RequestMapping("/emailCheck")

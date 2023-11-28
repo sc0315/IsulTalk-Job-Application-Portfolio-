@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="myProfile" th:fragment="myProfile">
+		<div id="mySmallProfile">
+			<table 	style="width : 310px;">
+				<tr>
+					<td rowspan='2' style="width : 75px; height : 75px;">
+						<div class="profileImageWrap">
+							<img class="profileImage" src="https://i.namu.wiki/i/JFgk6yG9xDH15Lj1gfms1DkB7tEJPRgTvuZ2klGEb8mfnmAAt2mlpJDfC2xcGuuSrHbiJX5eOJ5SeUVNE2kdig.webp"/>
+						</div>
+					</td>
+					<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+				</tr>
+				<tr>
+					<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
