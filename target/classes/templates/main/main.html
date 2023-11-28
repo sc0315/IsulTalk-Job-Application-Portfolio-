@@ -2,106 +2,68 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-table, tr, td {
-	border:1px solid gray;
-	border-collapse: collapse;
-	border-spacing: 0}
-	
-div {
-	border : 1px solid black;
-}
-
-.friendList{
-	transform: translateY(20px);
-	margin:20px 10px 10px 0px; 
-	position: relative; 
-	top:-30px;
-	border: none;
-	float:left;
-}
-
-.img-wrapper{
-	border: none;
-	width:240px;
-}
-.img-wrapper img {
-    width: 40px;
-    height: 40px;
-    border-radius: 40%;
-    float:left;
-    margin:0px 5px 0px 5px;
-}
-
-div span{
-	float:left;
-	overflow: hidden;  		
-  text-overflow: ellipsis;  	 
-  white-space: nowrap; 	
-  word-break:break-all;
-  width: 180px;
-  display: block;
-}
-
-.container {
-	margin-top : 10%;
-}
-.main_frame {
-	margin : auto;
-	width : 800px;
-	height : 700px;
-}
-
-.head {
-	width : 800px;
-	height : 50px;
-}
-.push {
-	width : 50px;
-	height : 650px; 
-}
-.friend {
-	width : 250px;
-	height : 650px; 
-}
-.chat {
-	width : 500px;
-	height : 650px; 
-}
-</style>
-
+<title>이슬톡톡 ISULTOKTALK</title>
+<link rel="stylesheet" href="/css/main.css">
 </head>
-<body >
-	<div class="container">
-		<table class="main_frame">
-			<!--   해드    -->
-			<tr>
-				<td colspan="3" class="head">
-					<div class="head" th:replace="main/head.html :: div" ></div>
-				</td>
-			</tr>
+<body>
+
+	<header>
+		<div class="header" th:replace="main/header.html :: div"></div>
+	</header>
+	
+	<table class="mainTable">
+		<tr>
+			<td id="menubar"
+				style="width: 70px; min-width: 70px; height: 860px; margin: 0 auto;"
+				rowspan='2'>
+				
+				<div class="mainNav">
+					<a href="#"> <img class="mainNavImg"
+						src="/images/main/friend.png" style="width: 60px; height: 60px;">
+						친구목록
+					</a><br>
+				</div>
+				
+				<div class="mainNav">
+					<a href="#"> <img class="mainNavImg"
+						src="/images/main/talk.png" style="width: 60px; height: 60px;">
+						채팅
+					</a><br>
+				</div>
+				
+				<div class="mainNav">
+					<a href="#"> <img class="mainNavImg"
+						src="/images/main/plus.png" style="width: 60px; height: 60px;">
+						친구추가
+					</a><br>
+				</div>
+				
+				<div class="mainNav">
+					<a href="#"> <img class="mainNavImg" src="/images/main/set.png"
+						style="width: 60px; height: 60px;"> 정보설정
+					</a><br>
+				
+				</div>
+			</td>
 			
-			<tr>
-			<!--    알림  -->
-				<td class="push">
-					<div class="push" th:replace="main/push.html :: div"></div>
-				</td>
-				
-				
-			<!--  친구 목록 -->
-				<td class="friend">
-					<div class="friend" th:replace="main/friend.html :: div"></div>
-				</td>
-				
-				
-			<!--  채팅 상세프로필 -->
-				<td class="chat">
-					<div class="chat" th:replace="main/chat.html :: div"></div>
-				</td>
-			</tr>
-		</table>
-		
-	</div>
+			<td id="myProfile"
+				style="width: 310px; min-width: 310px; height: 75px;">
+				<div class="myProfile" th:replace="main/myProfile.html :: div"></div>
+			</td>
+
+			<td id="chat" style="width: 550px;" rowspan='2'>
+			<div class="profile" th:replace="main/profile.html :: div"></div>
+				<!--  <div class="chat" th:replace="main/chat.html :: div"></div>-->
+			</td>
+
+		</tr>
+		<tr>
+			<td id="friendList">
+				<div class="friend" th:replace="main/friend.html :: div"></div>
+			</td>
+		</tr>
+	</table>
+
+	<script src="/js/main.js"></script>
 </body>
 </html>

@@ -91,6 +91,12 @@ public class MemberController {
 		return "member/find_password";
 	}
 	
+	//채팅테스트
+		@GetMapping("/chatTest")
+		public String chatTest() {
+			return "main/chatTest";
+		}
+	
 	
 	
 }

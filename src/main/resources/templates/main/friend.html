@@ -5,31 +5,399 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="friend" th:fragment="friend" >
+	<div class="friend" th:fragment="friend">
+		<div class="accordion" id="friendListTable">
+	        <div class="accordion-section">
+	            <div class="accordion-title" onclick="toggleAccordion(this), rotateImage();">
+	            	나를 추가한 친구
+	           		<img src="/images/main/arrow.png" id="rotatingImage" class="arrow">
+	          
+	            </div>
+	            <div class="accordion-content">
+	               
+					
+					 <table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table>
+					
+					
+					
+	<!-- -----------------------------------테스트용 반복 추가 ------------------------------------------>
+					  <table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table> 
+				<!-- -----------------------------------테스트용 반복 추가 끝끝 ------------------------------------------>	
+					
+					
+	                    
+	            </div>
+	        </div>
 	
-	<div class="friendList" th:fragment="friend">
-	 <div class="img-wrapper">
-	  <img 
-	      src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"
-	       alt="브레이브걸스"/>
-	  		<span style="float:left;"><b>브레이브걸스</b></span><br>
-	  		<span>안녕하세요 브레이브걸스입니다.</span>
-	  		    
-	   </div>
-	</div>
 	
-	<div class="friendList" th:fragment="friend">
-	 <div class="img-wrapper">
-	  <img 
-	      src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"
-	       alt="브레이브걸스"/>
-	  		<span style="float:left;"><b>브레이브걸스</b></span><br>
-	  		<span>안녕하세요 브레이브걸스입니다.</span>
-	  		    
-	   </div>
+	
+	
+	
+	
+	
+	
+	        <div class="accordion-section">
+	            <div class="accordion-title" onclick="toggleAccordion(this), rotateImage2()">
+	            	친구
+	            	<img src="/images/main/arrow.png" id="rotatingImage2" class="arrow"></div>
+	            <div class="accordion-content">
+	                
+	                <!-- -----------------------------------테스트용 반복 추가 ------------------------------------------>
+	                <table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table><table class="friendHover">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
+								</div>
+							</td>
+							<td class="profileContentBox">
+								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td class="profileStatusBox">
+								<span class="statusMessage">상태메세지 길어진다</span>
+							</td>
+						</tr>
+					</table>
+			<!-- -----------------------------------테스트용 반복 추가 끝끝------------------------------------------>
+			
+			
+			
+			
+					
+	            </div>
+	        </div>
+	
+	        
+	
+	    </div>
+		
 	</div>
-
-</div>
 
 </body>
 </html>
