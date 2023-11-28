@@ -3,33 +3,52 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-  <mapper namespace="com.isul.member.MemberDAO">
-  
-  <select id="getMember" resultType="com.isul.dto.MemberDTO">
-  	SELECT * FROM member WHERE id=#{id}
-  </select>
-  <select id="getMemberByIdEmail" resultType="com.isul.dto.MemberDTO">
-  	SELECT * FROM member WHERE id=#{id} AND email=#{email}
-  </select>
-  <select id="getMemberByNamePhone" resultType="com.isul.dto.MemberDTO">
-  	SELECT id FROM member WHERE name=#{name} AND phone=#{phone}
-  </select>
-  <select id="getMemberList" resultType="com.isul.dto.MemberDTO">
-   SELECT * FROM member
-  </select>		
-  <select id="insertMember" parameterType="com.isul.dto.MemberDTO">
-  	INSERT INTO member (id, password, name, phone, email, zipCode, address1, address2) 
-  	VALUES (#{id}, #{password}, #{name}, #{phone}, #{email}, #{zipCode}, #{address1}, #{address2})
-  </select>
-  <select id="idCheck" resultType="Integer">
-      SELECT COUNT(*) FROM member
-      WHERE id = #{id}
-  </select>
-  <select id="confirmID" resultType="String" parameterType="com.isul.dto.MemberDTO">
-  	SELECT password FROM member WHERE id=#{id} 
-  </select>
-  <update id="changePassword" parameterType="com.isul.dto.MemberDTO">
-  	UPDATE member SET password=#{password} WHERE email=#{email}
-  </update>
-  
-  </mapper>
+<mapper namespace="com.isul.member.MemberDAO">
+	
+	<select id="getMyProfile" resultType="com.isul.dto.ProfileDTO">
+		SELECT * FROM profile WHERE id=#{id}
+	</select>
+	
+	<select id="getMember" resultType="com.isul.dto.MemberDTO">
+		SELECT * FROM member WHERE id=#{id}
+	</select>
+
+
+	<select id="getMemberByIdEmail" resultType="com.isul.dto.MemberDTO">
+		SELECT * FROM member WHERE id=#{id} AND email=#{email}
+	</select>
+
+
+	<select id="getMemberByNamePhone" resultType="com.isul.dto.MemberDTO">
+		SELECT id FROM member WHERE name=#{name} AND phone=#{phone}
+	</select>
+
+
+	<select id="getMemberList" resultType="com.isul.dto.MemberDTO">
+		SELECT * FROM member
+	</select>
+
+
+	<select id="insertMember" parameterType="com.isul.dto.MemberDTO">
+		INSERT INTO member (id, password, name, phone, email, zipCode, address1, address2)
+		VALUES (#{id}, #{password}, #{name}, #{phone}, #{email}, #{zipCode}, #{address1}, #{address2},'1','1',sysdate)
+	</select>
+
+
+	<select id="idCheck" resultType="Integer">
+		SELECT COUNT(*) FROM member WHERE id = #{id}
+	</select>
+
+
+	<select id="confirmID" resultType="String" parameterType="com.isul.dto.MemberDTO">
+		SELECT password FROM member WHERE id=#{id}
+	</select>
+
+
+	<update id="changePassword" parameterType="com.isul.dto.MemberDTO">
+		UPDATE member SET password=#{password} WHERE email=#{email}
+	</update>
+
+
+
+</mapper>

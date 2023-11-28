@@ -5,9 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.isul.dto.MemberDTO;
+import com.isul.dto.ProfileDTO;
 
 @Mapper
 @Repository
@@ -21,4 +21,7 @@ public interface MemberDAO {
 	public String confirmID(MemberDTO memberDTO);
 	public void changePassword(MemberDTO memberDTO);
 	public MemberDTO getMemberByNamePhone(@Param("name") String name, @Param("phone") String phone);
+	
+	// 내 프로필 불러오기
+	public ProfileDTO getMyProfile(String id);
 }
