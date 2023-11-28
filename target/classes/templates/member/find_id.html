@@ -2,11 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <title>이슬톡톡 ISULTOKTALK - 아이디/비밀번호 찾기</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="/js/login.js"></script>
-
 <style>
 
 	
@@ -25,10 +23,8 @@ table{
 	padding: 30px;
 }
 
-
 .container, container1 {
 	margin:auto;
-
 	width: 600px;
 	height: 200px;
 	background-color: white;
@@ -36,9 +32,7 @@ table{
 }
 
 .container1 {
-
 	margin:auto;
-
 	margin-top: 200px;
 	width: 600px;
 	height: 200px;
@@ -78,13 +72,11 @@ table{
 
 
 
-
 </style>
 </head>
 <body style="margin:0px; padding:0px;">
 	<div class="head"><b>아이디/비밀번호 찾기</b></div>
 	<form action="findphone" id="findphone_id" name="findphone_id" method="post">
-
 		<hr style="margin:0px; padding:0px">
 		<div class="container">
 			<table>
@@ -104,35 +96,27 @@ table{
 				</tr>
 				<tr>
 					<td>
-
 						<input type="text" id="find_name" name="find_name" class="login_form" placeholder="이름">
-
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
-
 						<input type="hidden" id="findphoneAuthorizationKey" name="findphoneAuthorizationKey" value="11">
 						<input type="text" id="find_phone" name="find_phone" class="login_form" placeholder="전화번호">
 						<input type="button" class="button" style=height:36px onclick="return send_phone()" value="인증번호 받기">
-
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
-
 						<input type="text" id="find_phoneCheck" name="find_phoneCheck" class="login_form" placeholder="인증번호 확인">
-
 					</td>
 				</tr>
 				
 				<tr>
 						<td colspan="3">
-
 						<input type="submit" style="width:415px; height:36px;" onclick="return find_id_phone()" value="아이디 찾기" class="button">
-
 						</td>
 				</tr>
 				</div>
@@ -143,12 +127,10 @@ table{
 			
 		</div>
 		
-
 		</form>
 		<form action="/findEmailAuth" method="post">
 		<div class="container1">
 			<table style="margin:0px; padding-right: 140px;">
-
 			
 				<tr>
 					<td>
@@ -160,30 +142,24 @@ table{
 				<tr>
 					<td>
 						<input type="radio" value=1 checked>본인 확인 이메일로 인증
-
 						<p style="font-size: small">본인 확인 이메일 주소로 임시비밀번호가 발송됩니다.</p>
-
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
-
 						<input type="hidden" id="findauthorizationKey" name="findauthorizationKey" value="11">
 						<input type="text" id="find_id" name="find_id" class="login_form" placeholder="아이디">
 						<input type="email" class="login_form" id="find_email" name="find_email" placeholder="이메일">
 						<td colspan="1">
 						<div style="height:36px; background-color: white"></div>
 						</td>
-
 					</td>
 				</tr>
 				
 				<tr>
 						<td colspan="3">
-
 						<input type="submit" style="width:415px; height:36px;" onclick="find_send_email()" value="임시 비밀번호 발송" class="button">
-
 						</td>
 				</tr>
 				</div>

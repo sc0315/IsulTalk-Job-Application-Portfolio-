@@ -9,5 +9,8 @@ public class MemberDTO {
 	private String name;
 	private String phone;
 	private String email;
+	private String zipCode;
+	private String address1;
+	private String address2;
 
 }

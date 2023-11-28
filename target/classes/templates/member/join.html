@@ -10,13 +10,11 @@
 	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
 	crossorigin="anonymous">
 <script type="text/javascript" src="/js/join.js"></script>
-
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body class="body-color">
 	<form action="join" name="form" id="form" method="post">
-
 
 				<!-- 외곽 컨테이너  -->
 		<div class="container1">
@@ -41,21 +39,18 @@
 								<span class="input-group-text" id="inputGroup-sizing-sm">
 									<img src="/images/join/id.png" width="25"
 									height="25">
-
 								</span> <input type="text" name ="id" id="id" class="form-control" placeholder="아이디" autocomplete="off">
 								
-
 							</div>
 						</td>
 
 						<!-- 아이디 중복확인 버튼 -->
-
 						<td colspan='12'>
 							<button class="btn btn-outline-secondary btn-sm" type="button"
 								id="idCheck" onclick="id_Check()">중복확인</button>
 								<span id="result_id" style="font-size:12px;"></span>
 						</td>
-
+						
 						<td colspan='4'>&nbsp;</td>
 					</tr>
 				
@@ -70,11 +65,9 @@
 							<span class="input-group-text" id="inputGroup-sizing-sm">
 								<img src="/images/join/password.png" width="25"
 								height="25">
-
 							</span> 
 							<input type="password" name="password" id="password"  class="form-control" placeholder="비밀번호" autocomplete="off">
 							<span id="result_pwd" style="font-size:12px;"></span>
-
 						</div>
 					</td>
 
@@ -87,15 +80,12 @@
 							<span class="input-group-text" id="inputGroup-sizing-sm">
 								<img src="/images/join/passwordcf.png" width="25"
 								height="25">
-
 							</span> <input type="password" id="pwdCheck" class="form-control"
 								placeholder="비밀번호 확인" autocomplete="off">
-
 						</div>
 					</td>
 
 					<tr>
-
 						<td colspan='6' class="text1">• 8~14자 영문 대문자, 소문자, 숫자를 각 1개
 							이상 포함해 주세요.</td>
 						
@@ -118,9 +108,7 @@
 						<td colspan='2'>
 							<input type="hidden" id="authorizationKey" name="authorizationKey" value="11">
 							<button class="btn btn-outline-secondary btn-sm" type="button"
-
 								id="sendEmail" onClick="send_email()">메일전송</button>
-
 						</td>
 
 						<!-- 이메일 인증번호 입력 -->
@@ -129,18 +117,14 @@
 								<span class="input-group-text" id="inputGroup-sizing-sm">
 									<img src="/images/join/emailkey.png" width="25"
 									height="25">
-
 								</span> <input type="text" id=emailCheck class="form-control" placeholder="인증번호">
-
 							</div>
 						</td>
 					<tr>
 					
 					<tr>
 						<td colspan='6' class="text1">• 이메일주소 입력 후 메일전송 버튼을 클릭하세요.</td>
-
 						<td colspan='4' class="text1">• 이메일 인증</td>
-
 					</tr>
 
 
@@ -150,9 +134,7 @@
 							<span class="input-group-text" id="inputGroup-sizing-sm">
 								<img src="/images/join/name.png" width="25"
 								height="25">
-
 							</span> <input type="text" name="name" id="name" class="form-control" placeholder="이름">
-
 						</div>
 					</td>
 
@@ -206,18 +188,14 @@
 								<span class="input-group-text" id="inputGroup-sizing-sm">
 									<img src="/images/join/phonecf.png" width="25"
 									height="25">
-
 								</span> <input type="text" id="phoneCheck" class="form-control" placeholder="문자 인증번호">
-
 							</div>
 						</td>
 					<tr>
 					
 					<tr>
 						<td colspan='6' class="text1">• 인증받을 전화번호를 입력하고 문자전송 버튼을 클릭해주세요.</td>
-
 						<td colspan='4' class="text1">• 인증번호 확인</td>
-
 					</tr>
 
 
@@ -232,19 +210,15 @@
 							<span class="input-group-text" id="inputGroup-sizing-sm">
 								<img src="/images/join/address.png" width="25"
 								height="25">
-
 							</span> <input type="text" class="form-control" id="zipCode" name="zipCode"
 								placeholder="우편번호" readonly>
-
 						</div>
 					</td>
 
 					<!-- 주소 검색 버튼 -->
 					<td colspan='2'><input
 						class="btn btn-outline-secondary btn-sm" type="button"
-
 						id="searchAddress" onclick="execDaumPostcode()" value="우편번호 찾기"></td>
-
 					<td colspan='4'></td>
 					</tr>
 					<tr>
@@ -255,10 +229,8 @@
 								<span class="input-group-text" id="inputGroup-sizing-sm">
 									<img src="/images/join/address.png" width="25"
 									height="25">
-
 								</span> <input type="text" class="form-control" id="address1"
 									name="address1" placeholder="검색된 주소" readonly>
-
 							</div>
 						</td>
 
@@ -268,10 +240,8 @@
 								<span class="input-group-text" id="inputGroup-sizing-sm">
 									<img src="/images/join/address.png" width="25"
 									height="25">
-
 								</span> <input type="text" class="form-control" id="address2"
 									name="address2" placeholder="상세 주소">
-
 							</div>
 						</td>
 					</tr>
@@ -282,9 +252,7 @@
 						<td colspan='4' class="text1">• 나머지 상세주소를 입력해주세요.</td>
 					</tr>
 
-
 					<input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
-
 					<tr>
 					
 
@@ -387,10 +355,8 @@ QR코드 등록 정보:삭제 시점으로부터6개월 보관
 						<!-- 회원가입 버튼 -->
 
 						<td colspan='4'>
-
 							<button type="submit" class="btn btn-secondary btn-lg" 
 								id="signOk" onClick="return join()"> 회원가입 </button>
-
 						</td>
 						<td></td>
 					</tr>
