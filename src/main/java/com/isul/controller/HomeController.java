@@ -80,7 +80,7 @@ public class HomeController {
 			out.println("history.go(-1); </script>");
 			out.close();
 			
-			return "redirect:/main/"; 
+			return "main/main"; 
 		}
 	}
 	

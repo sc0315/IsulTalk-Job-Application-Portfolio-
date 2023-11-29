@@ -195,19 +195,19 @@ function join() {
         alert("비밀번호는 8~14자 영문 대문자, 소문자, 숫자를 각 1개 이상 포함해야 합니다.");
         pwd.focus();
         return false;
-    } else if (emailCheck.value != storedAuthorizationKey) {
+    } /*else if (emailCheck.value != storedAuthorizationKey) {
         alert("이메일 인증번호가 일치하지 않습니다.");
         emailCheck.focus(); 
         return false;
-    } else if (name.value == "") {
+    }*/ else if (name.value == "") {
         alert("이름을 입력해 주세요.");
         name.focus();
         return false;
-    } else if (phoneCheck.value != storedphoneAuthorizationKey) {
+    } /*else if (phoneCheck.value != storedphoneAuthorizationKey) {
         alert("문자 인증번호가 일치하지 않습니다.");
         phoneCheck.focus(); 
         return false;
-    } else if (zipCode.value == "") {
+    } */else if (zipCode.value == "") {
         alert("우편번호 찾기를 눌러주세요.");
         zipCode.focus();
         return false;
