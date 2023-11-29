@@ -17,4 +17,5 @@ public class MemberDTO {
 	private String usage;
 	private String contract;
 	private Date createDate;
+	
 }

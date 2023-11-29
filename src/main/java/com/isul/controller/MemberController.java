@@ -13,6 +13,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +25,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.isul.dto.MemberDTO;
 import com.isul.member.MemberService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
 @RequestMapping("/member/")
+@RequiredArgsConstructor
 public class MemberController {
+	
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	//----- 이메일 발송 --------------------------------------------------------
 	@PostMapping(value = "/emailAuth")
@@ -88,6 +94,7 @@ public class MemberController {
 	@PostMapping("/join")
 	public String insertMember(MemberDTO dto) {
 		System.out.println(dto);
+		dto.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
 		memberService.insertMember(dto);
 		return "redirect:../";
 	}
