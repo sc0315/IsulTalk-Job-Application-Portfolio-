@@ -6,7 +6,26 @@
 </head>
 <body>
 <div class="csboard" th:fragment="csboard">
-	고객센터
+	<table class="table table-sriped">
+			<thead>
+			<tr>
+				<td scope="col">#</td>
+				<td scope="col">Title</td>
+				<td scope="col">Writer</td>
+				<td scope="col">Regdate</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="dto : ${boardList}">
+				<th scope="row">[[${dto.board_number}]]</th>
+				<td>
+					[[${dto.board_title}]]
+				</td>
+				<td>[[${dto.board_writer}]]</td>
+				<td>[[${dto.board_createdate}]]</td>
+			</tr>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>

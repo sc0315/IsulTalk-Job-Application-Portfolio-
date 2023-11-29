@@ -51,11 +51,7 @@ public class MainController {
 		return "main/modifyMyInfo";
 	}
 	
-	@RequestMapping("/csboard")
-	public String csboardView() {
-		System.out.println("고객센터 열기");
-		return "board/csboard";
-	}
+	
 	
 	
 }

@@ -2,6 +2,7 @@ package com.isul.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.isul.board.BoardService;
+import com.isul.dto.BoardDTO;
 import com.isul.dto.MemberDTO;
 import com.isul.dto.ProfileDTO;
 import com.isul.member.MemberService;
@@ -33,10 +36,14 @@ public class HomeController {
 	
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private BoardService boardService;
 	
 	@RequestMapping("/")
-	public String check() {
+	public String check(BoardDTO boardDTO) {
 		System.out.println("확인");
+		
+		System.out.println(boardService.getBoardList(boardDTO));
 		return "index";
 	}
 	
