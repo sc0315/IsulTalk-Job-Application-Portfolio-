@@ -11,16 +11,16 @@
 				<tr>
 					<td rowspan='2' style="width : 75px; height : 75px;">
 						<div class="profileImageWrap">
-							<img class="profileImage" src="/images/profile/winter.png"/>
+							<img class="profileImage" th:src="${session.profile.profile_img}"/>
 						</div>
 					</td>
 					<td class="profileContentBox">
-								<span class="friendListNickName">대화명</span><span>(memberID)</span>
+								<span class="friendListNickName" th:text="${session.profile.nick_name}">대화명</span><span th:text="'('+${session.loginId}+')'">(memberID)</span>
 							</td>
 				</tr>
 				<tr>
 					<td class="profileStatusBox">
-								<span class="statusMessage">상태메세지 길어진다</span>
+								<span class="statusMessage" th:text="${session.profile.status_message}">상태메세지 길어진다</span>
 							</td>
 				</tr>
 			</table>

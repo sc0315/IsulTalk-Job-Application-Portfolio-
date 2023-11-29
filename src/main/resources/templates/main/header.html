@@ -6,12 +6,16 @@
 
 </head>
 <body>
-	<div id="header"> 
+	<div id="header" th:fragment="header"> 
 		<div style="width:930px; margin : auto;">
-			<img id="talklogo" class="logo" src="/images/minimini.png" style="width:40px; height:40px;">
-			<img class="logo" src="/images/isulkor.png" style="width:65px; height:40px;">
-			<div id="logout">로그아웃&nbsp;&nbsp;</div>
-			<div id="logout">상철접속</div>
+			<a href="/logout">
+				<img id="talklogo" class="logo" src="/images/minimini.png" style="width:40px; height:40px;">
+				<img class="logo" src="/images/isulkor.png" style="width:65px; height:40px;">
+			</a>
+			<div id="logout">
+				<a href="/logout" style="color : black;">로그아웃&nbsp;&nbsp;</a>
+			</div>
+			<div class="logoutSessionId" th:text="'사용자이름('+${session.loginId}+')'">상철접속</div>
 		</div>
 	</div>
 </body>

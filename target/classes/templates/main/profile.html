@@ -7,18 +7,18 @@
 </head>
 <body>
 <div th:fragment="profile" style="height:855px; width:550px; background-color: white; position: relative;">
-	<div class="profileBackImage">
+	<div class="profileBackImage" th:style="'background-image:url('+ ${session.profile.background_img} +');'">
 		
 		<div class="profileStatusChat">
 			1:1대화
 		</div>
-		<div class="profileStatusNick">
+		<div class="profileStatusNick" th:text="${session.profile.nick_name}">
 			대화명
 		</div>
 		<div class="profileSetImageWrap">
-			<img class="profileSetImage" src="/images/profile/newjean.jpg">
+			<img class="profileSetImage" th:src="${session.profile.profile_img}"/>
 		</div>
-		<div class="profileStatusMessage">
+		<div class="profileStatusMessage" th:text="${session.profile.status_message}">상태메세지 길어진다>
 			상태메세지
 		</div>
 		
