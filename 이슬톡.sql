@@ -1,5 +1,3 @@
--- 이슬톡톡 회원가입 정보 테이블
-
 
 -- 테이블 삭제
 DROP TABLE member               CASCADE CONSTRAINTS; 
@@ -131,13 +129,13 @@ INSERT INTO member(id, password, name, email, phone, zipcode, address1, address2
     INSERT INTO member(id, password, name, email, phone, zipcode, address1, address2, 
                 usage, contract, createdate
                 ) VALUES (
-   'dohyuk','Asdf1234','민도혁','dohyuk@email.com','010-1212-1212',
+   'dohyuk','$2a$10$uCdBWRN4j/bhDz1f237MLuRxsglBeKH6CpoGiQQuj4rCNcmhat7Ty','민도혁','dohyuk@email.com','010-1212-1212',
     '12345','부산 동구로 123','2222호','1','1',   sysdate);
     
 INSERT INTO member(id, password, name, email, phone, zipcode, address1, address2, 
                 usage, contract, createdate
                 )  VALUES (
-    'hanmone','Asdf1234','한모네','hanmone@email.com','010-1313-1313',
+    'hanmone','$2a$10$uCdBWRN4j/bhDz1f237MLuRxsglBeKH6CpoGiQQuj4rCNcmhat7Ty','한모네','hanmone@email.com','010-1313-1313',
     '12345','서울시 종로구 종로 123','1111호','1','1',sysdate);
     
 INSERT INTO member(id, password, name, email, phone, zipcode, address1, address2, 
@@ -148,7 +146,7 @@ INSERT INTO member(id, password, name, email, phone, zipcode, address1, address2
 INSERT INTO member(id, password, name, email, phone, zipcode, address1, address2, 
                 usage, contract, createdate
                 )  VALUES (
-   'one99','One99','루피','ruppy@email.com','010-1577-1577',
+   'one99','$2a$10$uCdBWRN4j/bhDz1f237MLuRxsglBeKH6CpoGiQQuj4rCNcmhat7Ty','루피','ruppy@email.com','010-1577-1577',
     '12345','서울시 위대한 항로 123','봉우리1호','1','1',sysdate);
 --------------------------------------------------------------
 
@@ -199,8 +197,15 @@ INSERT INTO profile(id, profile_img, background_img, status_message, nick_name)
 INSERT INTO profile(id, profile_img, background_img, status_message, nick_name)
         VALUES('winter', '/images/profile/newjean.jpg', '/images/background/newjeanback.jpg', '겨울상태메세지나온다', '겨울대화명나온다');
 INSERT INTO profile(id, profile_img, background_img, status_message, nick_name)
-        VALUES('winter', '/images/profile/oneruffy.png', '/images/background/one.jpg', '고무고무가 그립다', '해적왕루피');        
-        
+        VALUES('one99', '/images/profile/oneruffy.png', '/images/background/one.jpg', '고무고무가 그립다', '해적왕루피');
+INSERT INTO profile(id, profile_img, background_img, status_message, nick_name)
+        VALUES('dohyuk', '/images/profile/mindopro.png', '/images/background/mindoback.jpg', '두배로 갚아주겠어', '심준석아님');
+INSERT INTO profile(id, profile_img, background_img, status_message, nick_name)
+        VALUES('hanmone', '/images/profile/monepro.png', '/images/background/moneback.jpg', '고마워 팽희야', '진짜엄마');
+INSERT INTO profile(id, profile_img, background_img, status_message, nick_name)
+        VALUES('gumlahee', '/images/profile/laheepro.png', '/images/background/laheeback.jpg', '10억이야!!!', '금라');   
+INSERT INTO profile(id, profile_img, background_img, status_message, nick_name)
+        VALUES('asdf1234', '/images/profile/no_image.png', '/images/background/no_image.png', '제발!!실행좀', '테스터임');          
 ----------------------------친구 추가 ----------------------------------
 --나를 추가한 친구 '0'
 INSERT INTO friend(id, friend_id, friend_approval, friend_block)
@@ -219,6 +224,9 @@ INSERT INTO friend(id, friend_id, friend_approval, friend_block)
 INSERT INTO friend(id, friend_id, friend_approval, friend_block)
             VALUES('rlatkdcjf86', 'one99', '1', '1');
 
+--------------------------------보드 목록 추가 --------------------
+INSERT INTO csboard(board_number,board_title,board_content,board_writer,board_createdate,board_updatedate,board_secret) VALUES (1,'게시글','내용','작성자',SYSDATE,SYSDATE,'0');
+INSERT INTO csboard(board_number,board_title,board_content,board_writer,board_createdate,board_updatedate,board_secret) VALUES (2,'게시글2','내용','작성자',SYSDATE,SYSDATE,'0');
 --------------------------------친구 목록 조회 --------------------
 --서로친구
 SELECT * FROM friend WHERE id='rlatkdcjf86' AND friend_approval=1;
@@ -257,4 +265,3 @@ WHERE room_number IN (SELECT room_number FROM chat_member WHERE member_id='hanmo
 SELECT * FROM member WHERE id='winter';
 
 SELECT * FROM profile WHERE id='winter';
-
