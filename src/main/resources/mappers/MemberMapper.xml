@@ -30,8 +30,12 @@
 
 
 	<select id="insertMember" parameterType="com.isul.dto.MemberDTO">
-		INSERT INTO member (id, password, name, phone, email, zipCode, address1, address2, usage, contract, createDate)
+		INSERT ALL
+		INTO member (id, password, name, phone, email, zipCode, address1, address2, usage, contract, createDate)
 		VALUES (#{id}, #{password}, #{name}, #{phone}, #{email}, #{zipCode}, #{address1}, #{address2},'1','1',sysdate)
+		INTO profile(id, profile_img, background_img, status_message, nick_name)
+        VALUES (#{id}, '/images/profile/no_image.png','/images/background/no_image.jpg', ' ', ' ')
+        SELECT * FROM DUAL
 	</select>
 
 
@@ -49,17 +53,15 @@
 		UPDATE member SET password=#{password} WHERE email=#{email}
 	</update>
 
-	<!-- 서로친구 프로필목록 -->
+	<!-- 서로 친구 프로필목록 -->
 	<select id="getFriendList" resultType="com.isul.dto.ProfileDTO">
-		SELECT * FROM friend f, profile p WHERE f.id='rlatkdcjf86' AND friend_approval=1
+		SELECT * FROM friend f, profile p WHERE f.id=#{id} AND friend_approval=1
 	</select>
 	
-	<!-- 서로친구 프로필목록 -->
+	<!-- 나를 추가한 친구 프로필목록 -->
 	<select id="getAddedMeList" resultType="com.isul.dto.ProfileDTO">
-		SELECT * FROM friend f, profile p WHERE f.id='rlatkdcjf86' AND friend_approval=0;
+		SELECT * FROM friend f, profile p WHERE f.id=#{id} AND friend_approval=0;
 	</select>
-	
-	
 	
 	
 </mapper>
