@@ -218,7 +218,7 @@ function join() {
     } else if (!flexCheckDefault.checked) {
         alert("약관에 동의해 주세요.");
         return false;
-    } else if ((name.value && address2.value).length > 20) {
+    } else if ((name.value || address2.value).length > 20) {
         alert("20자 이내로 적어주세요.");
         return false;
     } else {

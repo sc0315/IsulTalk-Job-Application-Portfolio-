@@ -1,16 +1,11 @@
 package com.isul.controller;
 
 
-import java.util.Properties;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import com.isul.dto.MemberDTO;
+import com.isul.dto.ProfileDTO;
 import com.isul.member.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -34,63 +30,61 @@ public class MemberController {
 	
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	//----- 이메일 발송 --------------------------------------------------------
-	@PostMapping(value = "/emailAuth")
-	public String emailAuth(@RequestParam(value="email") String email,
-							@RequestParam(value="authorizationKey") String authorizationKey) {
-		 final String username = "rlatkdcjf86@naver.com";
-	     final String password = "Da357159";
-	        // SMTP 서버 설정
-	        Properties props = new Properties();
-	        props.put("mail.smtp.auth", "true");
-	        props.put("mail.smtp.starttls.enable", "true");
-	        props.put("mail.smtp.host", "smtp.naver.com");
-	        props.put("mail.smtp.port", "587");
-
-	        // 세션 생성
-	        Session session = Session.getInstance(props, new Authenticator() {
-	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication(username, password);
-	            }
-	        });
-
-	        try {
-	            // 메시지 생성
-	            Message message = new MimeMessage(session);
-	            message.setFrom(new InternetAddress(username));
-	            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-	            message.setSubject("이메일 테스트");
-	            message.setText("인증번호6자리"
-	            		+ "["+ authorizationKey +"]");
-
-	            // 메시지 전송
-	            Transport.send(message);
-	            System.out.println("메일 보내기 성공 " + email + " 로 인증번호 [" + authorizationKey +"]");
-	            
-	        } catch (MessagingException e) {
-	            e.printStackTrace();
-	        }
-	        return "redirect:member/join";
-	}
-	
-	
-	
 	@Autowired
 	MemberService memberService;
 	
-	//회원가입폼 
+	// 로그인
+	@PostMapping("/login")
+	public String login(MemberDTO memberDTO, HttpSession session, HttpServletResponse response) throws IOException {
+		String loginId = null;
+		
+		int result = memberService.loginID(memberDTO);
+		System.out.println(result);
+		if(result ==1) { // 1: id가 있음 로그인 성공
+			
+			loginId = memberDTO.getId();
+			
+			ProfileDTO profile = memberService.getMyProfile(loginId);
+			session.setAttribute("loginId", loginId);
+			session.setAttribute("profile", profile);
+			System.out.println(loginId);
+			System.out.println(profile);
+			System.out.println("로그인 성공");
+			
+			return "redirect:/main/";
+		} else { // 로그인 실패
+			// 한글로 출력
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html; charset=utf-8");
+			
+			PrintWriter out = response.getWriter();
+			out.println("<script> alert('아이디 또는 비밀번호가 틀립니다.');");
+			out.println("history.go(-1); </script>");
+			out.close();
+			
+			return "main/main"; 
+		}
+	}
+	
+	// 로그아웃
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		 session.invalidate();
+		 return "index";
+	}
+	// 회원가입폼 
 	@GetMapping("/join")
 	public String joinFormView() {
 		return "member/join";
 	}
 	
-	//아이디 찾기 팝업
+	// 아이디 찾기 팝업
 	@GetMapping("/find_id")
 	public String findIdView() {
 		return "member/find_id";
 	}
 
-	//회원가입
+	// 회원가입
 	@PostMapping("/join")
 	public String insertMember(MemberDTO dto) {
 		System.out.println(dto);
@@ -100,7 +94,7 @@ public class MemberController {
 	}
 	
 
-	//아이디 중복확인
+	// 아이디 중복확인
 	@RequestMapping("/idCheck")
     @ResponseBody //ajax 값을 보내기 위해 사용
     public String idCheck(@RequestParam("id") String id) {
@@ -114,14 +108,13 @@ public class MemberController {
         return result;
 	}
 
-	
-	//이메일 중복확인
-		@RequestMapping("/emailCheck")
-	    @ResponseBody //ajax 값을 보내기 위해 사용
-	    public String emailCheck(@RequestParam("email") String email) {
-			// result=1 성공, -1 실패
-	        String result="1";
-	        
-	        return result;
+	// 이메일 중복확인
+	@RequestMapping("/emailCheck")
+    @ResponseBody //ajax 값을 보내기 위해 사용
+    public String emailCheck(@RequestParam("email") String email) {
+		// result=1 성공, -1 실패
+        String result="1";
+        
+        return result;
 		}
 }
