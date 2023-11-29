@@ -74,9 +74,14 @@ body {
 	height : 28px;
 	text-align : right;
 	padding-top :  15px;
-	color : black;
 }
-a:link, a:visited{
+.logoutSessionId {
+	float : right;
+	color : black;
+	font-size:25px;
+	padding-top :  5px;
+}
+a:link, a:visited {
 	color: #eaeaea;
 	text-decoration: none;
 }
@@ -338,7 +343,7 @@ height: 660px;
 .myMessageBox {
 	float : right;
 }
-yourMessageBox {
+.yourMessageBox {
 	float : left;
 }	
 
@@ -382,7 +387,7 @@ yourMessageBox {
     
  /*프로필과 프로필 배경 상태메세지 */   
 .profileBackImage {
-	background-image: url(/images/background/newjeanback.jpg);
+	  background-image: url(/images/background/newjeanback.jpg);
 	  background-size : cover;
 	  background-repeat : no-repeat;
 	  background-position: center center;

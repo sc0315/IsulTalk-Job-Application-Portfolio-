@@ -39,6 +39,13 @@ public class HomeController {
 		System.out.println("확인");
 		return "index";
 	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		 session.invalidate();
+		 return "index";
+	}
+	
 	@GetMapping("/login_fail")
 	public String login_fail(){
 		System.out.println("실패");

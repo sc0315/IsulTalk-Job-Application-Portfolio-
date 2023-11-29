@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.isul.member.MemberDAO">
-	
+	<!-- 로그인멤버 프로필 -->
 	<select id="getMyProfile" resultType="com.isul.dto.ProfileDTO">
 		SELECT * FROM profile WHERE id=#{id}
 	</select>
@@ -30,8 +30,8 @@
 
 
 	<select id="insertMember" parameterType="com.isul.dto.MemberDTO">
-		INSERT INTO member (id, password, name, phone, email, zipCode, address1, address2)
-		VALUES (#{id}, #{password}, #{name}, #{phone}, #{email}, #{zipCode}, #{address1}, #{address2},'1','1',sysdate)
+		INSERT INTO member (id, password, name, phone, email, zipCode, address1, address2, usage, contract, createdate)
+		VALUES (#{id}, #{password}, #{name}, #{phone}, #{email}, #{zipCode}, #{address1}, #{address2},'1','1', sysdate)
 	</select>
 
 
@@ -49,6 +49,17 @@
 		UPDATE member SET password=#{password} WHERE email=#{email}
 	</update>
 
-
-
+	<!-- 서로친구 프로필목록 -->
+	<select id="getFriendList" resultType="com.isul.dto.ProfileDTO">
+		SELECT * FROM friend f, profile p WHERE f.id='rlatkdcjf86' AND friend_approval=1
+	</select>
+	
+	<!-- 서로친구 프로필목록 -->
+	<select id="getAddedMeList" resultType="com.isul.dto.ProfileDTO">
+		SELECT * FROM friend f, profile p WHERE f.id='rlatkdcjf86' AND friend_approval=0;
+	</select>
+	
+	
+	
+	
 </mapper>
