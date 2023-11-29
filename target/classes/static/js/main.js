@@ -127,14 +127,14 @@ var rotationDegree = 0;
 		
 	}	
 		
-	
+
 //고객센터
 	function csboardView() {
 			$.ajax({
 		    url : "csboard",
 		    dataType : "html",
 		    type : "get",  
-		    data : { a:"값1", b:"값2"},   // 호출할 url 에 있는 페이지로 넘길 파라메터
+		    data : { },   // 호출할 url 에 있는 페이지로 넘길 파라메터
 		    success : function(result){
 		        $("#chat").html(result);
 		    }
