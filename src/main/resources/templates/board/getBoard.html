@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form id="getBoard" name="getBoard" method="post"></form>
+	<div class="insertBoard" th:fragment="insertBoard">
+		<h3>글 등록</h3>
+		<table class="table-sriped">
+			<tr>
+				<th>제목</th>
+				<td>[[${board.board_title}]]</td>
+			</tr>
+			<tr style="height: 70px">
+				<th>작성자</th>
+				<td>[[${board.board_writer}]]</td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td>
+					<textarea name="content" id="content" rows="30" cols="65" readonly>[[${board.board_content}]]</textarea>
+				</td>
+			</tr>
+
+		</table>
+		<input type="button" id="button1" class="button1"
+			style="height: 36px; font-size: small; float: right;" onclick="csboardView()"
+			value="뒤로가기">
+		<input type="button" id="button1" class="button1"
+			style="height: 36px; font-size: small; float: left;" onclick=""
+			value="수정">
+		<input type="button" id="button1" class="button1"
+			style="height: 36px; font-size: small; float: left;" onclick=""
+			value="삭제">
+		
+	</div>
+</body>
+</html>

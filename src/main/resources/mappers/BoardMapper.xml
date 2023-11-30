@@ -8,4 +8,19 @@
   	<select id="getBoardList" resultType="com.isul.dto.BoardDTO">
 		SELECT * FROM csboard
 	</select>
+	
+	<select id="getBoard" resultType="com.isul.dto.BoardDTO">
+		SELECT * FROM csboard WHERE board_number=#{board_number}
+	</select>
+	
+	<insert id="insertBoard">
+		<![CDATA[
+		INSERT INTO board(board_number, board_title, board_content, board_writer,
+						 board_createdate, board_updatedate)
+		VALUES(csboard_seq.NEXTVAL, #{board_title}, #{board_content}, #{board_writer},
+				SYSDATE, SYSDATE)
+		]]>
+	</insert>
+	
+	
   </mapper>

@@ -141,5 +141,36 @@ var rotationDegree = 0;
 			});
 		
 	}	
+
+// 글 등록
+	function insertBoardForm(){
 	
+		$.ajax({
+		    url : "insertBoardForm",
+		    dataType : "html",
+		    type : "get",  
+		    data : { },   // 호출할 url 에 있는 페이지로 넘길 파라메터
+		    success : function(result){
+		        $("#chat").html(result);
+		    }
+			});
+
+	}
+
+// 글 상세정보
+	function getBoardForm(event){
+	var clickedRow = event.currentTarget;
+	
+	var board_number = clickedRow.querySelector(".board_number").value;
+    
+		$.ajax({
+		    url : "getBoardForm",
+		    dataType : "text",
+		    type : "get",  
+		    data : {board_number:board_number },   // 호출할 url 에 있는 페이지로 넘길 파라메터
+		    success : function(result){
+		        $("#chat").html(result);
+		    }
+			});
+	}
 		

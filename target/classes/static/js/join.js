@@ -154,6 +154,8 @@ function id_Check() {
                 document.getElementById("address1").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("address2").focus();
+                var g =document.getElementById('zipCode');
+                console.log(g);
             }
         }).open();
     }
@@ -218,7 +220,7 @@ function join() {
     } else if (!flexCheckDefault.checked) {
         alert("약관에 동의해 주세요.");
         return false;
-    } else if ((name.value && address2.value).length > 20) {
+    } else if ((name.value || address2.value).length > 20) {
         alert("20자 이내로 적어주세요.");
         return false;
     } else {

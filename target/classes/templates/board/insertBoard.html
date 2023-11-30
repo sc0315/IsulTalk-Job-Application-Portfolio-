@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form id="insertBoard" name="insertBoard" method="post"></form>
+	<div class="insertBoard" th:fragment="insertBoard">
+		<h3>글 등록</h3>
+		<table class="table-sriped">
+			<tr>
+				<th>제목</th>
+				<td><input type="text" id="boardTitle" name="boardTitle" style="width: 470px; height: 30px;">
+				</td>
+			</tr>
+			<tr style="height: 70px">
+				<th>작성자</th>
+				<td>[[${boardList.board_writer}]]</td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td>
+					<textarea name="content" id="content" rows="30" cols="65"></textarea>
+				</td>
+			</tr>
+
+		</table>
+		<input type="button" id="button1" class="button1"
+			style="height: 36px; font-size: small; float: right;" onclick=""
+			value="글등록">
+	</div>
+</html>

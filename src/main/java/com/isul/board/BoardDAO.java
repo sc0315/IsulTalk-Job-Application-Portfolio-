@@ -11,6 +11,8 @@ import com.isul.dto.BoardDTO;
 @Repository
 public interface BoardDAO {
 
-	List<BoardDTO> getBoardList(BoardDTO boardDTO);
+	public List<BoardDTO> getBoardList(BoardDTO boardDTO);
+	public void insertBoard(BoardDTO boardDTO);
+	public BoardDTO getBoard(String board_number);
 	
 }

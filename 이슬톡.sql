@@ -213,7 +213,6 @@ INSERT INTO friend(id, friend_id, friend_approval, friend_block)
 INSERT INTO friend(id, friend_id, friend_approval, friend_block)
             VALUES('rlatkdcjf86', 'one99', '0', '1');
             
-            
 --서로친구 '1'
 INSERT INTO friend(id, friend_id, friend_approval, friend_block)
             VALUES('rlatkdcjf86', 'winter', '1', '1');
