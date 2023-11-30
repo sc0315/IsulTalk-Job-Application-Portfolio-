@@ -252,12 +252,26 @@ a:hover, a:active {
     color: #fff;
     border:none;
     border-radius:5px;
- }
+ }.button1 {
+	background-color: #e86479;
+	color: #fff;
+	border:none;
+    border-radius:5px;
+    margin: 5px 5px 0px 0px;
+}
 .button:hover {
 	background-color: #ffb6c4;
 	border: 1px solid #e86479;
 }
 .button:active {
+	background-color: #ffb6c4;
+	border: 2px solid #e86479;
+}
+.button1:hover {
+	background-color: #ffb6c4;
+	border: 1px solid #e86479;
+}
+.button1:active {
 	background-color: #ffb6c4;
 	border: 2px solid #e86479;
 }
@@ -431,3 +445,32 @@ height: 660px;
 	text-shadow: -1px 1px gray, 1px 1px gray, 1px 1px gray, 1px -1px gray;
 	
 }
+
+/* 게시판 */
+.csboard {
+	position: absolute;
+	top: 50px;
+	width: 550px;
+}
+.table-sriped {
+	border-bottom: 1px solid #adadad;
+	width: 550px;
+}
+h3 {
+	margin: 35px 25px 15px 0px;
+    border-bottom: 1px solid #DFDFE0;
+    padding-bottom: 20px;
+    width: 550px;
+    text-align: center;
+}
+
+/* 글등록 */
+.insertBoard {
+	position: absolute;
+	top: 50px;
+	width: 550px;
+}
+.table-sriped th{
+	width:100px;
+}
+	

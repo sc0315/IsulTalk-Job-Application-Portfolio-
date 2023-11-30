@@ -154,6 +154,8 @@ function id_Check() {
                 document.getElementById("address1").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("address2").focus();
+                var g =document.getElementById('zipCode');
+                console.log(g);
             }
         }).open();
     }

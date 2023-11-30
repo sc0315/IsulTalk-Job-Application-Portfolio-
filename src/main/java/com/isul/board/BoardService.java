@@ -17,5 +17,12 @@ public class BoardService {
 		return boardDAO.getBoardList(boardDTO);
 	}
 
+	public void insertBoard(BoardDTO boardDTO) {
+		boardDAO.insertBoard(boardDTO);
+	}
+	
+	public BoardDTO getBoard(String board_number) {
+		return boardDAO.getBoard(board_number);
+	}
 
 }
