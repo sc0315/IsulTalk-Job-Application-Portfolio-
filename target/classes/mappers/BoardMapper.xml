@@ -6,7 +6,7 @@
   <mapper namespace="com.isul.board.BoardDAO">
   
   	<select id="getBoardList" resultType="com.isul.dto.BoardDTO">
-		SELECT * FROM csboard
+		SELECT * FROM csboard order by board_number ASC
 	</select>
 	
 	<select id="getBoard" resultType="com.isul.dto.BoardDTO">
@@ -14,13 +14,20 @@
 	</select>
 	
 	<insert id="insertBoard">
-		<![CDATA[
-		INSERT INTO board(board_number, board_title, board_content, board_writer,
+		INSERT INTO csboard(board_number, board_title, board_content, board_writer,
 						 board_createdate, board_updatedate)
 		VALUES(csboard_seq.NEXTVAL, #{board_title}, #{board_content}, #{board_writer},
-				SYSDATE, null)
-		]]>
+				SYSDATE, SYSDATE)
 	</insert>
 	
+	<update id="updateBoard">
+		UPDATE csboard 
+		SET board_title=#{board_title}, board_content=#{board_content}, board_updatedate=SYSDATE
+		WHERE board_number = #{board_number}
+	</update>
 	
+	<delete id="deleteBoard">
+		DELETE csboard
+		WHERE board_number = #{board_number}
+	</delete>
   </mapper>

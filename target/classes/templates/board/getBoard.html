@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -7,11 +7,14 @@
 <body>
 <form id="getBoard" name="getBoard" method="post"></form>
 	<div class="insertBoard" th:fragment="insertBoard">
-		<h3>글 등록</h3>
+
+		<h3>게시글</h3>
 		<table class="table-sriped">
 			<tr>
 				<th>제목</th>
-				<td>[[${board.board_title}]]</td>
+				<td>[[${board.board_title}]] </td>
+				
+				
 			</tr>
 			<tr style="height: 70px">
 				<th>작성자</th>
@@ -25,16 +28,23 @@
 			</tr>
 
 		</table>
+		 <div th:if="${loginId} == ${board.board_writer}">
 		<input type="button" id="button1" class="button1"
 			style="height: 36px; font-size: small; float: right;" onclick="csboardView()"
 			value="뒤로가기">
 		<input type="button" id="button1" class="button1"
-			style="height: 36px; font-size: small; float: left;" onclick=""
+			style="height: 36px; font-size: small; float: left;" onclick="updateBoardForm()"
 			value="수정">
 		<input type="button" id="button1" class="button1"
-			style="height: 36px; font-size: small; float: left;" onclick=""
+			style="height: 36px; font-size: small; float: left;" onclick="boardDelete()"
 			value="삭제">
+		</div>
 		
+		<div th:unless="${loginId} == ${board.board_writer}">
+		<input type="button" id="button1" class="button1"
+			style="height: 36px; font-size: small; float: right;" onclick="csboardView()"
+			value="뒤로가기">
+		</div> 
 	</div>
 </body>
 </html>

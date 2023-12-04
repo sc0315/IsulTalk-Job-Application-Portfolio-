@@ -473,4 +473,10 @@ h3 {
 .table-sriped th{
 	width:100px;
 }
+
+.updateBoard{
+	position: absolute;
+    top: 50px;
+    width: 550px;
+}
 	

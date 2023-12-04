@@ -16,13 +16,20 @@ public class BoardService {
 	public List<BoardDTO> getBoardList(BoardDTO boardDTO){
 		return boardDAO.getBoardList(boardDTO);
 	}
-
-	public void insertBoard(BoardDTO boardDTO) {
-		boardDAO.insertBoard(boardDTO);
-	}
 	
 	public BoardDTO getBoard(String board_number) {
 		return boardDAO.getBoard(board_number);
 	}
+	
+	public void insertBoard(BoardDTO boardDTO) {
+		boardDAO.insertBoard(boardDTO);
+	}
+	
+	public void updateBoard(BoardDTO boardDTO) {
+		boardDAO.updateBoard(boardDTO);
+	}
 
+	public void deleteBoard(BoardDTO boardDTO) {
+		boardDAO.deleteBoard(boardDTO);
+	}
 }

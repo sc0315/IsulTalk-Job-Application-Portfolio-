@@ -12,7 +12,9 @@ import com.isul.dto.BoardDTO;
 public interface BoardDAO {
 
 	public List<BoardDTO> getBoardList(BoardDTO boardDTO);
-	public void insertBoard(BoardDTO boardDTO);
 	public BoardDTO getBoard(String board_number);
+	public void insertBoard(BoardDTO boardDTO);
+	public void updateBoard(BoardDTO boardDTO);
+	public void deleteBoard(BoardDTO boardDTO);
 	
 }
