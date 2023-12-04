@@ -4,13 +4,6 @@
 <meta charset="UTF-8">
 <title>이슬톡톡 ISULTOKTALK</title>
 <link rel="stylesheet" href="/css/main.css">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-<script>
-	//간단하게 요렇게 써도 됨
-	//$("#div 아이디").load("로딩할 페이지 URL", {넘길 파라메터});
-</script>
-
 </head>
 <body>
 
@@ -67,7 +60,6 @@
 
 			<td id="chat" style="width: 550px;" rowspan='2'>
 			<div class="profile" th:replace="main/profile.html :: div"></div>
-				<!--  <div class="chat" th:replace="main/chat.html :: div"></div>-->
 			</td>
 
 		</tr>
@@ -78,5 +70,6 @@
 		</tr>
 	</table>
 	<script src="/js/main.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </body>
 </html>

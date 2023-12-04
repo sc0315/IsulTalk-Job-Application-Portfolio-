@@ -3,27 +3,23 @@
 var rotationDegree = 0;
 		var rotationDegree2 = 0;
 		function rotateImage() {
-			// 이미지 요소를 가져와서 적절한 각도로 회전
 			var imgElement = document.getElementById('rotatingImage');
 			rotationDegree -= 180;
 			imgElement.style.transform = 'rotate(' + rotationDegree + 'deg)';
 		}
 		function rotateImage2() {
-			// 이미지 요소를 가져와서 적절한 각도로 회전
 			var imgElement = document.getElementById('rotatingImage2');
 			rotationDegree2 -= 180;
 			imgElement.style.transform = 'rotate(' + rotationDegree2 + 'deg)';
 		}
 		function toggleAccordion(titleElement) {
-			// Find the parent section
-			var section = titleElement.parentElement;
 
-			// Toggle the content's display property
+			var section = titleElement.parentElement;
 			var content = section.querySelector('.accordion-content');
-			if (content.style.display === 'block') {
-				content.style.display = 'none';
-			} else {
+			if (content.style.display === 'none') {
 				content.style.display = 'block';
+			} else {
+				content.style.display = 'none';
 			}
 		}
 		

@@ -4,6 +4,7 @@
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 body {
 	margin : 0px;
 	padding : 0px;
@@ -199,23 +200,24 @@ a:hover, a:active {
 }
 /*친구 리스트 아코디언*/
 .accordion {
-	display: flex;
+	display: block;
 	flex-direction: column;
     max-width: 400px;
 }
 .accordion-section {
-            margin-bottom: 8px;      
+            margin-bottom: 8px; 
 }
 .accordion-title {
             background-color: white;
             height : 35px;
+            width : 295px;
             padding-left : 15px;
 			padding-top : 10px;
 }
 .accordion-content {
-            display: none;
-		    overflow-y: auto;
-           	max-height : 500px;
+            display: block;
+            overflow-y: auto;
+			overflow-x: hidden;
 }
 /* 돌아가는 화살표 */
 .arrow {
