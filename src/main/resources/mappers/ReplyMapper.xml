@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.isul.board.ReplyDAO">
+  	<!-- 답글 전체 조회 -->
+  	<select id="getReplyList" resultType="com.isul.dto.ReplyDTO">
+  		SELECT * FROM csreply
+  		WHERE board_number=${board_number}
+  		order by reply_createdate ASC
+  	</select>
+  	
+  	<!-- 답글 총 갯수 -->
+  	<select id="countReply" resultType="String">
+  		SELECT count(*)
+  		FROM csreply
+  		WHERE board_number = ${board_number}
+  	</select>
+  	
+  	<!-- 댓글 작성 -->
+  	<insert id="insertReply">
+  		INSERT INTO csreply(reply_number, board_number, reply_content, reply_writer, 
+  							reply_createdate, reply_updatedate, reply_secret)
+  		VALUES (reply_seq.NEXTVAL, ${board_number}, '${reply_content}', '${reply_writer}', SYSDATE, SYSDATE, '0')
+  	</insert>
+  	
+  	<!-- 댓글 찾기 -->
+  	<select id="getReply" resultType="com.isul.dto.ReplyDTO">
+  	   select*from csreply where reply_number=${reply_number}
+  	</select>
+  	
+  	<delete id="deleteReply">
+		DELETE csreply
+		WHERE reply_number = #{reply_number}
+	</delete>
+  </mapper>

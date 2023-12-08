@@ -14,7 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.isul.board.BoardService;
+import com.isul.board.ReplyService;
 import com.isul.dto.BoardDTO;
+import com.isul.dto.ReplyDTO;
+
+import utils.Criteria;
+import utils.PageMaker;
 
 @Controller
 @RequestMapping("/main/")
@@ -23,51 +28,76 @@ public class BoardController {
 
 	@Autowired
 	public BoardService boardService;
+	@Autowired
+	public ReplyService replyService;
 
 	@GetMapping("/csboard")
-	public String csBoardView(BoardDTO boardDTO, Model model) {
-
-		List<BoardDTO> boardList = boardService.getBoardList(boardDTO);
-		model.addAttribute("boardList", boardList);
+	public String csBoardView(BoardDTO boardDTO, Model model, Criteria cri, HttpSession session) {
+		System.out.println("boardList controller");
+		List<BoardDTO> boardList = boardService.getBoardList(cri);
 		
-		System.out.println("게시판 열기" + boardList);
-
+		int total = boardService.totalCnt();
+		PageMaker pageMaker = new PageMaker(cri, total);
+		System.out.println(boardList);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("paging", pageMaker);
+		System.out.println(pageMaker);
+	//	String countReply = replyService.countReply();
+		
+		//model.addAttribute("countReply", countReply);
 		return "board/csboard";
+
 	}
 
 	@GetMapping("/getBoardForm")
-	public String getBoard(BoardDTO boardDTO, Model model, @RequestParam("board_number") String board_number,HttpSession session) {
+	public String getBoard(BoardDTO boardDTO, Model model, @RequestParam("board_number") String board_number,
+			HttpSession session, ReplyDTO replyDTO) {
+		
+		System.out.println("getBoard controller");
 		BoardDTO board = boardService.getBoard(board_number);
+		List<ReplyDTO> replyList = replyService.getReplyList(board_number);
+		String countReply = replyService.countReply(board_number);
+
+		// 댓글 수 업데이트
+		boardService.updateReplyCount(board_number);
+		
 		session.setAttribute("board_number", board_number);
-		// 글 상세정보 소환
+		
+		// 글 상세정보 저장
 		model.addAttribute("board", board);
+		model.addAttribute("replyList", replyList);
+		model.addAttribute("countReply", countReply);
+		
 		// 수정삭제 권한
 		model.addAttribute("loginId", session.getAttribute("loginId"));
 		
-		System.out.println("상세글 읽기"+board);
-		
+		model.addAttribute("replyList", replyList);
+		System.out.println(replyList);
+
 		return "board/getBoard";
 	}
 
 	@GetMapping("/insertBoardForm")
 	public String insertBoardView(BoardDTO boardDTO, HttpSession session, Model model) {
 		model.addAttribute("loginId", session.getAttribute("loginId"));
-		
-		System.out.println("글 등록 Id: "+session.getAttribute("loginId"));
 
 		return "board/insertBoard";
 	}
-	
+
 	@PostMapping("/insertBoard")
-	public String insertBoard(BoardDTO boardDTO, HttpSession session) {
-		String id = (String)session.getAttribute("loginId");
+	public String insertBoard(BoardDTO boardDTO, HttpSession session, Model model, Criteria cri) {
+		String id = (String) session.getAttribute("loginId");
 		boardDTO.setBoard_writer(id);
-		
+
 		boardService.insertBoard(boardDTO);
-		
-		System.out.println("글 등록 성공");
-		System.out.println(boardDTO);
-		
+
+		List<BoardDTO> boardList = boardService.getBoardList(cri);
+		int total = boardService.totalCnt();
+		PageMaker pageMaker = new PageMaker(cri, total);
+
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("paging", pageMaker);
+
 		return "board/csboard";
 	}
 
@@ -75,31 +105,38 @@ public class BoardController {
 	public String updateBoardView(BoardDTO boardDTO, HttpSession session, Model model) {
 		model.addAttribute("loginId", session.getAttribute("loginId"));
 		boardDTO = (BoardDTO) session.getAttribute("board");
-		
-		System.out.println("글 등록 Id: "+session.getAttribute("loginId"));
-		System.out.println(boardDTO);
-		System.out.println("글 수정 정보: "+ boardDTO);
-		
+
 		return "board/updateBoard";
 	}
-	
-	@PostMapping("/updateBoard")
-	public String updateBoard(BoardDTO boardDTO, HttpSession session) {
-		boardDTO.setBoard_number((String)session.getAttribute("board_number"));
+
+	@GetMapping("/updateBoard")
+	public String updateBoard(BoardDTO boardDTO, HttpSession session, Model model, Criteria cri) {
+		boardDTO.setBoard_number((String) session.getAttribute("board_number"));
 		boardService.updateBoard(boardDTO);
+		String board_number = (String)session.getAttribute("board_number");
 		
-		System.out.println(boardDTO);
-		
-		return "board/csBoard";
+		List<BoardDTO> boardList = boardService.getBoardList(cri);
+		int total = boardService.totalCnt();
+		PageMaker pageMaker = new PageMaker(cri, total);
+
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("paging", pageMaker);
+
+		return "redirect:/main/getBoardForm?"+ "board_number="+board_number;
 	}
-	
+
 	@GetMapping("/deleteBoard")
-	public String deleteBoard(BoardDTO boardDTO, HttpSession session) {
-		boardDTO.setBoard_number((String)session.getAttribute("board_number"));
+	public String deleteBoard(BoardDTO boardDTO, HttpSession session, Model model, Criteria cri) {
+		boardDTO.setBoard_number((String) session.getAttribute("board_number"));
 		boardService.deleteBoard(boardDTO);
-		
-		System.out.println("게시판 삭제: "+boardDTO);
-		
+
+		List<BoardDTO> boardList = boardService.getBoardList(cri);
+		int total = boardService.totalCnt();
+		PageMaker pageMaker = new PageMaker(cri, total);
+
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("paging", pageMaker);
+
 		return "board/csBoard";
 	}
 }

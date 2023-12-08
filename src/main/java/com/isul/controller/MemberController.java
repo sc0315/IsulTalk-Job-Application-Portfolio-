@@ -37,7 +37,7 @@ public class MemberController {
 	
 	// 로그인
 	@PostMapping("/login")
-	public String login(MemberDTO memberDTO, HttpSession session, HttpServletResponse response) throws IOException {
+	public String login(MemberDTO memberDTO, HttpSession session, HttpServletResponse response, Model model) throws IOException {
 		String loginId = null;
 		
 		int result = memberService.loginID(memberDTO);
