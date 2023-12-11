@@ -1,12 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<meta charset="UTF-8">
+	<title>Room</title>
+	
 </head>
+
 <body>
 	<div class="chatList" th:fragment="chatList">
-	채팅방 목록
-	</div>
+		<table class="chatListTable">
+			<tr style="height : 40px;">
+				<td>
+				 <span id="chatListTitle">채팅</span>
+				</td>
+			</tr>
+			<tr th:each="chatList : ${chatList}">
+				<td>
+					<table class="friendHover" onclick="goChat(event)">
+						<tr>
+							<td rowspan='2' class="friendListImageTable">
+								<div class="friendProfileImageWrap">
+									<img class="friendProfileImage"
+										th:src="${chatList.profile_img}" />
+								</div>
+							</td>
+							<td class="profileContentBox"><span
+								class="friendListNickName"
+								th:text="${chatList.nick_name}">대화명</span>
+								<input type="hidden" class="chatSessionId" th:value="${chatList.id}"></td>
+						</tr>
+						<tr>
+							<td class="profileStatusBox"><span class="statusMessage"
+								th:text="${chatList.message}">상태메세지 길어진다</span>
+							<input type="hidden" id="roomNumber" class="roomNumber" th:value="${chatList.room_number}">
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>	
+	
+	
+
+	
+	
 </body>
 </html>

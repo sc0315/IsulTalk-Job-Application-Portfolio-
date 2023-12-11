@@ -4,6 +4,7 @@
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 body {
 	margin : 0px;
 	padding : 0px;
@@ -199,23 +200,25 @@ a:hover, a:active {
 }
 /*친구 리스트 아코디언*/
 .accordion {
-	display: flex;
+	display: block;
 	flex-direction: column;
-    max-width: 400px;
+
 }
 .accordion-section {
-            margin-bottom: 8px;      
+            margin-bottom: 8px;
 }
 .accordion-title {
             background-color: white;
             height : 35px;
+            width : 295px;
             padding-left : 15px;
 			padding-top : 10px;
 }
 .accordion-content {
-            display: none;
-		    overflow-y: auto;
-           	max-height : 500px;
+            display: inline-block;
+            overflow-y: auto;
+			overflow-x: hidden;
+			max-height : 515px;
 }
 /* 돌아가는 화살표 */
 .arrow {
@@ -227,6 +230,16 @@ a:hover, a:active {
             margin-right : 10px;
 }
 
+
+
+/* 채팅 방 목록 */
+.chatListTable {
+	  position: absolute;
+	  top : 132px;
+}
+#chatListTitle {
+	margin-left : 15px;
+}
 
 
 /*채팅창 (인풋부터 시작) */
@@ -338,6 +351,8 @@ height: 660px;
 	font-size : 10px;
 }
 .timeAlign{
+	min-width:150px;
+	
 	vertical-align : bottom;
 }
 .myNick {
@@ -346,6 +361,7 @@ height: 660px;
 	text-align : right;
 	padding-right : 30px;
 	vertical-align : bottom;
+
 }
 .yourNick {
 	font-size : 13px;
@@ -353,12 +369,16 @@ height: 660px;
 	text-align : left;
 	padding-left : 30px;
 	vertical-align : bottom;
+
 }
 .myMessageBox {
 	float : right;
+	text-align : right;
+	margin-right : 5px;
 }
 .yourMessageBox {
 	float : left;
+	text-align : left;
 }	
 
 

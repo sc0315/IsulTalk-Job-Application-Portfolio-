@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.isul.dto.MemberDTO;
-import com.isul.dto.ProfileDTO;
 import com.isul.member.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -41,18 +40,10 @@ public class MemberController {
 		String loginId = null;
 		
 		int result = memberService.loginID(memberDTO);
-		System.out.println(result);
 		if(result ==1) { // 1: id가 있음 로그인 성공
 			
 			loginId = memberDTO.getId();
-			
-			ProfileDTO profile = memberService.getMyProfile(loginId);
 			session.setAttribute("loginId", loginId);
-			session.setAttribute("profile", profile);
-			System.out.println(loginId);
-			System.out.println(profile);
-			System.out.println("로그인 성공");
-			
 			return "redirect:/main/";
 		} else { // 로그인 실패
 			// 한글로 출력
