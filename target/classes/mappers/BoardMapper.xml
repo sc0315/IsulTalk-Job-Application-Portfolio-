@@ -6,6 +6,48 @@
   <mapper namespace="com.isul.board.BoardDAO">
   
   	<select id="getBoardList" resultType="com.isul.dto.BoardDTO">
-		SELECT * FROM csboard
+		 <![CDATA[
+			SELECT rn, board_number, board_title, board_content, board_writer,
+						 board_createdate, reply_count
+			FROM	(SELECT
+						rownum rn, board_number, board_title, board_content, board_writer,
+						 board_createdate, reply_count
+					from csboard where rownum <= #{pageNum} * #{amount})
+			where rn > (#{pageNum}-1) * #{amount}
+			ORDER BY board_number DESC
+		]]>
 	</select>
+	
+ 	<select id="getBoard" resultType="com.isul.dto.BoardDTO">
+		SELECT * FROM csboard c WHERE c.board_number=#{board_number}
+	</select> 
+	
+	<insert id="insertBoard">
+		INSERT INTO csboard(board_number, board_title, board_content, board_writer,
+						 board_createdate, board_updatedate, board_secret)
+		VALUES(csboard_seq.NEXTVAL, #{board_title}, #{board_content}, #{board_writer},
+				SYSDATE, SYSDATE, '0')
+	</insert>
+	
+	<update id="updateBoard">
+		UPDATE csboard 
+		SET board_title=#{board_title}, board_content=#{board_content}, board_updatedate=SYSDATE
+		WHERE board_number = #{board_number}
+	</update>
+	
+	<delete id="deleteBoard">
+		DELETE csboard
+		WHERE board_number = #{board_number}
+	</delete>
+	
+	<select id="totalCnt" resultType="int">
+		SELECT count(*)
+		FROM csboard
+	</select>
+	
+	<update id="updateReplyCount" parameterType="string">
+	update csboard b
+	set b.reply_count = (select count(reply_number) from csreply where board_number = #{board_number})
+	where b.board_number = #{board_number}
+</update>
   </mapper>
