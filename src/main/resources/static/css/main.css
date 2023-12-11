@@ -267,6 +267,7 @@ a:hover, a:active {
 	background-color: #ffb6c4;
 	border: 2px solid #e86479;
 }
+/* 버튼 클래스값으로 불러와야해서 2개로 나눔*/
 .button1:hover {
 	background-color: #ffb6c4;
 	border: 1px solid #e86479;
@@ -275,6 +276,7 @@ a:hover, a:active {
 	background-color: #ffb6c4;
 	border: 2px solid #e86479;
 }
+
 /* 채팅메시지 말풍선 등*/
 .messegeInputArea {
     width: 500px;
@@ -445,6 +447,20 @@ height: 660px;
 	text-shadow: -1px 1px gray, 1px 1px gray, 1px 1px gray, 1px -1px gray;
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* 게시판 */
 .csboard {

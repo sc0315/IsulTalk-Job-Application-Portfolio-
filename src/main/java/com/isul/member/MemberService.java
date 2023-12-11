@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.isul.dto.ChatListDTO;
+import com.isul.dto.ChatMessageDTO;
 import com.isul.dto.MemberDTO;
 import com.isul.dto.ProfileDTO;
 
@@ -77,5 +79,30 @@ public class MemberService {
 	public List<MemberDTO> getMemberList(){
 		return memberDAO.getMemberList();
 	}
+	
+	// 친구리스트 프로필 불러오기
+		public List<ProfileDTO> getFriendList(String id) {
+			return memberDAO.getFriendList(id);
+		}
+		
+		// 나를 추가한 친구 리스트 프로필 불러오기
+		public List<ProfileDTO> getAddedMeList(String id) {
+			return memberDAO.getAddedMeList(id);
+		}
+		
+		// 내가 참가한 방번호와 참가자 프로필
+		public List<ChatListDTO> roomMemberAndProfile(String id) {
+			return memberDAO.roomMemberAndProfile(id);
+		}
+		
+		// 선택한 채팅방 메세지 불러오기
+		public List<ChatMessageDTO> getChatMessage(int roomNumber) {
+			return memberDAO.getChatMessage(roomNumber);
+		}
+		
+		// 메세지 데이터 전송
+		public void insertChatMessage(ChatMessageDTO chatMessageDTO) {
+			memberDAO.insertChatMessage(chatMessageDTO);
+		}
 	
 }	

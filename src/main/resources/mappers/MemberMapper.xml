@@ -60,8 +60,32 @@
 	
 	<!-- 나를 추가한 친구 프로필목록 -->
 	<select id="getAddedMeList" resultType="com.isul.dto.ProfileDTO">
-		SELECT * FROM friend f, profile p WHERE f.id=#{id} AND friend_approval=0;
+		SELECT * FROM friend f, profile p WHERE f.id=#{id} AND friend_approval=0
+	</select>
+	<!-- 참가중인 방번호에 참가자한 멤버 프로필 + 마지막 메시지 -->
+	<select id="roomMemberAndProfile" resultType="com.isul.dto.ChatListDTO">
+		WITH RankedMessages AS (
+    							SELECT c.room_number, c.id, p.profile_img, p.background_img, p.nick_name,
+        							p.status_message, m.message, m.message_check, m.message_createdate, 
+        							ROW_NUMBER() OVER (PARTITION BY c.id ORDER BY m.message_createdate DESC) AS rnk
+   								FROM chat_member c LEFT JOIN profile p ON c.id = p.id LEFT JOIN chat_message m ON c.room_number = m.room_number
+    							WHERE c.room_number IN (SELECT room_number FROM chat_member WHERE id = #{id})
+    							AND c.id NOT IN (#{id}) AND m.id NOT IN (#{id})
+								)
+		SELECT room_number, id, profile_img, background_img, nick_name, status_message, message, message_check, message_createdate
+		  FROM RankedMessages WHERE rnk = 1 ORDER BY message_createdate DESC
 	</select>
 	
+	<select id="getChatMessage" resultType="com.isul.dto.ChatMessageDTO">
+		SELECT cm.room_number, cm.message, cm.id, cm.message_check, cm.message_createdate,
+	    	p.profile_img, p.nick_name
+		FROM chat_message cm JOIN profile p ON cm.id = p.id
+		WHERE room_number=#{roomNumber} ORDER BY cm.message_createdate
+	</select>
+	
+	<insert id="insertChatMessage" parameterType="com.isul.dto.ChatMessageDTO">
+		INSERT INTO chat_message(room_number, message, id, message_check, message_createdate)
+		VALUES (#{room_number}, #{message}, #{id}, '1', sysdate)
+	</insert>
 	
 </mapper>
