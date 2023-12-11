@@ -1,39 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
-<div class="csboard" th:fragment="csboard">
-<h3>자유게시판</h3>
 
-	<table class="table-sriped">
+<script>
+	$(document).ready(
+		function() {
+			// 페이지 번호 이동
+			$(document).off('click', '#pagingDiv a').on('click',
+				'#pagingDiv a', function(e) {
+					e.preventDefault();
+					var pageNum = $(this).find(".pageNum").val();
+					loadPage(pageNum);
+					console.log(pageNum);
+				});
+		});
+</script>
+
+</head>
+
+<body>
+	<div class="csboard" th:fragment="csboard">
+		<h3>자유게시판</h3>
+
+		<table class="table-sriped" style="margin-bottom: 20px;">
 			<thead>
-			<tr>
-				<td style="width:40px; text-align:center;" scope="col">No</td>
-				<td style="width:300px; text-align:center;" scope="col">제목</td>
-				<td style="width:100px;" scope="col">글쓴이</td>
-				<td style="width:90px; text-align:center;" scope="col">작성일자</td>
-			</tr>
-			
+				<tr>
+					<td style="width: 40px; text-align: center;" scope="col">No</td>
+					<td style="width: 300px; text-align: center;" scope="col">제목</td>
+					<td style="width: 100px;" scope="col">글쓴이</td>
+					<td style="width: 90px; text-align: center;" scope="col">작성일자</td>
+				</tr>
+
 			</thead>
 			<tbody>
-			<tr style="height:30px; font-size: small; border-top:0.5px solid #adadad" th:each="dto : ${boardList}" >
-			
-				<td style="width:40px; text-align:center;" scope="row">
-					[[${dto.board_number}]]
-				</td>
-				<td style="width:300px;">
-				<a href="#" style="color:black !important;" onclick="getBoardForm(event)">
-				<input type="hidden" class="board_number" name="board_number" th:value="${dto.board_number}">
-					[[${dto.board_title}]]
-				</a></td>
-				<td style="width:100px;">[[${dto.board_writer}]]</td>
-				<td style="width:90px; text-align:center;" scope="col">[[${#dates.format(dto.board_createdate, 'yyyy-MM-dd')}]]</td>
-			</tr>
+				<tr
+					style="height: 30px; font-size: small; border-top: 0.5px solid #adadad"
+					th:each="dto : ${boardList}">
+
+					<td style="width: 40px; text-align: center;" scope="row">
+						[[${dto.board_number}]]</td>
+					<td style="width: 300px; padding-left: 50px;"><a href="#"
+						style="color: black !important;" onclick="getBoardForm(event)">
+							<input type="hidden" class="board_number" name="board_number"
+							th:value="${dto.board_number}"> [[${dto.board_title}]]
+							<span class=boardList_reply_count>([[${dto.reply_count}]])</span> 
+							
+					</a></td>
+					<td style="width: 100px;">[[${dto.board_writer}]]</td>
+					<td style="width: 90px; text-align: center;" scope="col">[[${#dates.format(dto.board_createdate,
+						'yyyy-MM-dd')}]]</td>
+				</tr>
 			</tbody>
 		</table>
-			<input type="button" id="button1" name="button1" class="button1" style="height:36px; font-size:small; float:right;" onclick="insertBoardForm();" value="글등록">
+		
+		<input type="button" id="button1" name="button1" class="button1"
+			style="height: 36px; font-size: small; float: right;"
+			onclick="insertBoardForm();" value="글등록">
+
+		<div id="pagingDiv" style="text-align: center;">
+			<!-- 이전 페이지 -->
+			<span th:if="${paging.prev}"> 
+			<a style="color: black;"
+				href="#"> <input type="hidden" class="pageNum"
+				th:value="${paging.startPage-1}"> 이전
+			</a>
+			</span>
+
+			<!-- 번호 -->
+			<span th:each="num : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+				<a th:class="${num == paging.currentPage} ? 'currentPage' : ''" href="#">
+				 <input type="hidden" class="pageNum" name="pageNum" th:value="${num}">
+					[[${num}]]
+			</a>&nbsp;
+			</span>
+
+			<!-- 다음 페이지 -->
+			<span th:if="${paging.next}"> <a style="color: black;"
+				href="#"> <input type="hidden" class="pageNum"
+					th:value="${paging.endPage+1}"> 다음
+			</a>
+			</span>
+
+		</div>
+	</div>
+
 </body>
 </html>

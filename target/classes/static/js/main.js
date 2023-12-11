@@ -128,23 +128,44 @@ var rotationDegree = 0;
 	}	
 		
 
-//고객센터
+/**------------------------------------------------------------------------------------------------------------------------------------
+ *	 게시판 
+ */
+ 
 	function csboardView() {
+	
 			$.ajax({
 		    url : "csboard",
 		    dataType : "html",
 		    type : "get",  
-		    data : { },   // 호출할 url 에 있는 페이지로 넘길 파라메터
+		    data :{},   // 호출할 url 에 있는 페이지로 넘길 파라메터
 		    success : function(result){
+				
 		        $("#chat").html(result);
 		    }
 			});
 		
 	}	
 
-// 글 등록
-	function insertBoardForm(){
+// 글 상세정보
+	function getBoardForm(event){
+	var clickedRow = event.currentTarget;
 	
+	var board_number = clickedRow.querySelector(".board_number").value;
+    	console.log(board_number);
+		$.ajax({
+		    url : "getBoardForm",
+		    dataType : "text",
+		    type : "get",  
+		    data : {board_number:board_number },   // 호출할 url 에 있는 페이지로 넘길 파라메터
+		    success : function(result){
+				
+		        $("#chat").html(result);
+		    }
+			});
+	}
+// 글 등록창
+	function insertBoardForm(){
 		$.ajax({
 		    url : "insertBoardForm",
 		    dataType : "html",
@@ -157,20 +178,144 @@ var rotationDegree = 0;
 
 	}
 
-// 글 상세정보
-	function getBoardForm(event){
-	var clickedRow = event.currentTarget;
+// 글 등록
+	function boardInsert(){
 	
-	var board_number = clickedRow.querySelector(".board_number").value;
-    
+        $.ajax({
+            url: "insertBoard",
+             dataType : "html",
+            type: "post",
+            data: $('#insertform').serialize(),
+            
+            success: function(result){
+				
+               alert("글이 등록되었습니다.");
+             	
+            $.ajax({
+			    url : "csboard",
+			    dataType : "html",
+			    type : "get",  
+			    data : { },   // 호출할 url 에 있는 페이지로 넘길 파라메터
+			    success : function(result){
+			        $("#chat").html(result);
+			    }
+			});
+	    }
+	    });
+	}
+
+// 글 수정창
+	function updateBoardForm(){
 		$.ajax({
-		    url : "getBoardForm",
-		    dataType : "text",
+		    url : "updateBoardForm",
+		    dataType : "html",
 		    type : "get",  
-		    data : {board_number:board_number },   // 호출할 url 에 있는 페이지로 넘길 파라메터
+		    data : { },   // 호출할 url 에 있는 페이지로 넘길 파라메터
 		    success : function(result){
 		        $("#chat").html(result);
 		    }
 			});
 	}
+	
+// 글 수정
+	function boardUpdate(){
+		console.log("업데이트 진입")
+		$.ajax({
+			url : "updateBoard",
+			dataType:"html",
+			type : "get",
+			data: $('#updateform').serialize(),
+			success : function(result){
+				alert("글이 수정되었습니다.");
+				$("#chat").html(result); 
+			
+			}
+			
+		});
+	}
+
+// 글 삭제
+	function boardDelete(){
+		$.ajax({
+			url : "deleteBoard",
+			dataType:"html",
+			type:"get",
+			data:$("updateform").serialize(),
+			success : function(result){
+				alert("글이 삭제되었습니다.");
+				
+		$.ajax({
+		    url : "csboard",
+		    dataType : "html",
+		    type : "get",  
+		    data : { },   // 호출할 url 에 있는 페이지로 넘길 파라메터
+		    success : function(result){
+		        $("#chat").html(result);
+		    }
+			});
+			}
+		});
+	}
+	
+// 페이지 넘버 검색해서 띄우기
+function loadPage(pageNum) {
+	
+        $.ajax({
+            url: "csboard",
+            type: 'GET',
+            data: {pageNum:pageNum
+            },
+            success: function (result) {
+                $('#chat').html(result);
+              
+            }
+        });
+    }
+
+/**------------------------------------------------------------------------------------------------------------------------------------
+ *	 댓글 
+ */
+
+// 댓글 등록
+	function replyInsert(){
+	
+        $.ajax({
+            url: "insertReply",
+            dataType : "html",
+            type: "post",
+            data: $('#insertReplyForm').serialize(),
+            
+            success: function(result){
+				alert("댓글이 등록되었습니다.");
+				 $("#chat").html(result);         	
+	    }
+	    
+	    });
+	}
+
+// 댓글 삭제
+ function reply_delete(event) {
+	
+	var clickedRow = event.currentTarget;
+	var loginId = document.getElementById("loginId").value;
+	var reply_writer =clickedRow.querySelector(".reply_writer").value;
+	var reply_number = clickedRow.querySelector(".reply_number").value;
+    	
 		
+		if(loginId == reply_writer){
+		$.ajax({
+		    url : "deleteReply",
+		    dataType : "text",
+		    type : "get",  
+		    data : {reply_number:reply_number },   // 호출할 url 에 있는 페이지로 넘길 파라메터
+		    success : function(result){
+				alert("댓글이 삭제되었습니다.");
+		        $("#chat").html(result);
+		    }
+			});
+		}else{
+			alert("댓글 작성자만 삭제할 수 있습니다.");
+			console.log(loginId, reply_writer);
+			return false;	
+		}
+	}

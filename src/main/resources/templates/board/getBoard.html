@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<form id="getBoard" name="getBoard" method="post"></form>
-	<div class="insertBoard" th:fragment="insertBoard">
-		<h3>글 등록</h3>
-		<table class="table-sriped">
+	<!-- 상세 글 읽기 -->
+	<div class="getBoard" th:fragment="getBoard">
+		<form id="insertReplyForm" name="insertReplyForm" method="post">
+			<input type="hidden" id="loginId" name="loginId" th:value="${loginId}">
+	
+		<h3>게시글</h3>		
+		<table class="table-sriped1">
 			<tr>
 				<th>제목</th>
 				<td>[[${board.board_title}]]</td>
+				
+				
 			</tr>
 			<tr style="height: 70px">
 				<th>작성자</th>
@@ -20,21 +25,77 @@
 			<tr>
 				<th>내용</th>
 				<td>
-					<textarea name="content" id="content" rows="30" cols="65" readonly>[[${board.board_content}]]</textarea>
+					<textarea name="content" id="content" rows="20" cols="65" readonly>[[${board.board_content}]]</textarea>
 				</td>
 			</tr>
-
 		</table>
-		<input type="button" id="button1" class="button1"
-			style="height: 36px; font-size: small; float: right;" onclick="csboardView()"
-			value="뒤로가기">
-		<input type="button" id="button1" class="button1"
-			style="height: 36px; font-size: small; float: left;" onclick=""
-			value="수정">
-		<input type="button" id="button1" class="button1"
-			style="height: 36px; font-size: small; float: left;" onclick=""
-			value="삭제">
 		
+		<!-- 버튼 칸 -->
+		<!-- 글쓴이와 로그인ID가 일치하면 보이는 기능 -->
+		<div class="getBoardUpdate" 
+		 	th:if="${loginId} == ${board.board_writer}">
+			<input type="button" id="button1" class="button1" onclick="csboardView()"
+				value="뒤로가기">
+			<input type="button" id="button1" class="button1" onclick="boardDelete()"
+				value="삭제">
+			<input type="button" id="button1" class="button1" onclick="updateBoardForm()"
+				value="수정">
+		</div>
+		
+		<!-- 글쓴이와 로그인ID가 다를 경우 -->
+		<div class="getBoardUpdate" 
+				th:unless="${loginId} == ${board.board_writer}">
+			<input type="button" id="button1" class="button1" onclick="csboardView()"
+				value="뒤로가기">
+		</div> 
+		
+		<br>
+		<br>
+		<br>
+		
+		<!-- 댓글 칸 -->
+		<div class="reply">
+			<div class="reply_count">
+				<div class="countBox">전체 댓글
+					<em class="font_red">[[${countReply}]]</em> 개
+				</div>
+			</div>
+		
+			<!-- 댓쓴이와 로그인ID가 일치하면 보이는 기능 -->	
+			<div class="reply_box">
+			
+				<ul th:each="replyList : ${replyList}">
+					<li>
+					<div class="reply_info clear">
+						<div class=reply_nickBox> [[${replyList.reply_writer}]] </div>
+						
+							<div class=reply_textBox>[[${replyList.reply_content}]]
+								<div class=reply_time> 
+									[[${#dates.format(replyList.reply_updateDate, 'yy-MM-dd HH:mm')}]]
+									 <a href="#" class="reply_delete" onclick="return reply_delete(event)">
+									 <input type="hidden" class="reply_number" th:value="${replyList.reply_number}" />
+									  <input type="hidden" id="reply_writer" class="reply_writer" th:value="${replyList.reply_writer}" />
+	                        		<input type="hidden" id="reply_content" th:value="${replyList.reply_content}" />
+									 x</a>
+							 	</div>
+							</div>		
+					</div>	
+					</li>
+				</ul>
+			</div>
+			
+			<!-- 댓글 쓰기 -->
+			
+				<input type="hidden" id="board_number" name="board_number" th:value="${session.board_number}">
+				<div class= reply_writeForm>
+					<textarea id="reply_content" name="reply_content" maxlength="500"></textarea>
+	
+				</div>
+				<div class=reply_write>
+					<button type="button"  class="button1" onclick="replyInsert()">댓글 쓰기</button>
+				</div>
+			</div>
+		</form>
 	</div>
 </body>
 </html>
