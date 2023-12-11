@@ -6,20 +6,23 @@
 
 </head>
 <body>
-	<div th:fragment="profile"
-		style="height: 855px; width: 550px; background-color: white; position: relative;">
-		<div class="profileBackImage"
-			th:style="'background-image:url('+ ${profile.background_img} +');'">
-
-			<div class="profileStatusChat">1:1대화</div>
-			<div class="profileStatusNick" th:text="${profile.nick_name}">
-				대화명</div>
-			<div class="profileSetImageWrap">
-				<img class="profileSetImage" th:src="${profile.profile_img}" />
-			</div>
-			<div class="profileStatusMessage"
-				th:text="${profile.status_message}">상태메세지 길어진다 상태메세지</div>
+<div th:fragment="profile" style="height:855px; width:550px; background-color: white; position: relative;">
+	<div class="profileBackImage" th:style="'background-image:url('+ ${session.profile.background_img} +');'">
+		
+		<div class="profileStatusChat">
+			1:1대화
 		</div>
+		<div class="profileStatusNick" th:text="${session.profile.nick_name}">
+			대화명
+		</div>
+		<div class="profileSetImageWrap">
+			<img class="profileSetImage" th:src="${session.profile.profile_img}"/>
+		</div>
+		<div class="profileStatusMessage" th:text="${session.profile.status_message}">상태메세지 길어진다>
+			상태메세지
+		</div>
+		
 	</div>
+</div>
 </body>
 </html>
