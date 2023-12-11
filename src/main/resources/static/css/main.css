@@ -201,7 +201,7 @@ a:hover, a:active {
 .accordion {
 	display: flex;
 	flex-direction: column;
-    max-width: 400px;
+
 }
 .accordion-section {
             margin-bottom: 8px;      
@@ -209,13 +209,15 @@ a:hover, a:active {
 .accordion-title {
             background-color: white;
             height : 35px;
+            width : 295px;
             padding-left : 15px;
 			padding-top : 10px;
 }
 .accordion-content {
-            display: none;
-		    overflow-y: auto;
-           	max-height : 500px;
+            display: inline-block;
+            overflow-y: auto;
+			overflow-x: hidden;
+			max-height : 515px;
 }
 /* 돌아가는 화살표 */
 .arrow {
@@ -228,6 +230,14 @@ a:hover, a:active {
 }
 
 
+/* 채팅 방 목록 */
+.chatListTable {
+	  position: absolute;
+	  top : 132px;
+}
+#chatListTitle {
+	margin-left : 15px;
+}
 
 /*채팅창 (인풋부터 시작) */
 .messegeInput {

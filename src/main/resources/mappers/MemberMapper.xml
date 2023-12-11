@@ -55,13 +55,18 @@
 
 	<!-- 서로 친구 프로필목록 -->
 	<select id="getFriendList" resultType="com.isul.dto.ProfileDTO">
-		SELECT * FROM friend f, profile p WHERE f.id=#{id} AND friend_approval=1
+		SELECT * FROM profile WHERE 
+		id IN
+		(SELECT friend_id FROM friend WHERE id=#{id} AND friend_approval=1) OR 
+		id IN 
+		(SELECT id FROM friend WHERE friend_id=#{id} AND friend_approval=1)
 	</select>
 	
 	<!-- 나를 추가한 친구 프로필목록 -->
 	<select id="getAddedMeList" resultType="com.isul.dto.ProfileDTO">
-		SELECT * FROM friend f, profile p WHERE f.id=#{id} AND friend_approval=0
+		SELECT * FROM profile WHERE id IN (SELECT friend_id FROM friend WHERE id=#{id} AND friend_approval=0)
 	</select>
+	
 	<!-- 참가중인 방번호에 참가자한 멤버 프로필 + 마지막 메시지 -->
 	<select id="roomMemberAndProfile" resultType="com.isul.dto.ChatListDTO">
 		WITH RankedMessages AS (

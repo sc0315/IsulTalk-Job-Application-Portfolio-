@@ -20,10 +20,10 @@ var rotationDegree = 0;
 
 			// Toggle the content's display property
 			var content = section.querySelector('.accordion-content');
-			if (content.style.display === 'block') {
-				content.style.display = 'none';
-			} else {
+			if (content.style.display === 'none') {
 				content.style.display = 'block';
+			} else {
+				content.style.display = 'none';
 			}
 		}
 		
