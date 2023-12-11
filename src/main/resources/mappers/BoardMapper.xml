@@ -12,7 +12,7 @@
 			FROM	(SELECT
 						rownum rn, board_number, board_title, board_content, board_writer,
 						 board_createdate, reply_count
-					from csboard where rownum <= #{pageNum} * #{amount})
+					from csboard where rownum <= #{pageNum} * #{amount} ORDER BY board_number DESC)
 			where rn > (#{pageNum}-1) * #{amount}
 			ORDER BY board_number DESC
 		]]>
