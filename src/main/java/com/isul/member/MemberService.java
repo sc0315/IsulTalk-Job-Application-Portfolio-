@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.isul.dto.ChatListDTO;
+import com.isul.dto.ChatMessageDTO;
 import com.isul.dto.MemberDTO;
 import com.isul.dto.ProfileDTO;
 
@@ -94,4 +95,13 @@ public class MemberService {
 		return memberDAO.roomMemberAndProfile(id);
 	}
 	
+	// 선택한 채팅방 메세지 불러오기
+	public List<ChatMessageDTO> getChatMessage(int roomNumber) {
+		return memberDAO.getChatMessage(roomNumber);
+	}
+	
+	// 메세지 데이터 전송
+	public void insertChatMessage(ChatMessageDTO chatMessageDTO) {
+		memberDAO.insertChatMessage(chatMessageDTO);
+	}
 }	

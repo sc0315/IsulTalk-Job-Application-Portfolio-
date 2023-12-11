@@ -10,9 +10,10 @@
 	<header>
 		<div class="header" th:replace="main/header.html :: div"></div>
 	</header>
-	
+
 	<table class="mainTable">
 		<tr>
+		
 			<td id="menubar"
 				style="width: 70px; min-width: 70px; height: 860px; margin: 0 auto;"
 				rowspan='2'>
@@ -23,7 +24,7 @@
 						친구목록
 					</a><br>
 				</div>
-				
+								
 				<div class="mainNav">
 					<a href="#" onclick="chatView();"> <img class="mainNavImg"
 						src="/images/main/talk.png" style="width: 60px; height: 60px;">
@@ -51,6 +52,7 @@
 					</a><br>
 				
 				</div>
+				
 			</td>
 			
 			<td id="myProfile"
@@ -59,7 +61,7 @@
 			</td>
 
 			<td id="chat" style="width: 550px;" rowspan='2'>
-			<div class="profile" th:replace="main/profile.html :: div"></div>
+				 <div class="profile" th:replace="main/profile.html :: div"></div>
 			</td>
 
 		</tr>
@@ -69,7 +71,7 @@
 			</td>
 		</tr>
 	</table>
-	<script src="/js/main.js"></script>
+	<script src="/js/main.js"></script> 
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </body>
 </html>

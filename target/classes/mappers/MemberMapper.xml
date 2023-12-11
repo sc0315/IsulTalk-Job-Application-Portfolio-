@@ -82,5 +82,16 @@
 		  FROM RankedMessages WHERE rnk = 1 ORDER BY message_createdate DESC
 	</select>
 	
+	<select id="getChatMessage" resultType="com.isul.dto.ChatMessageDTO">
+		SELECT cm.room_number, cm.message, cm.id, cm.message_check, cm.message_createdate,
+	    	p.profile_img, p.nick_name
+		FROM chat_message cm JOIN profile p ON cm.id = p.id
+		WHERE room_number=#{roomNumber} ORDER BY cm.message_createdate
+	</select>
+	
+	<insert id="insertChatMessage" parameterType="com.isul.dto.ChatMessageDTO">
+		INSERT INTO chat_message(room_number, message, id, message_check, message_createdate)
+		VALUES (#{room_number}, #{message}, #{id}, '1', sysdate)
+	</insert>
 	
 </mapper>

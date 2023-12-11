@@ -50,11 +50,11 @@
 			            <div class="accordion-title" onclick="toggleAccordion(this), rotateImage2()">
 			            	친구목록
 			            	<img src="/images/main/arrow.png" id="rotatingImage2" class="arrow"></div>
-			            <div class="accordion-content" style="max-height : 515px;">
+			            <div class="accordion-content">
 			            	<table>
 			            		<tr th:each="friendList : ${friendList}">
 			            			<td>
-				            			<table class="friendHover">
+				            			<table class="friendHover" onclick="goFriendProfile(event)">
 					                	<tr>
 					                		<td rowspan='2' class="friendListImageTable">
 					                			<div class="friendProfileImageWrap">
@@ -64,133 +64,7 @@
 					                		<td class="profileContentBox">
 					                			<span class="friendListNickName" th:text="${friendList.nick_name}">대화명</span>
 					                			<span th:text="'('+${friendList.id}+')'">(memberID)</span>
-					                		</td>
-					                	</tr>
-					                	<tr>
-					                		<td class="profileStatusBox">
-												<span class="statusMessage" th:text="${friendList.status_message}">상태메세지 길어진다</span>
-											</td>
-					                	</tr>
-					                	</table>
-					                </td>
-			            		</tr>
-			            		<tr th:each="friendList : ${friendList}">
-			            			<td>
-				            			<table class="friendHover">
-					                	<tr>
-					                		<td rowspan='2' class="friendListImageTable">
-					                			<div class="friendProfileImageWrap">
-					                				<img class="friendProfileImage" th:src="${friendList.profile_img}"/>
-					                			</div>
-					                		</td>
-					                		<td class="profileContentBox">
-					                			<span class="friendListNickName" th:text="${friendList.nick_name}">대화명</span>
-					                			<span th:text="'('+${friendList.id}+')'">(memberID)</span>
-					                		</td>
-					                	</tr>
-					                	<tr>
-					                		<td class="profileStatusBox">
-												<span class="statusMessage" th:text="${friendList.status_message}">상태메세지 길어진다</span>
-											</td>
-					                	</tr>
-					                	</table>
-					                </td>
-			            		</tr><tr th:each="friendList : ${friendList}">
-			            			<td>
-				            			<table class="friendHover">
-					                	<tr>
-					                		<td rowspan='2' class="friendListImageTable">
-					                			<div class="friendProfileImageWrap">
-					                				<img class="friendProfileImage" th:src="${friendList.profile_img}"/>
-					                			</div>
-					                		</td>
-					                		<td class="profileContentBox">
-					                			<span class="friendListNickName" th:text="${friendList.nick_name}">대화명</span>
-					                			<span th:text="'('+${friendList.id}+')'">(memberID)</span>
-					                		</td>
-					                	</tr>
-					                	<tr>
-					                		<td class="profileStatusBox">
-												<span class="statusMessage" th:text="${friendList.status_message}">상태메세지 길어진다</span>
-											</td>
-					                	</tr>
-					                	</table>
-					                </td>
-			            		</tr><tr th:each="friendList : ${friendList}">
-			            			<td>
-				            			<table class="friendHover">
-					                	<tr>
-					                		<td rowspan='2' class="friendListImageTable">
-					                			<div class="friendProfileImageWrap">
-					                				<img class="friendProfileImage" th:src="${friendList.profile_img}"/>
-					                			</div>
-					                		</td>
-					                		<td class="profileContentBox">
-					                			<span class="friendListNickName" th:text="${friendList.nick_name}">대화명</span>
-					                			<span th:text="'('+${friendList.id}+')'">(memberID)</span>
-					                		</td>
-					                	</tr>
-					                	<tr>
-					                		<td class="profileStatusBox">
-												<span class="statusMessage" th:text="${friendList.status_message}">상태메세지 길어진다</span>
-											</td>
-					                	</tr>
-					                	</table>
-					                </td>
-			            		</tr><tr th:each="friendList : ${friendList}">
-			            			<td>
-				            			<table class="friendHover">
-					                	<tr>
-					                		<td rowspan='2' class="friendListImageTable">
-					                			<div class="friendProfileImageWrap">
-					                				<img class="friendProfileImage" th:src="${friendList.profile_img}"/>
-					                			</div>
-					                		</td>
-					                		<td class="profileContentBox">
-					                			<span class="friendListNickName" th:text="${friendList.nick_name}">대화명</span>
-					                			<span th:text="'('+${friendList.id}+')'">(memberID)</span>
-					                		</td>
-					                	</tr>
-					                	<tr>
-					                		<td class="profileStatusBox">
-												<span class="statusMessage" th:text="${friendList.status_message}">상태메세지 길어진다</span>
-											</td>
-					                	</tr>
-					                	</table>
-					                </td>
-			            		</tr><tr th:each="friendList : ${friendList}">
-			            			<td>
-				            			<table class="friendHover">
-					                	<tr>
-					                		<td rowspan='2' class="friendListImageTable">
-					                			<div class="friendProfileImageWrap">
-					                				<img class="friendProfileImage" th:src="${friendList.profile_img}"/>
-					                			</div>
-					                		</td>
-					                		<td class="profileContentBox">
-					                			<span class="friendListNickName" th:text="${friendList.nick_name}">대화명</span>
-					                			<span th:text="'('+${friendList.id}+')'">(memberID)</span>
-					                		</td>
-					                	</tr>
-					                	<tr>
-					                		<td class="profileStatusBox">
-												<span class="statusMessage" th:text="${friendList.status_message}">상태메세지 길어진다</span>
-											</td>
-					                	</tr>
-					                	</table>
-					                </td>
-			            		</tr><tr th:each="friendList : ${friendList}">
-			            			<td>
-				            			<table class="friendHover">
-					                	<tr>
-					                		<td rowspan='2' class="friendListImageTable">
-					                			<div class="friendProfileImageWrap">
-					                				<img class="friendProfileImage" th:src="${friendList.profile_img}"/>
-					                			</div>
-					                		</td>
-					                		<td class="profileContentBox">
-					                			<span class="friendListNickName" th:text="${friendList.nick_name}">대화명</span>
-					                			<span th:text="'('+${friendList.id}+')'">(memberID)</span>
+					                			<input type="hidden" class="profileId" th:value="${friendList.id}"/>
 					                		</td>
 					                	</tr>
 					                	<tr>

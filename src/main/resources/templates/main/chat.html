@@ -1,258 +1,199 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 
+<meta charset="UTF-8">
+<title>Chatting</title>
+<link rel="stylesheet" href="/css/main.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
-<div th:fragment="chat" style="height:855px; width:550px; background-color: white; position: relative;">
- 	<div  id="chatHeader">
- 		 <div class="dropdown">
-			  <button onclick="toggleDropdown()">대화방 참가자</button>
-			  <div id="dropdownContent" class="dropdown-content">
-			    
-			    
-			    <a href="#">
-			    	<div>
-			    		 <table class="friendHover">
-							<tr>
-								<td rowspan='2' class="friendListImageTable">
-									<div class="friendProfileImageWrap">
-										<img class="friendProfileImage" src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
-									</div>
-								</td>
-								<td>
-									대화명
-								</td>
-								
-							</tr>
-							<tr>
-								<td>
-									상태메세지
-								</td>
-							</tr>
-						</table>
-	       		 	</div>
-	       		 </a>
-	       		 
-	       		  <a href="#">
-			    	<div>
-			    		 <table class="friendHover">
-							<tr>
-								<td rowspan='2' class="friendListImageTable">
-									<div class="friendProfileImageWrap">
-										<img class="friendProfileImage" src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
-									</div>
-								</td>
-								<td>
-									대화명
-								</td>
-								
-							</tr>
-							<tr>
-								<td>
-									상태메세지
-								</td>
-							</tr>
-						</table>
-	       		 	</div>
-	       		 </a> <a href="#">
-			    	<div>
-			    		 <table class="friendHover">
-							<tr>
-								<td rowspan='2' class="friendListImageTable">
-									<div class="friendProfileImageWrap">
-										<img class="friendProfileImage" src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
-									</div>
-								</td>
-								<td>
-									대화명
-								</td>
-								
-							</tr>
-							<tr>
-								<td>
-									상태메세지
-								</td>
-							</tr>
-						</table>
-	       		 	</div>
-	       		 </a>
-	       		  <a href="#">
-			    	<div>
-			    		 <table class="friendHover">
-							<tr>
-								<td rowspan='2' class="friendListImageTable">
-									<div class="friendProfileImageWrap">
-										<img class="friendProfileImage" src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
-									</div>
-								</td>
-								<td>
-									대화명
-								</td>
-								
-							</tr>
-							<tr>
-								<td>
-									상태메세지
-								</td>
-							</tr>
-						</table>
-	       		 	</div>
-	       		 </a>
-	       		  <a href="#">
-			    	<div>
-			    		 <table class="friendHover">
-							<tr>
-								<td rowspan='2' class="friendListImageTable">
-									<div class="friendProfileImageWrap">
-										<img class="friendProfileImage" src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
-									</div>
-								</td>
-								<td>
-									대화명
-								</td>
-								
-							</tr>
-							<tr>
-								<td>
-									상태메세지
-								</td>
-							</tr>
-						</table>
-	       		 	</div>
-	       		 </a>
-	       		 
-	       		 
-	       		
-			   
-			  </div>
+	<div th:fragment="chat"
+		style="height: 855px; width: 550px; background-color: white; position: relative;">
+		<div id="chatHeader">
+			<div class="dropdown">
+				<button onclick="toggleDropdown()">대화방 참가자</button>
+				<div id="dropdownContent" class="dropdown-content">
+
+
+					<a href="#">
+						<div>
+							<table class="friendHover">
+								<tr>
+									<td rowspan='2' class="friendListImageTable">
+										<div class="friendProfileImageWrap">
+											<img class="friendProfileImage"
+												src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/" />
+										</div>
+									</td>
+									<td>대화명</td>
+
+								</tr>
+								<tr>
+									<td>상태메세지</td>
+								</tr>
+							</table>
+						</div>
+					</a> <a href="#">
+						<div>
+							<table class="friendHover">
+								<tr>
+									<td rowspan='2' class="friendListImageTable">
+										<div class="friendProfileImageWrap">
+											<img class="friendProfileImage"
+												src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/" />
+										</div>
+									</td>
+									<td>대화명</td>
+
+								</tr>
+								<tr>
+									<td>상태메세지</td>
+								</tr>
+							</table>
+						</div>
+					</a> <a href="#">
+						<div>
+							<table class="friendHover">
+								<tr>
+									<td rowspan='2' class="friendListImageTable">
+										<div class="friendProfileImageWrap">
+											<img class="friendProfileImage"
+												src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/" />
+										</div>
+									</td>
+									<td>대화명</td>
+
+								</tr>
+								<tr>
+									<td>상태메세지</td>
+								</tr>
+							</table>
+						</div>
+					</a> <a href="#">
+						<div>
+							<table class="friendHover">
+								<tr>
+									<td rowspan='2' class="friendListImageTable">
+										<div class="friendProfileImageWrap">
+											<img class="friendProfileImage"
+												src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/" />
+										</div>
+									</td>
+									<td>대화명</td>
+
+								</tr>
+								<tr>
+									<td>상태메세지</td>
+								</tr>
+							</table>
+						</div>
+					</a> <a href="#">
+						<div>
+							<table class="friendHover">
+								<tr>
+									<td rowspan='2' class="friendListImageTable">
+										<div class="friendProfileImageWrap">
+											<img class="friendProfileImage"
+												src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/" />
+										</div>
+									</td>
+									<td>대화명</td>
+
+								</tr>
+								<tr>
+									<td>상태메세지</td>
+								</tr>
+							</table>
+						</div>
+					</a>
+				</div>
 			</div>
-			대화내용 검색
- 		   <input type="text" style="width:300px;">
- 		</div>
- 		
- 		
- 		
-		 <div class="wrap" id="wrap">
-	     
-	        <table class="yourMessageBox">
-	        	<tr>
-					<td rowspan='2'>
-							<div class="friendProfileImageWrap">
-								<img class="friendProfileImage" src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
-							</div>
-					</td>
-					<td class="yourNick">
-							<span style="text-align:left">대화명</span><span>①</span> 
-					</td>
-					<td>
-					</td>
-				</tr>
-				<tr>
-					<td class="chatting ch1">
-							 <div class="textbox">안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.</div>
-					</td>
-					<td class="timeAlign">
-						<span class="chatTime">2023-11-23 오후 12:40</span>
-					</td>
-				</tr>
-	        </table>
-	        
-	        
-	          <table class="myMessageBox">
-	        	<tr>
-	        		<td>
-	        		</td>
-					<td class="myNick">
-					<span>①</span> 
-					<span>대화명</span>
-							
-					</td>
-					<td rowspan='2'>
-						<div class="friendProfileImageWrap">
-								<img class="friendProfileImage" src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
-							</div>	
-					</td>
-				</tr>
-				<tr>
-					
-					<td class="timeAlign">
-						<span class="chatTime">2023-11-23 오후 12:40</span>
-					</td>
-					<td class="chatting ch2">
-							 <div class="textbox">안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.</div>
-					</td>
-				</tr>
-	        </table>
-	        
-	        
-	         <table class="yourMessageBox">
-	        	<tr>
-					<td rowspan='2'>
-							<div class="friendProfileImageWrap">
-								<img class="friendProfileImage" src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
-							</div>
-					</td>
-					<td class="yourNick">
-							<span>대화명</span><span>①</span> 
-					</td>
-					<td>
-					</td>
-				</tr>
-				<tr>
-					<td class="chatting ch1">
-							 <div class="textbox">안녕하세요.</div>
-					</td>
-					<td class="timeAlign">
-						<span class="chatTime">2023-11-23 오후 12:40</span>
-					</td>
-				</tr>
-	        </table>
-	        
-	        
-	         <table class="myMessageBox">
-	        	<tr>
-	        		<td>
-	        		</td>
-					<td class="myNick">
-					<span>①</span> 
-					<span>대화명</span>
-							
-					</td>
-					<td rowspan='2'>
-						<div class="friendProfileImageWrap">
-								<img class="friendProfileImage" src="https://thumb.mt.co.kr/06/2021/06/2021061415420468740_1.jpg/dims/optimize/"/>
-							</div>	
-					</td>
-				</tr>
-				<tr>
-					
-					<td class="timeAlign">
-						<span class="chatTime">2023-11-23 오후 12:40</span>
-					</td>
-					<td class="chatting ch2">
-							 <div class="textbox">안녕하세요.</div>
-					</td>
-				</tr>
-	        </table>
-	        
-	 
-	        
-	    </div>
-	
-	
-		<div class="messegeInput">
-			<textarea rows="4" name="messege" id="messege" placeholder="메세지 입력..." class="messegeInputArea"></textarea>
-			<button type="button" class="button">전송</button>
+			대화내용 검색 <input type="text" style="width: 300px;"> 
 		</div>
-		<script type="text/javascript">
-		window.onload=function(){
-			let mySpace = document.getElementById("wrap");
-			mySpace.scrollTop = mySpace.scrollHeight; };
-		</script>
+
+
+
+		<input type="hidden" id="sessionId" th:value="${memberId}">
+		<input type="hidden" id="roomNumber" th:value="${roomNumber}">
+		<div id="wrap" class="wrap">
+
+			<table style="width : inherit;">
+			
+				<tr th:each="messageList : ${messageList}">
+					<td th:if="${messageList.id} != ${memberId}">
+						<table class='yourMessageBox'>
+							<tr>
+								<td rowspan='2'>
+									<div class='friendProfileImageWrap'>
+										<img class='friendProfileImage' th:src='${messageList.profile_img}'/>
+									</div>
+								</td>
+								<td class='yourNick'>
+								<span style='text-align: left' th:text='${messageList.nick_name}'>대화명</span>
+								<span>①</span></td>
+								<td><input type="hidden" th:value='${messageList.id}'></td>
+							</tr>
+							<tr>
+								<td class='chatting ch1'>
+									<div class='textbox' th:text='${messageList.message}'>메세지</div>
+								</td>
+								<td class='timeAlign'><span class='chatTime' 
+								th:text="${#dates.format(messageList.message_createdate, 'yyyy-MM-dd HH:mm')}">
+										시간</span></td>
+							</tr>
+						</table>
+					</td>
+					<td th:if="${messageList.id} == ${memberId}">
+						<table class='myMessageBox'>
+							<tr>
+						    	<td><input type="hidden" th:value="${messageList.id}"></td>
+						    	<td class='myNick'>
+						    		<span>①</span>
+						    		<span th:text="${messageList.nick_name}">대화명</span>
+						    	</td>
+						    	<td rowspan='2'>
+						    		<div class='friendProfileImageWrap'>
+						    			<img class='friendProfileImage' th:src="${messageList.profile_img}"/>
+						    		</div>
+						    	</td>
+						    </tr>
+						    <tr>
+						    	<td class='timeAlign'>
+						    		<span class='chatTime'
+						    		 th:text="${#dates.format(messageList.message_createdate, 'yyyy-MM-dd HH:mm')}">
+						    		 시간</span>
+						    	</td>
+								<td class='chatting ch2'>
+						    		<div class='textbox' th:text="${messageList.message}">메세지</div>
+						    	</td>
+						    </tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="messegeInput">
+			<textarea rows="4" name="messege" id="chatting"
+				placeholder="메세지 입력..." class="messegeInputArea"></textarea>
+			<button type="button" class="button" onclick="send()" id="sendBtn">전송</button>
+		</div>
+	
+	
+	
+	<script>
+		ws = new WebSocket("ws://" + location.host + "/chatting/"
+				+ document.getElementById("roomNumber").value);
+		wsEvt();
+		
+		
+		var scrollContainer = document.getElementById("wrap");
+		scrollContainer.scrollTop = scrollContainer.scrollHeight;
+	</script>
 	</div>
-</div>
+
+
+
+
 </body>
 </html>

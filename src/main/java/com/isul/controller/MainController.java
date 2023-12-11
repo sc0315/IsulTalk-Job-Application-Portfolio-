@@ -4,12 +4,17 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isul.dto.BoardDTO;
 import com.isul.dto.ChatListDTO;
 import com.isul.dto.ProfileDTO;
@@ -29,22 +34,17 @@ public class MainController {
 		
 		List<ProfileDTO> friendList = memberService.getFriendList(sessionId);
 		model.addAttribute("friendList", friendList);
-		System.out.println(friendList);
-		
+
 		List<ProfileDTO> addedFriendList = memberService.getAddedMeList(sessionId);
 		model.addAttribute("addedFriendList", addedFriendList);
-		System.out.println(addedFriendList);
 		
+		ProfileDTO profile = memberService.getMyProfile(sessionId);
+		model.addAttribute("profile", profile);
+
 		return "main/main";
 	}
 	
-	
-	@RequestMapping("/profile")
-	public String profileView(HttpSession session ) {
-		System.out.println("프로필 열기");
-		return "main/profile";
-	}
-	
+
 	@RequestMapping("/friendList")
 	public String friendListView(ProfileDTO profileDTO, Model model, HttpSession session) {
 		System.out.println("친구목록 열기");
@@ -52,16 +52,42 @@ public class MainController {
 		
 		List<ProfileDTO> friendList = memberService.getFriendList(sessionId);
 		model.addAttribute("friendList", friendList);
-		System.out.println(friendList);
-		
+
 		List<ProfileDTO> addedFriendList = memberService.getAddedMeList(sessionId);
 		model.addAttribute("addedFriendList", addedFriendList);
-		System.out.println(addedFriendList);
+		
+		ProfileDTO profile = memberService.getMyProfile(sessionId);
+		model.addAttribute("profile", profile);
 		
 		return "main/friend";
 	}
 	
+	@RequestMapping("/friendProfile")
+	public String getFriendProfile(ProfileDTO profileDTO, Model model,
+									@RequestParam("profileId") String profileId) {
+		System.out.println("친구 프로필 조회 도착");
+		ProfileDTO profile = memberService.getMyProfile(profileId);
+		model.addAttribute("profile", profile);
+		System.out.println("profile" + profile);
+		return "main/profile";
+	}
 	
+	@ResponseBody
+	@RequestMapping("/profile")
+	public String getProfile(ProfileDTO profileDTO, Model model, 
+									@RequestParam("id") String id) {
+		ProfileDTO profile = memberService.getMyProfile(id);
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+            String json = objectMapper.writeValueAsString(profile);
+            return json;
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 예외 처리 필요
+            return null;
+        }
+	}
+		
 	@RequestMapping("/chatList")
 	public String chatListView(ChatListDTO chatListDTO, HttpSession session, Model model) {
 		System.out.println("채팅 목록 열기");
@@ -97,7 +123,5 @@ public class MainController {
 		return "main/modifyMyInfo";
 	}
 	
-	
-	
-	
+
 }
