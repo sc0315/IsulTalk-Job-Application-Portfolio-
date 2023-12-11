@@ -13,11 +13,16 @@ public class PageMaker {
 	
 	public PageMaker(Criteria cri,int total){
 		this.cri=cri;
-		int realEnd = (int)Math.ceil(total / (double)cri.getamount());
-		this.endPage = (int)(Math.ceil(cri.getPageNum() / 10.0) * 10);
-		this.startPage = getEndPage()-9;
 		
-		if( this.endPage > realEnd ) {
+		int realEnd = (int)Math.ceil(total / (double)cri.getamount());
+		// 끝 페이지
+		this.endPage = (int)(Math.ceil(cri.getPageNum() / 10.0) * 10);
+		// 첫 페이지
+		this.startPage = getEndPage()-9;
+		// 실제 끝 페이지
+		if(realEnd == 0) {
+			this.endPage = 1;
+		} else if( this.endPage > realEnd ) {
 			this.endPage = realEnd;
 		}
 		
