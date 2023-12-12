@@ -315,6 +315,23 @@ function loadPage(pageNum) {
 		}
 	}
 	
+// 대댓글
+
+function re_replyInsertForm(event) {
+		var clickedRow = event.currentTarget;
+		var reply_number = clickedRow.querySelector(".reply_number").value;
+		console.log(reply_number);
+	
+        var reply2 = document.querySelector('.reply2');
+		
+            if (reply2 && window.getComputedStyle(reply2).display === 'none') {
+                reply2.style.display = 'block';
+          } else{
+                reply2.style.display = 'none';
+		 
+     }
+     }
+	
 	/*----------------채팅--*/
 	var ws;
 	window.onload = function(){
