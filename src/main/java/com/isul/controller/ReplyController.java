@@ -55,4 +55,24 @@ public class ReplyController {
 		
 		return "redirect:/main/getBoardForm?"+ "board_number="+board_number;
 	}
+	
+	@PostMapping("/reinsertReply")
+	public String reinsertReply(ReplyDTO replyDTO, HttpSession session, Model model, Criteria cri, @RequestParam("board_number") String board_number
+			){
+		System.out.println("대댓글insertReply controller");
+		String id = (String) session.getAttribute("loginId");
+		
+		replyDTO.setReply_writer(id);
+		
+		replyService.reinsertReply(replyDTO);
+		System.out.println(replyDTO.getReply_level());
+		List<BoardDTO> boardList = boardService.getBoardList(cri);
+		int total = boardService.totalCnt();
+		PageMaker pageMaker = new PageMaker(cri, total);
+
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("paging", pageMaker);
+		System.out.println("대댓글인설트 끝");
+		return "redirect:/main/getBoardForm?"+ "board_number="+board_number;
+	}
 }

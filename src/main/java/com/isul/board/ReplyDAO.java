@@ -13,6 +13,11 @@ public interface ReplyDAO {
 	public List<ReplyDTO> getReplyList(String board_number);
 	public String countReply(String board_number);
 	public void insertReply(ReplyDTO replyDTO);
-	public String getReply(String reply_number);
+	public ReplyDTO getReply(String reply_number);
 	public void deleteReply(String reply_number);
+	public void reinsertReply(ReplyDTO replyDTO);
+	
+	public ReplyDTO replyRef(String replyRef);
+	public int maxLevel();
+	public void updateLevel(ReplyDTO replyDTO);
 }
