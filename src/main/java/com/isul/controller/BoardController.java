@@ -68,10 +68,9 @@ public class BoardController {
 		model.addAttribute("replyList", replyList);
 		model.addAttribute("countReply", countReply);
 		
-		// 수정삭제 권한
+		// 로그인 아이디랑 일치 시 수정/삭제 버튼 보이게
 		model.addAttribute("loginId", session.getAttribute("loginId"));
-		
-		model.addAttribute("replyList", replyList);
+	
 		System.out.println(replyList);
 
 		return "board/getBoard";

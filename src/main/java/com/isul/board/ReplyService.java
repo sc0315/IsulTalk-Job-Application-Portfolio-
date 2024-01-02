@@ -24,11 +24,25 @@ public class ReplyService {
 		replyDAO.insertReply(replyDTO);
 	}
 	
-	public String getReply(String reply_number) {
+	public ReplyDTO getReply(String reply_number) {
 		return replyDAO.getReply(reply_number);
 	}
 	
 	public void deleteReply(String reply_number) {
 		replyDAO.deleteReply(reply_number);
+	}
+	
+	public void reinsertReply(ReplyDTO replyDTO) {
+		replyDAO.reinsertReply(replyDTO);
+	}
+	
+	public ReplyDTO replyRef(String replyRef) {
+		return replyDAO.replyRef(replyRef);
+	}
+	public int maxLevel() {
+		return replyDAO.maxLevel();
+	}
+	public void updateLevel(ReplyDTO replyDTO) {
+		replyDAO.updateLevel(replyDTO);
 	}
 }

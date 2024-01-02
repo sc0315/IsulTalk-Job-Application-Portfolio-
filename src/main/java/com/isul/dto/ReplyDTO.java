@@ -13,4 +13,7 @@ public class ReplyDTO {
 	private Date reply_createDate;
 	private Date reply_updateDate;
 	private String reply_secret;
+	private String reply_ref;
+	private int reply_deep;
+	private int reply_level;
 }
