@@ -563,8 +563,9 @@ h3 {
 	width:540px;
 	height:30px;
 }
-.reply_write button{
-	float:right;
+.reply_write, .re_reply_write button{
+	float:right; 
+
 }
 .font_red{
 	color:red;
@@ -573,11 +574,32 @@ h3 {
 	margin-left:5px;
 	color:red;
 }
-.reply_delete{
+.reply_delete, .re_replyForm{
 	width: 15px;
     height: 20px;
     margin-left: 5px;
     border: 1px solid black;
     padding: 1px 5px 3px 4px;
-    background: darkgray;
+    background: #e86479;
+    border: none;
+    border-radius: 5px;
+    color: white;
 }
+.re_reply_writeForm{
+	width:550px;
+	height:30px;
+}
+.re_reply_writeForm textarea {
+    width: 520px;
+    height: 20px;
+}
+.reply_info{
+    padding: 9px 3px 10px 5px;
+}
+
+.replay_wrap{
+	margin-top: 15px;
+}
+/* .reply2{
+	display:none;
+} */

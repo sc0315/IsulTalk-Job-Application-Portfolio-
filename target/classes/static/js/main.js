@@ -273,14 +273,27 @@ function loadPage(pageNum) {
 
 // 댓글 등록
 	function replyInsert(){
-	
+		var board_number = document.getElementById('board_number').value;
+		var board_content = document.getElementById('reply_content').value;
+		
+		if (board_content.trim() === "") {
+        alert("댓글 내용을 입력하세요.");
+        reply_content.focus();
+        return;
+        }
+
         $.ajax({
             url: "insertReply",
             dataType : "html",
             type: "post",
-            data: $('#insertReplyForm').serialize(),
-            
+            data: {	board_number: board_number,
+            		reply_content: board_content,
+				
+			},
+			
             success: function(result){
+				
+				
 				alert("댓글이 등록되었습니다.");
 				 $("#chat").html(result);         	
 	    }
@@ -314,6 +327,69 @@ function loadPage(pageNum) {
 			return false;	
 		}
 	}
+	
+// 대댓글 입력창
+
+function re_replyInsertForm(event) {
+    var clickedRow = event.currentTarget;
+    var replyInfo = clickedRow.closest('.reply_info');
+    var reply2 = replyInfo.querySelector('.re_reply');
+    
+    if (reply2) {
+        if (window.getComputedStyle(reply2).display === 'none') {
+            reply2.style.display = 'block';
+        } else {
+            reply2.style.display = 'none';
+        }
+    }
+    
+}
+// 대댓글 등록
+function re_replyInsert(event){
+	
+	var clickedRow = event.currentTarget;   
+    var re_replyBox = clickedRow.closest('.re_reply');
+    var re_reply_number = re_replyBox.querySelector('.re_reply_number');
+    var reply_number = re_reply_number.value;
+	var re_reply_content = re_replyBox.querySelector('.re_reply_content');
+	var reply_content = re_reply_content.value;
+	var re_reply_ref = re_replyBox.querySelector('.reply_ref');
+	var reply_ref = re_reply_ref.value;
+	var re_reply_deep = re_replyBox.querySelector('.reply_deep');
+	var reply_deep = re_reply_deep.value;
+	var re_reply_level = re_replyBox.querySelector('.reply_level');
+	var reply_level = re_reply_level.value;
+	
+	
+	var board_number = document.getElementById('board_number').value;
+	var reply_writer = document.getElementById('reply_writer').value;
+
+	if (reply_content.trim() === "") {
+        alert("댓글 내용을 입력하세요.");
+        re_reply_content.focus();
+        return;
+        }
+	
+    $.ajax({
+        url: "reinsertReply",
+        dataType : "html",
+        type: "post",
+        data: {reply_content: reply_content,
+        		board_number: board_number,
+        		reply_number : reply_number,
+        		reply_ref : reply_ref,
+        		reply_deep : reply_deep	,
+        		reply_level : reply_level,
+        		reply_writer : reply_writer
+        	},
+        
+        success: function(result){
+			alert("댓글이 등록되었습니다.");
+			 $("#chat").html(result);         	
+    }
+    
+    });
+}
 	
 	/*----------------채팅--*/
 	var ws;

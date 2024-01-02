@@ -8,7 +8,7 @@
   	<select id="getReplyList" resultType="com.isul.dto.ReplyDTO">
   		SELECT * FROM csreply
   		WHERE board_number=${board_number}
-  		order by reply_createdate ASC
+  		order by reply_ref ASC, reply_level ASC
   	</select>
   	
   	<!-- 답글 총 갯수 -->
@@ -21,8 +21,8 @@
   	<!-- 댓글 작성 -->
   	<insert id="insertReply">
   		INSERT INTO csreply(reply_number, board_number, reply_content, reply_writer, 
-  							reply_createdate, reply_updatedate, reply_secret)
-  		VALUES (reply_seq.NEXTVAL, ${board_number}, '${reply_content}', '${reply_writer}', SYSDATE, SYSDATE, '0')
+  							reply_createdate, reply_updatedate, reply_ref)
+  		VALUES (reply_seq.NEXTVAL, #{board_number}, #{reply_content}, #{reply_writer}, SYSDATE, SYSDATE, reply_seq.NEXTVAL)
   	</insert>
   	
   	<!-- 댓글 찾기 -->
@@ -30,8 +30,28 @@
   	   select*from csreply where reply_number=${reply_number}
   	</select>
   	
+  	<!-- 댓글 삭제 -->
   	<delete id="deleteReply">
 		DELETE csreply
 		WHERE reply_number = #{reply_number}
 	</delete>
+	
+	<!-- 대댓글 작성 -->
+	<insert id="reinsertReply">
+	    INSERT INTO csreply(
+	        reply_number, board_number, reply_content, reply_writer, 
+	        reply_createdate, reply_updatedate, reply_ref, reply_deep, reply_level)
+	    VALUES (
+	        reply_seq.NEXTVAL, #{board_number}, #{reply_content}, #{reply_writer}, 
+	        SYSDATE, SYSDATE, #{reply_ref}, 
+	        1 , reply_seq.NEXTVAL
+	    )
+	</insert>
+	
+	<update id="updateLevel">
+		UPDATE csreply
+		SET reply_level = reply_level+1
+		WHERE board_number = #{board_number} AND reply_level > #{reply_level}
+	</update>
   </mapper>
+  

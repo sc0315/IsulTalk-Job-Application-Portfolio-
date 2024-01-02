@@ -8,10 +8,10 @@
   	<select id="getBoardList" resultType="com.isul.dto.BoardDTO">
 		 <![CDATA[
 			SELECT rn, board_number, board_title, board_content, board_writer,
-						 board_createdate, reply_count
+						 board_createdate, board_updatedate, reply_count
 			FROM	(SELECT
 						rownum rn, board_number, board_title, board_content, board_writer,
-						 board_createdate, reply_count
+						 board_createdate, board_updatedate, reply_count
 					from csboard where rownum <= #{pageNum} * #{amount} ORDER BY board_number DESC)
 			where rn > (#{pageNum}-1) * #{amount}
 			ORDER BY board_number DESC
