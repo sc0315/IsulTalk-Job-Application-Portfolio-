@@ -53,7 +53,7 @@ function send_email() {
 
     $.ajax({
         type: "post",
-        url: "emailAuth",
+        url: "/emailAuth",
         data: {
             email: email,
             authorizationKey: authorizationKey

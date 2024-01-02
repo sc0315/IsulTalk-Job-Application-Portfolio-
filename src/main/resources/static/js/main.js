@@ -93,7 +93,21 @@ var rotationDegree = 0;
 			        $("#chat").html(result);
 			    }
 				});		
-	}		
+	}
+	
+//
+function goMyFriendProfile() {
+	var pfId = document.getElementById("myProfileId").value;
+	$.ajax({	
+			    url : "friendProfile",
+			    dataType : "html",
+			    type : "get", 
+			    data: { profileId : pfId },
+			    success : function(result){
+			        $("#chat").html(result);
+			    }
+				});		
+	}					
 
 
 //친구찾기
@@ -133,7 +147,6 @@ var rotationDegree = 0;
 		    url : "csboard",
 		    dataType : "html",
 		    type : "get",  
-		    data :{},   // 호출할 url 에 있는 페이지로 넘길 파라메터
 		    success : function(result){
 				
 		        $("#chat").html(result);
@@ -165,7 +178,6 @@ var rotationDegree = 0;
 		    url : "insertBoardForm",
 		    dataType : "html",
 		    type : "get",  
-		    data : { },   // 호출할 url 에 있는 페이지로 넘길 파라메터
 		    success : function(result){
 		        $("#chat").html(result);
 		    }
@@ -190,7 +202,6 @@ var rotationDegree = 0;
 			    url : "csboard",
 			    dataType : "html",
 			    type : "get",  
-			    data : { },   // 호출할 url 에 있는 페이지로 넘길 파라메터
 			    success : function(result){
 			        $("#chat").html(result);
 			    }
@@ -328,6 +339,7 @@ function loadPage(pageNum) {
 		}
 	}
 	
+
 // 대댓글 입력창
 
 function re_replyInsertForm(event) {
@@ -399,44 +411,12 @@ function re_replyInsert(event){
 	}
 	
 	
-	function getRoom(){  // 방 목록 가져오기
-		commonAjax('/getRoom', "", 'post', function(result){
-			createChatingRoom(result);
-		});
-	}
 	
-	function createRoom(){
-		$("#createRoom").click(function(){
-			var msg = { roomName : $('#roomName').val()	};
-			commonAjax('/createRoom', msg, 'post', function(result){
-				createChatingRoom(result);
-			});
+	
+	
+	/*----------------채팅--*/
+	
 
-			$("#roomName").val("");
-		});
-	}
-
-	function goRoom(number, name){
-		console.log(name);
-		console.log(number);
-		location.href="/moveChatting?roomName="+name+"&"+"roomNumber="+number;
-	}
-
-	function createChatingRoom(res){
-		if(res != null){
-			var tag = "<tr><th class='num'>순서</th><th class='room'>방 이름</th><th class='go'></th></tr>";
-			res.forEach(function(d, idx){
-				var rn = d.roomName.trim();
-				var roomNumber = d.roomNumber;
-				tag += "<tr>"+
-							"<td class='num'>"+(idx+1)+"</td>"+
-							"<td class='room'>"+ rn +"</td>"+
-							"<td class='go'><button type='button' onclick='goRoom(\""+roomNumber+"\", \""+rn+"\")'>참여</button></td>" +
-						"</tr>";	
-			});
-			$("#roomList").empty().append(tag);
-		}
-	}
 
 	function commonAjax(url, parameter, type, callbak, contentType){
 		$.ajax({
@@ -456,14 +436,7 @@ function re_replyInsert(event){
 	
 	
 	
-	
 
-function wsOpen(){
-	ws = new WebSocket("ws://" + location.host + "/chatting/" + document.getElementById("roomNumber").value);
-	wsEvt();
-}
-	
-	
 	
 function wsEvt() {
 	ws.onopen = function(data){ //소켓이 열리면 초기화 세팅하기
@@ -472,6 +445,7 @@ function wsEvt() {
 	ws.onmessage = function(data) { //메시지를 받으면 처리하는 내용
 		var msg = data.data;
 		if(msg != null && msg.trim() != ''){
+			var rcv_data = '';
 			var rcv_data = JSON.parse(msg);
 			console.log('receive : ', rcv_data);
 				if (rcv_data.type == "message"){
@@ -482,11 +456,11 @@ function wsEvt() {
 						    "<td></td>" +
 						    "<td class='myNick'>" +
 						    "<span>①</span>" +
-						    "<span>" + rcv_data.profile.nick_name + "</span>" +
+						    "<span>" + rcv_data.chatProfile.nick_name + "</span>" +
 						    "</td>" +
 						    "<td rowspan='2'>" +
 						    "<div class='friendProfileImageWrap'>" +
-						    "<img class='friendProfileImage' src='" + rcv_data.profile.profile_img + "'/>" +
+						    "<img class='friendProfileImage' src='" + rcv_data.chatProfile.profile_img + "'/>" +
 						    "</div>" +
 						    "</td>" +
 						    "</tr>" +
@@ -508,11 +482,11 @@ function wsEvt() {
 						" 	<tr>" +
 						"			<td rowspan='2'>" +
 						"				<div class='friendProfileImageWrap'>" +
-						"					<img class='friendProfileImage' src='" + rcv_data.profile.profile_img + "'/>" +
+						"					<img class='friendProfileImage' src='" + rcv_data.chatProfile.profile_img + "'/>" +
 						"				</div>" +
 						"			</td>" +
 						"			<td class='yourNick'>" +
-						"				<span style='text-align:left'>" + rcv_data.profile.nick_name + "</span>" +
+						"				<span style='text-align:left'>" + rcv_data.chatProfile.nick_name + "</span>" +
 						"				<span>①</span> " +
 						"			</td>" +
 						"			<td>" +
@@ -541,23 +515,22 @@ function wsEvt() {
 	});
 }
 	
-var profile = '';
+var chatProfile = '';
 
 function getProfile() {
-	if (!profile) {
+	if (!chatProfile) {
 		const userId = document.getElementById("sessionId").value;
 		$.ajax({
 		    url : `/main/profile?id=${userId}`,
 		    type : "get",  
 		    success : function(result){
 		    	console.log('result : ',  JSON.parse(result));
-		        profile = JSON.parse(result);
-		      
+		        chatProfile = JSON.parse(result);
 		    },
 		    async : false
 		});
 	}
-	return profile;
+	return chatProfile;
 }
 
 function send() {
@@ -574,28 +547,12 @@ function send() {
         sessionId: document.getElementById("sessionId").value,
         currentDate: sendDate,
         msg: document.getElementById("chatting").value,
-        profile: getProfile()
+        chatProfile: getProfile()
     };
-    
     console.log('option : ', option);
-
     ws.send(JSON.stringify(option));
     document.getElementById("chatting").value = ""; // clear;
 }
-			
-	/*	
-		function wsClose() {
-			var uN = $("#userName").val();
-			var msg = uN + "님이 퇴장하셨습니다!";
-
-			ws.send(msg);
-			ws.close();
-			
-			self.opener = self;
-			window.close()
-		}
-	*/
-	
 	
 function goChat(event) {
 var clickedChat = event.currentTarget;
@@ -609,7 +566,105 @@ $.ajax({
 		        $("#chat").html(result);
 		    }
 			});
-			
 }
-	
-	
+
+function checkChatRoom() {
+	var friendId = document.getElementById("friendId").value;
+	$.ajax({	
+		    url : "/checkChatRoom?friendId=" + friendId,
+		    dataType : "html",
+		    type : "get",  
+		    success : function(result){
+		        $("#chat").html(result);
+		   		 }
+		});
+}
+
+function wsClose() {
+			console.log("웹소켓닫기");
+				ws.close();
+}
+
+
+
+/* 새로운 친구 검색 */
+function searchAddMember() {
+		var condition = document.getElementById("searchCondition").value;
+		var keyword = document.getElementById("searchKeyword").value;
+	$.ajax({	
+		    url : "/main/searchMember",
+		    dataType : "html",
+		    type : "post",
+		    data : {condition:condition, keyword:keyword },
+		    success : function(result){
+		        $("#chat").html(result);
+		   		 }
+		});
+}
+
+/* 새로 검색된 친구 추가 */
+function addFriend() {
+		var memberId = document.getElementById("searchMemeberId").value;
+	$.ajax({	
+		    url : "/main/searchMemberAdd",
+		    dataType : "html",
+		    type : "post",
+		    data : {memberId, memberId},
+		    success : function(result){
+		        $("#chat").html(result);
+		   		 }
+		});
+		alert("친구 신청을 보냈습니다.");
+		 location.reload();
+}
+
+
+/* 새로 추가된 친구 삭제 */
+function addCancle() {
+		var memberId = document.getElementById("addMemeberId").value;
+	$.ajax({	
+		    url : "/main/addMemberCancle",
+		    dataType : "html",
+		    type : "post",
+		    data : {memberId, memberId},
+		    success : function(result){
+		        $("#chat").html(result);
+		   		 }
+		});
+		alert("친구 신청을 취소했습니다.");
+		 location.reload();
+}
+
+
+function friendAccept() {
+	var memberId = document.getElementById("friendListId").value;
+	$.ajax({	
+		    url : "/main/friendAccept",
+		    dataType : "html",
+		    type : "post",
+		    data : {memberId, memberId},
+		    success : function(result){
+		        $("#chat").html(result);
+		   		 }
+		});
+	alert("친구 신청을 수락했습니다.");
+	 location.reload();
+}
+
+function friendReject() {
+	var memberId = document.getElementById("friendListId").value;
+	$.ajax({	
+		    url : "/main/friendReject",
+		    dataType : "html",
+		    type : "post",
+		    data : {memberId, memberId},
+		    success : function(result){
+		        $("#chat").html(result);
+		   		 }
+		});
+		alert("친구 신청을 거절했습니다.");
+		 location.reload();
+}
+
+
+

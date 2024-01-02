@@ -22,6 +22,7 @@ import com.isul.dto.MemberDTO;
 import com.isul.dto.ProfileDTO;
 import com.isul.member.MemberService;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -39,16 +40,19 @@ public class MemberController {
 	@PostMapping("/login")
 	public String login(MemberDTO memberDTO, HttpSession session, HttpServletResponse response, Model model) throws IOException {
 		String loginId = null;
-		
 		int result = memberService.loginID(memberDTO);
 		System.out.println(result);
+		
 		if(result ==1) { // 1: id가 있음 로그인 성공
 			
 			loginId = memberDTO.getId();
-			
+			MemberDTO loginMember = memberService.getMember(loginId);
+			String loginName = loginMember.getName();
 			ProfileDTO profile = memberService.getMyProfile(loginId);
+			session.setAttribute("loginName", loginName);
 			session.setAttribute("loginId", loginId);
 			session.setAttribute("profile", profile);
+			System.out.println(loginName);
 			System.out.println(loginId);
 			System.out.println(profile);
 			System.out.println("로그인 성공");

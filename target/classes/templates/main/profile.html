@@ -11,9 +11,19 @@
 		<div class="profileBackImage"
 			th:style="'background-image:url('+ ${profile.background_img} +');'">
 
-			<div class="profileStatusChat">1:1대화</div>
+			<div th:if="${profile.id != session.loginId}" class="profileStatusChat" onclick="checkChatRoom()">
+				<div class="profileStatusChatChild">1:1대화</div>
+				<input type="hidden" th:value="${profile.id}" id="friendId"/>
+			</div>
+			<div class="profileStatusChat">
+				<div class="profileStatusChatChild" th:if="${profile.id == session.loginId}">대화명<br>변경</div>
+				<div class="profileStatusChatChild" th:if="${profile.id == session.loginId}">상태메세지<br>변경</div>
+				<div class="profileStatusChatChild" th:if="${profile.id == session.loginId}">프로필사진<br>변경</div>
+				<div class="profileStatusChatChild" th:if="${profile.id == session.loginId}">배경사진<br>변경</div>
+			</div>
 			<div class="profileStatusNick" th:text="${profile.nick_name}">
-				대화명</div>
+				대화명 
+			</div>
 			<div class="profileSetImageWrap">
 				<img class="profileSetImage" th:src="${profile.profile_img}" />
 			</div>

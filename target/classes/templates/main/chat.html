@@ -8,9 +8,10 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
-	<div th:fragment="chat"
+	<div class="clickFocus" th:fragment="chat"
 		style="height: 855px; width: 550px; background-color: white; position: relative;">
 		<div id="chatHeader">
+		
 			<div class="dropdown">
 				<button onclick="toggleDropdown()">대화방 참가자</button>
 				<div id="dropdownContent" class="dropdown-content">
@@ -182,13 +183,33 @@
 	
 	
 	<script>
+
+		var scrollContainer = document.getElementById("wrap");
+		scrollContainer.scrollTop = scrollContainer.scrollHeight;
+	
 		ws = new WebSocket("ws://" + location.host + "/chatting/"
 				+ document.getElementById("roomNumber").value);
 		wsEvt();
 		
 		
-		var scrollContainer = document.getElementById("wrap");
-		scrollContainer.scrollTop = scrollContainer.scrollHeight;
+		document.addEventListener('click', function (e) {
+		    // 지정한 DIV 클래스들
+		    var allowedClasses = ['button', 'messegeInputArea', 'messegeInput', 'chatting', 'ch1', 'ch2',
+		    	'chatTime', 'yourNick', 'myNick', 'yourMessageBox', 'myMessageBox', 'wrap', 'clickFocus',
+		    	'dropdown', 'body', 'dropdown-content', 'mainNav', 'mainNavImg'];
+
+		    // 클릭된 요소가 특정 클래스들 중 하나를 가지고 있는지 확인
+		    var isAllowedClick = allowedClasses.some(function (className) {
+		        return e.target.classList.contains(className);
+		    });
+
+		    // 특정 클래스들 외의 영역이 클릭된 경우에 작업 수행
+		    if (!isAllowedClick) {
+		        console.log('지정한 DIV 클래스들 외에 클릭');
+		        wsClose();
+		    }
+		});
+
 	</script>
 	</div>
 

@@ -4,7 +4,6 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<meta charset="UTF-8">
 	<title>Room</title>
-	
 </head>
 
 <body>
@@ -32,7 +31,9 @@
 						</tr>
 						<tr>
 							<td class="profileStatusBox"><span class="statusMessage"
-								th:text="${chatList.message}">상태메세지 길어진다</span>
+								th:text="${chatList.message}">메세지</span>
+								<span class="statusMessageTime"
+								th:text="${#dates.format(chatList.message_createdate, 'MM월dd일 HH:mm')}">시간</span>
 							<input type="hidden" id="roomNumber" class="roomNumber" th:value="${chatList.room_number}">
 							</td>
 						</tr>
