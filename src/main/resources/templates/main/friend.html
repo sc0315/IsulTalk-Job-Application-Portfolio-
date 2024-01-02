@@ -27,7 +27,13 @@
 						                		</td>
 						                		<td class="profileContentBox">
 						                			<span class="friendListNickName" th:text="${addedFriendList.nick_name}">대화명</span>
-						                			<span th:text="'('+${addedFriendList.id}+')'">(memberID)</span>
+						                			<span class="friendListId" th:text="'('+${addedFriendList.id}+')'">(memberID)</span>
+						                			<input type="hidden"  id="friendListId" th:value="${addedFriendList.id}"/>
+						                			<div>
+						                				<button type="button" onclick="friendAccept()" class="searchMemberBtn4"> 수락 </button>
+					                					<button type="button" onclick="friendReject()" class="searchMemberBtn5"> 거절 </button>
+						                			</div>
+						                			
 						                		</td>
 						                	</tr>
 						                	<tr>
@@ -63,7 +69,7 @@
 					                		</td>
 					                		<td class="profileContentBox">
 					                			<span class="friendListNickName" th:text="${friendList.nick_name}">대화명</span>
-					                			<span th:text="'('+${friendList.id}+')'">(memberID)</span>
+					                			<span class="friendListId" th:text="'('+${friendList.id}+')'">(memberID)</span>
 					                			<input type="hidden" class="profileId" th:value="${friendList.id}"/>
 					                		</td>
 					                	</tr>

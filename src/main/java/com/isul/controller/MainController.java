@@ -7,12 +7,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isul.dto.ChatListDTO;
+import com.isul.dto.FindMemberDTO;
+import com.isul.dto.MemberDTO;
 import com.isul.dto.ProfileDTO;
 import com.isul.member.MemberService;
 
@@ -74,7 +78,6 @@ public class MainController {
 
 	@RequestMapping("/friendList")
 	public String friendListView(ProfileDTO profileDTO, Model model, HttpSession session) {
-		System.out.println("친구목록 열기");
 		String sessionId = (String) session.getAttribute("loginId");
 
 		List<ProfileDTO> friendList = memberService.getFriendList(sessionId);
@@ -91,23 +94,92 @@ public class MainController {
 
 	@RequestMapping("/friendProfile")
 	public String getFriendProfile(ProfileDTO profileDTO, Model model, @RequestParam("profileId") String profileId) {
-		System.out.println("친구 프로필 조회 도착");
 		ProfileDTO profile = memberService.getMyProfile(profileId);
 		model.addAttribute("profile", profile);
-		System.out.println("profile" + profile);
 		return "main/profile";
 	}
 
-	@RequestMapping("/searchMember")
-	public String searchMemberView() {
-		System.out.println("친구검색 열기");
-		return "main/searchMember";
-	}
+	
 
 	@RequestMapping("/modifyMyInfo")
-	public String modifyMyInfoView() {
-		System.out.println("정보변경 열기");
+	public String modifyMyInfoView(HttpSession session, Model model) {
+		String loginId = (String)session.getAttribute("loginId");
+		MemberDTO loginMember = memberService.getMember(loginId);
+		model.addAttribute("loginMember", loginMember);
 		return "main/modifyMyInfo";
 	}
-
+	
+	@RequestMapping("findMemberList") 
+	public String findMemberList() {
+		return "redirect:/main/searchMember";
+	}
+	
+	@GetMapping("/searchMember")
+	public String searchAddMember(HttpSession session, Model model) {
+		String myId = (String)session.getAttribute("loginId");
+		List<FindMemberDTO> memberList =  memberService.getAddedFriendList(myId);
+		model.addAttribute("memberList", memberList);
+		return "main/searchMember";
+	}
+	
+	@PostMapping("/searchMember")
+	public String searchAddMemberAction(@RequestParam(value="condition", defaultValue="") String condition,
+			@RequestParam(value="keyword", defaultValue="") String keyword, HttpSession session, Model model) {
+			String myId = (String)session.getAttribute("loginId");
+			FindMemberDTO member = memberService.searchAddMember(myId, condition, keyword);
+			String ms = null;
+			if (member == null) {
+				ms = "일치하는 사용자가 없습니다.";
+			}
+			System.out.println(ms);
+			List<FindMemberDTO> memberList =  memberService.getAddedFriendList(myId);
+			model.addAttribute("memberList", memberList);
+			model.addAttribute("ms", ms);
+			model.addAttribute("member",member);
+			return "main/searchMember";
+		
+	}
+	
+	@PostMapping("/searchMemberAdd")
+	public String searchMemberAdd(@RequestParam(value="memberId", defaultValue="") String yourId,
+							HttpSession session, Model model) {
+			String myId = (String)session.getAttribute("loginId");
+			memberService.searchMemberAdd(myId, yourId);
+			return "main/searchMember";
+		
+	}
+	
+	@PostMapping("/addMemberCancle")
+	public String addMemberCancle(@RequestParam(value="memberId", defaultValue="") String yourId,
+							HttpSession session, Model model) {
+			String myId = (String)session.getAttribute("loginId");
+			memberService.addCancle(yourId, myId);
+			List<FindMemberDTO> memberList =  memberService.getAddedFriendList(myId);
+			model.addAttribute("memberList", memberList);
+			return "main/searchMember";
+	}
+	
+	@PostMapping("/friendReject")
+	public String friendReject(@RequestParam(value="memberId", defaultValue="") String myId,
+							HttpSession session, Model model) {
+			String yourId = (String)session.getAttribute("loginId");
+			List<FindMemberDTO> memberList =  memberService.getAddedFriendList(myId);
+			model.addAttribute("memberList", memberList);
+			memberService.addCancle(yourId, myId);
+			return "main/main";
+	}
+	
+	@PostMapping("/friendAccept")
+	public String friendAccept(@RequestParam(value="memberId", defaultValue="") String yourId,
+							HttpSession session, Model model) {
+			String myId = (String)session.getAttribute("loginId");
+			List<FindMemberDTO> memberList =  memberService.getAddedFriendList(myId);
+			model.addAttribute("memberList", memberList);
+			memberService.friendAccept(yourId, myId);
+			return "main/main";
+	}
+	
+	
+	
+	
 }

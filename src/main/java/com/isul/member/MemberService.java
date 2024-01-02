@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.isul.dto.ChatListDTO;
 import com.isul.dto.ChatMessageDTO;
+import com.isul.dto.FindMemberDTO;
+import com.isul.dto.FriendDTO;
 import com.isul.dto.MemberDTO;
 import com.isul.dto.ProfileDTO;
 
@@ -104,5 +106,41 @@ public class MemberService {
 		public void insertChatMessage(ChatMessageDTO chatMessageDTO) {
 			memberDAO.insertChatMessage(chatMessageDTO);
 		}
+		
+		// 1:1대화방 조회
+		public String findChatRoom(String myId, String yourId){
+			return memberDAO.findChatRoom(myId, yourId);
+		};
+				
+		// 1:1대화방 생성
+		public void createChatRoom(String myId, String yourId) {
+			memberDAO.createChatRoom(myId, yourId);
+		};
 	
+		// 추가할 친구 검색
+		public FindMemberDTO searchAddMember(String myId, String condition, String keyword){
+			return memberDAO.searchAddMember(myId, condition, keyword);
+		}
+		
+		// 검색된 친구 추가
+		public void searchMemberAdd(String myId, String yourId) {
+			memberDAO.searchMemberAdd(myId, yourId);
+		}
+		
+		// 내가 추가한 친구
+		public List <FindMemberDTO> getAddedFriendList(String myId) {
+			return memberDAO.getAddedFriendList(myId);
+		}
+		
+		// 내가 추가한 친구 취소 반대로 넣어서 나를 추가한 친구 거절
+		public void addCancle(String yourId, String myId) {
+			memberDAO.addCancle(yourId, myId);
+		}
+		
+		// 나를 추가한 친구 수락
+		public void friendAccept(String yourId, String myId) {
+			memberDAO.friendAccept(yourId, myId);
+		}
+		
+		
 }	

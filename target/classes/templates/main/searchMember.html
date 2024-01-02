@@ -1,12 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<div class="searchMember" th:fragment="searchMember">
-	친구검색 신청
+		<div class="searchMemberHeader">
+			<div class="searchMemberTitle"> 
+				<h2>친구 추가</h2>
+			</div>
+			<div class="searchMemeberForm">
+				<div class="bottomLine">
+					
+						<select class="searchMemberSelect" name="searchCondition" id="searchCondition">
+						    <option selected>검색조건</option>
+						    <option value="phone">전화번호</option>
+						    <option value="email">이메일</option>
+						    <option value="id">아이디</option>
+				  		</select>
+						<input type="text" class="searchMemberInput" id="searchKeyword" name="searchKeyword" >
+						<button type="button" class="searchMemberBtn" onclick="searchAddMember();">검색</button>
+					
+					
+				</div>
+				<div class="searchMemberBody" id="searchResult">
+					<table>
+						<tr th:if="${member != null}">
+							<td style='width : 10px;'></td>
+							<td>
+							  <div class="searchProfileImageWrap">
+									<img class="searchProfileImage"
+										th:src="${member.profile_img}" />
+								</div>
+							</td>
+							<td style="width:150px;">
+							  <div class="searchProfileName"><span th:text="${member.name}"></span></div>
+							  <input type="hidden" th:value="${member.id}" name="searchMemeberId" id="searchMemeberId"/>
+							</td>
+							<td>
+								<button type="button" onclick="addFriend()" class="searchMemberBtn2"> 추가 </button>
+							</td>
+							<td style='width : 10px;'></td>
+						</tr>
+						<tr th:if="${ms != null}">
+							<td style="width:350px;">
+							  <div class="searchProfileName"><span th:text="${ms}"></span></div>
+							</td>
+						</tr>
+					</table>
+				
+				</div>
+			</div>
+		</div>
+		
+		<div class="searchMemberWaiting">
+			<div class="searchMemberTitle">
+				<h2>수락 대기중 친구</h2>
+			</div>
+			<div class="searchMemberBody">
+			
+				<table>
+						<tr th:each="memberList : ${memberList}">
+							<td style='width : 10px;'></td>
+							<td>
+							  <div class="searchProfileImageWrap">
+									<img class="searchProfileImage"
+										th:src="${memberList.profile_img}" />
+								</div>
+							</td>
+							<td style="width:150px;">
+							  <div class="searchProfileName"><span th:text="${memberList.name}"></span></div>
+							  <input type="hidden" th:value="${memberList.id}" name="addMemeberId" id="addMemeberId" />
+							</td>
+							<td>
+								<button type="button" onclick="addCancle()" class="searchMemberBtn3"> 취소 </button>
+							</td>
+							<td style='width : 10px;'></td>
+						</tr>
+					</table>
+		
+			</div>
+		</div>
 	</div>
 </body>
 </html>

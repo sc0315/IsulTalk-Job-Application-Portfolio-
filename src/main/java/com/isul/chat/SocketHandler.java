@@ -59,14 +59,15 @@ public class SocketHandler extends TextWebSocketHandler {
 				
 		} 
 		
+		
 		if (flag) { // 존재하는 방이므로 세션만 추가한다.
 			HashMap<String, Object> map = roomList.get(idx); // 키 : 방번호, 값 : 채팅방의 세션 목록
 			map.put(session.getId(), session);
-		} else { // 존재하지 않는 방이므로 방번호와 세션을 roomList에 함께 저장
+		} 
+		else { // 존재하지 않는 방이므로 방번호와 세션을 roomList에 함께 저장
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("roomNumber", roomNumber);
 			map.put(session.getId(), session);
-			
 			roomList.add(map);
 		}
 		

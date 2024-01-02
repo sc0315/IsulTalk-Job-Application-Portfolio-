@@ -15,7 +15,7 @@
 			<div id="logout">
 				<a href="/logout" style="color : black;">로그아웃&nbsp;&nbsp;</a>
 			</div>
-			<div class="logoutSessionId" th:text="'사용자이름('+${session.loginId}+')'">상철접속</div>
+			<div class="logoutSessionId" th:text="${session.loginName}+'('+${session.loginId}+')'">상철접속</div>
 		</div>
 	</div>
 </body>
