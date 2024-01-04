@@ -51,7 +51,7 @@ public interface MemberDAO {
 		public void createChatRoom(String myId, String yourId);
 		
 		// 추가할 친구목록 검색
-		public FindMemberDTO searchAddMember(String myId, String condition, String keyword);
+		public FindMemberDTO searchAddMember(String myId, String searchCondition, String keyword);
 		
 		// 검색된 친구 추가
 		public void searchMemberAdd(String myId, String yourId);
@@ -65,7 +65,11 @@ public interface MemberDAO {
 		// 나를 추가한 친구 수락
 		public void friendAccept(String yourId, String myId);
 		
+		// 대화명 변경
+		public void changeNickName (String nickName, String myId);
 		
+		// 상태메세지 변경
+		public void changeStatusMessage (String statusMessage, String myId);
 		
 		
 }

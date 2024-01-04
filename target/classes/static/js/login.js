@@ -23,8 +23,7 @@
            if ($("#check").is(":checked")) {
                setCookie("key", $("#id").val(), 7);
            }
-       });
-       
+       }); 
    });
 
    function setCookie(cookieName, value, exdays) {

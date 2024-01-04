@@ -16,10 +16,87 @@
 				<input type="hidden" th:value="${profile.id}" id="friendId"/>
 			</div>
 			<div class="profileStatusChat">
-				<div class="profileStatusChatChild" th:if="${profile.id == session.loginId}">대화명<br>변경</div>
-				<div class="profileStatusChatChild" th:if="${profile.id == session.loginId}">상태메세지<br>변경</div>
-				<div class="profileStatusChatChild" th:if="${profile.id == session.loginId}">프로필사진<br>변경</div>
-				<div class="profileStatusChatChild" th:if="${profile.id == session.loginId}">배경사진<br>변경</div>
+				<div class="openChatName" th:if="${profile.id == session.loginId}" >대화명<br>변경</div>
+					<div class="modalChatName hidden">
+					 	<input id="changeChatName" type="text">
+					 	<input class="changeChatName" type="button" value="확인">
+					 	<input class="closeChatName" type="button" value="취소">
+					</div>
+					<script>
+					const openChatName = document.querySelector('.openChatName');
+					const closeChatName = document.querySelector('.closeChatName');
+					const modalChatName = document.querySelector('.modalChatName');
+					const changeChatName = document.querySelector('.changeChatName');
+
+					openChatName.addEventListener('click', vChatName);
+					closeChatName.addEventListener('click', hChatName);
+					changeChatName.addEventListener('click', aChatName);
+					
+					function aChatName() {
+					var nickName = document.getElementById("changeChatName").value;
+					$.ajax({	
+							url : "/main/changeNickName",
+							dataType : "html",
+							type : "get",
+							data : {nickName, nickName},
+							success : function(result){
+										$("#chat").html(result);
+									}
+							});
+							alert("대화명을 변경했습니다.");
+							location.reload();
+					}
+					function vChatName() {
+						modalChatName.classList.remove('hidden');
+						modalChatName.classList.add('visible');
+					}
+					function hChatName() {
+						modalChatName.classList.remove('visible');
+						modalChatName.classList.add('hidden');
+					}
+					</script>
+				
+				<div class="openStatusMessage" th:if="${profile.id == session.loginId}">상태메세지<br>변경</div>
+					<div class="modalStatusMessage hidden">
+					 	<input id="changeStatusMessage"type="text">
+					 	<input class="changeStatusMessage"type="button" value="확인">
+					 	<input class="closeStatusMessage" type="button" value="취소">
+					</div>
+					<script>
+					const openStatusMessage = document.querySelector('.openStatusMessage');
+					const closeStatusMessage = document.querySelector('.closeStatusMessage');
+					const modalStatusMessage = document.querySelector('.modalStatusMessage');
+					const changeStatusMessage = document.querySelector('.changeStatusMessage');
+					
+					openStatusMessage.addEventListener('click', vStatusMessage);
+					closeStatusMessage.addEventListener('click', hStatusMessage);
+					changeStatusMessage.addEventListener('click', aStatusMessage);
+					
+					function aStatusMessage() {
+						var statusMessage = document.getElementById("changeStatusMessage").value;
+						$.ajax({	
+							url : "/main/changeStatusMessage",
+							dataType : "html",
+							type : "get",
+							data : {statusMessage, statusMessage},
+							success : function(result){
+										$("#chat").html(result);
+									}
+							});
+							alert("상태메세지를 변경했습니다.");
+							location.reload();
+					}
+					function vStatusMessage() {
+						modalStatusMessage.classList.remove('hidden');
+						modalStatusMessage.classList.add('visible');
+					}
+					function hStatusMessage() {
+						modalStatusMessage.classList.remove('visible');
+						modalStatusMessage.classList.add('hidden');
+					}
+					</script>
+				<div class="profileStatusChatChild" th:if="${profile.id == session.loginId}" onclick="changeProfileImg()">프로필사진<br>변경</div>
+				<div class="profileStatusChatChild" th:if="${profile.id == session.loginId}" onclick="changeBackImg()">배경사진<br>변경</div>
 			</div>
 			<div class="profileStatusNick" th:text="${profile.nick_name}">
 				대화명 

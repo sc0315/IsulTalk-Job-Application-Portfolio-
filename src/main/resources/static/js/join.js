@@ -2,20 +2,17 @@
  * 전화번호 전송 
  */ 
 var storedphoneAuthorizationKey; // 인증코드 전역변수
-function send_SMS() {
 
+function send_SMS() {
 	var phone = $("#phone").val();
 	var randomNum = '';
 	for( var i = 0; i < 4 ; i ++){
 	 randomNum += Math.floor(Math.random() * 10)
 	};
 	 $("#phoneAuthorizationKey").val(randomNum);
-	
 	var phoneAuthorizationKey  = document.getElementById("phoneAuthorizationKey").value;
-	
 	console.log(phoneAuthorizationKey);
 	console.log(phone);
-	
 	    $.ajax({
         type: "post",
         url: "smsSend",
@@ -87,7 +84,7 @@ function id_Check() {
         $.ajax({
             type:'post',
             url:"idCheck",
-            data: {"id":id}, //JSON 형태로 DATA 전송
+            data: {"id":id}, 
             success: function(data){ 
              
              	if(data == "1"){ 
@@ -101,9 +98,8 @@ function id_Check() {
                      $("#result_id").html(result).css("color","red");
                      $("#id").val('');
                      idCheck = false;
-             }
+               }
 			 }
-        
         }); 
 }
 

@@ -123,11 +123,15 @@ public class MainController {
 	}
 	
 	@PostMapping("/searchMember")
-	public String searchAddMemberAction(@RequestParam(value="condition", defaultValue="") String condition,
+	public String searchAddMemberAction(@RequestParam(value="condition", defaultValue="") String searchCondition,
 			@RequestParam(value="keyword", defaultValue="") String keyword, HttpSession session, Model model) {
 			String myId = (String)session.getAttribute("loginId");
-			FindMemberDTO member = memberService.searchAddMember(myId, condition, keyword);
+			FindMemberDTO member = memberService.searchAddMember(myId, searchCondition, keyword);
 			String ms = null;
+			
+			
+			System.out.println("myid : " + myId+"---condition : "+ searchCondition+"---keyword: "+keyword);
+			
 			if (member == null) {
 				ms = "일치하는 사용자가 없습니다.";
 			}
@@ -136,6 +140,7 @@ public class MainController {
 			model.addAttribute("memberList", memberList);
 			model.addAttribute("ms", ms);
 			model.addAttribute("member",member);
+			System.out.println(member);
 			return "main/searchMember";
 		
 	}
@@ -179,7 +184,20 @@ public class MainController {
 			return "main/main";
 	}
 	
+	@GetMapping("/changeNickName")
+	public String changeNickName(@RequestParam(value="nickName", defaultValue="") String nickName,
+			HttpSession session) {
+		String myId = (String)session.getAttribute("loginId");
+		memberService.changeNickName(nickName, myId);
+		return "main/profile";
+	}
 	
-	
+	@GetMapping("/changeStatusMessage")
+	public String changeStatusMessage(@RequestParam(value="statusMessage", defaultValue="") String statusMessage,
+			HttpSession session) {
+		String myId = (String)session.getAttribute("loginId");
+		memberService.changeStatusMessage(statusMessage, myId);
+		return "main/main";
+	}
 	
 }

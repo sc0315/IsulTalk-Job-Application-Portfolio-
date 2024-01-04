@@ -118,8 +118,11 @@ public class MemberService {
 		};
 	
 		// 추가할 친구 검색
-		public FindMemberDTO searchAddMember(String myId, String condition, String keyword){
-			return memberDAO.searchAddMember(myId, condition, keyword);
+		public FindMemberDTO searchAddMember(String myId, String searchCondition, String keyword){
+			System.out.println("myid : " + myId+"---condition : "+ searchCondition+"---keyword: "+keyword);
+			System.out.println("여기서 오류냐?");
+			
+			return memberDAO.searchAddMember(myId, searchCondition, keyword);
 		}
 		
 		// 검색된 친구 추가
@@ -142,5 +145,14 @@ public class MemberService {
 			memberDAO.friendAccept(yourId, myId);
 		}
 		
+		// 대화명 변경
+		public void changeNickName (String nickName, String myId) {
+			memberDAO.changeNickName(nickName, myId);
+		}
+				
+		// 상태메세지 변경
+		public void changeStatusMessage (String statusMessage, String myId) {
+			memberDAO.changeStatusMessage(statusMessage, myId);
+		}
 		
 }	

@@ -3,7 +3,7 @@
 * {
 	border-collapse: collapse;
 	border-spacing: 0;
-	/*border : 1px solid black;*/
+	border : 1px solid black;
 }
 body {
 	margin : 0px;
@@ -386,6 +386,8 @@ height: 660px;
 .dropdown {
   position: relative;
   display: inline-block;
+  width: 545px;
+  height : 75px;
 }
 /* 버튼 */
 .dropdown button {
@@ -454,7 +456,7 @@ height: 660px;
 	text-shadow: -1px 1px gray, 1px 1px gray, 1px 1px gray, 1px -1px gray;
 	display: flex;
 }
-.profileStatusChatChild {
+.profileStatusChatChild{
 	margin-left : 23px;
 }
 .profileStatusNick {
@@ -468,7 +470,39 @@ height: 660px;
 	text-shadow: -1px 1px gray, 1px 1px gray, 1px 1px gray, 1px -1px gray;
 	
 }
+/* 정보 변경 모달 보이기 가리기*/
+.profileStatusChat DIV {
+	margin-left : 23px;
+}
+.modalChatName {
+    position: absolute;
+    height: 35px;
+    width: 200px;
+    margin: auto;
+    top : 70px;
+    left : 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.modalStatusMessage {
+    position: absolute;
+    height: 35px;
+    width: 200px;
+    margin: auto;
+    top : 70px;
+    left : 125px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.visible {
+    visibility: visible;
+}
+.hidden {
+    visibility: hidden;
+}
 
 
 
@@ -836,6 +870,7 @@ h3 {
 	background-color: #F78181;
 	border: 2px solid #FF0000;
 }
+
 
 
 

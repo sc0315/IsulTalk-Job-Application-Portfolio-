@@ -410,13 +410,6 @@ function re_replyInsert(event){
 		createRoom();
 	}
 	
-	
-	
-	
-	
-	/*----------------채팅--*/
-	
-
 
 	function commonAjax(url, parameter, type, callbak, contentType){
 		$.ajax({
@@ -455,7 +448,7 @@ function wsEvt() {
 							"<tr>" +
 						    "<td></td>" +
 						    "<td class='myNick'>" +
-						    "<span>①</span>" +
+						    "<span> &nbsp; &nbsp; &nbsp;</span>" +
 						    "<span>" + rcv_data.chatProfile.nick_name + "</span>" +
 						    "</td>" +
 						    "<td rowspan='2'>" +
@@ -487,7 +480,7 @@ function wsEvt() {
 						"			</td>" +
 						"			<td class='yourNick'>" +
 						"				<span style='text-align:left'>" + rcv_data.chatProfile.nick_name + "</span>" +
-						"				<span>①</span> " +
+						"				<span> &nbsp; &nbsp; &nbsp;</span> " +
 						"			</td>" +
 						"			<td>" +
 						"			</td>" +
@@ -615,7 +608,14 @@ function addFriend() {
 		   		 }
 		});
 		alert("친구 신청을 보냈습니다.");
-		 location.reload();
+		 $.ajax({
+		    url : "searchMember",
+		    dataType : "html",
+		    type : "get",  
+		    success : function(result){
+		        $("#chat").html(result);
+		    }
+			});
 }
 
 
@@ -632,7 +632,14 @@ function addCancle() {
 		   		 }
 		});
 		alert("친구 신청을 취소했습니다.");
-		 location.reload();
+		 $.ajax({
+		    url : "searchMember",
+		    dataType : "html",
+		    type : "get",  
+		    success : function(result){
+		        $("#chat").html(result);
+		    }
+			});
 }
 
 
@@ -667,4 +674,15 @@ function friendReject() {
 }
 
 
+
+
+/* 프로필 변경 */
+
+function changeProfileImg() {
+ alert("프로필이미지 변경");
+}
+
+function changeBackImg() {
+ alert("배경이미지 변경");
+}
 
