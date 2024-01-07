@@ -128,13 +128,14 @@
 	
 	<!-- 추가할 친구목록 검색 하기-->
 	<select id="searchAddMember" resultType="com.isul.dto.FindMemberDTO">
- 		SELECT m.id, m.name, m.phone, m.email, p.profile_img
+			SELECT m.id, m.name, m.phone, m.email, p.profile_img
 			FROM member m JOIN profile p ON m.id = p.id  WHERE m.id IN (SELECT id FROM 
 			(SELECT id AS id FROM friend WHERE NOT id=#{myId} AND NOT friend_id=#{myId} GROUP BY id
 			UNION
-			SELECT friend_id AS id FROM friend WHERE NOT id=#{myId} AND NOT friend_id=#{myId} GROUP BY friend_id) WHERE NOT id IN (SELECT friend_id AS id FROM friend WHERE id = #{myId}
+			SELECT friend_id AS id FROM friend WHERE NOT id=#{myId} AND NOT friend_id=#{myId} GROUP BY friend_id) WHERE NOT id IN (SELECT friend_id AS id FROM friend WHERE id=#{myId}
 			UNION
-			SELECT id AS id FROM friend WHERE friend_id = #{myId}) AND ${condition}=#{keyword})
+			SELECT id AS id FROM friend WHERE friend_id=#{myId}) AND ${searchCondition}=#{keyword})
+	
 	</select>
 	
 	<!-- 검색된 친구 추가 -->
@@ -159,6 +160,32 @@
     	UPDATE friend SET friend_approval ='1' WHERE id=#{myId} AND friend_id=#{yourId}
     </update>
     
+    <!-- 대화명 변경 -->
+    <update id="changeNickName" parameterType="String">
+    	UPDATE profile SET nick_name=#{nickName} WHERE id=#{myId}
+    </update>
+	
+	<!-- 상태메세지 변경 -->
+    <update id="changeStatusMessage" parameterType="String">
+    	UPDATE profile SET status_message=#{statusMessage} WHERE id=#{myId}
+    </update>
+	
+	<!-- 프로필 이미지변경 -->
+	<update id="changeProfileImage" parameterType="String">
+    	UPDATE profile SET profile_img=#{savePath} WHERE id=#{myId}
+    </update>
     
-     
+    <!-- 프로필 이미지변경 -->
+	<update id="changeBackImage" parameterType="String">
+    	UPDATE profile SET background_img=#{savePath} WHERE id=#{myId}
+    </update>
+	
+	
+	<!-- 비밀번호 변경 -->
+	<update id="changeInfoPassword" parameterType="String">
+		UPDATE member SET password=#{secPass} WHERE id=#{myId}
+	</update>
+	
+	
+	     
 </mapper>

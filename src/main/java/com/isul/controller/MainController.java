@@ -1,10 +1,15 @@
 package com.isul.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isul.dto.ChatListDTO;
@@ -20,13 +26,20 @@ import com.isul.dto.MemberDTO;
 import com.isul.dto.ProfileDTO;
 import com.isul.member.MemberService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
 @RequestMapping("/main/")
+@RequiredArgsConstructor
 public class MainController {
 
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	@Autowired
 	public MemberService memberService;
 
+	
+	
 	@RequestMapping("/")
 	public String check(ProfileDTO profileDTO, Model model, HttpSession session) {
 		System.out.println("메인");
@@ -123,11 +136,15 @@ public class MainController {
 	}
 	
 	@PostMapping("/searchMember")
-	public String searchAddMemberAction(@RequestParam(value="condition", defaultValue="") String condition,
+	public String searchAddMemberAction(@RequestParam(value="condition", defaultValue="") String searchCondition,
 			@RequestParam(value="keyword", defaultValue="") String keyword, HttpSession session, Model model) {
 			String myId = (String)session.getAttribute("loginId");
-			FindMemberDTO member = memberService.searchAddMember(myId, condition, keyword);
+			FindMemberDTO member = memberService.searchAddMember(myId, searchCondition, keyword);
 			String ms = null;
+			
+			
+			System.out.println("myid : " + myId+"---condition : "+ searchCondition+"---keyword: "+keyword);
+			
 			if (member == null) {
 				ms = "일치하는 사용자가 없습니다.";
 			}
@@ -136,6 +153,7 @@ public class MainController {
 			model.addAttribute("memberList", memberList);
 			model.addAttribute("ms", ms);
 			model.addAttribute("member",member);
+			System.out.println(member);
 			return "main/searchMember";
 		
 	}
@@ -179,7 +197,68 @@ public class MainController {
 			return "main/main";
 	}
 	
+	@GetMapping("/changeNickName")
+	public String changeNickName(@RequestParam(value="nickName", defaultValue="") String nickName,
+			HttpSession session) {
+		String myId = (String)session.getAttribute("loginId");
+		memberService.changeNickName(nickName, myId);
+		return "main/profile";
+	}
 	
+	@GetMapping("/changeStatusMessage")
+	public String changeStatusMessage(@RequestParam(value="statusMessage", defaultValue="") String statusMessage,
+			HttpSession session) {
+		String myId = (String)session.getAttribute("loginId");
+		memberService.changeStatusMessage(statusMessage, myId);
+		return "main/main";
+	}
 	
+
+	// 프로필 이미지 업로드
+	@PostMapping("/profileImageUpload")
+	public String imageUpload(@RequestParam("file") MultipartFile file, HttpSession session) {
+
+		String myId = (String)session.getAttribute("loginId");
+		try {
+			String dbPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\profile";
+			byte[] bytes = file.getBytes();
+			String realPath = myId + "_" + file.getOriginalFilename();
+			String savePath = "/images/profile/" + myId + "_" + file.getOriginalFilename();
+			memberService.changeProfileImage(savePath, myId);
+			 Path path = Paths.get(dbPath, realPath);
+	         Files.write(path, bytes);
+		} catch (IOException e) {
+		
+			e.printStackTrace();
+		}
+		 return "redirect:/main/main";
+	}
 	
+	// 프로필 배경 이미지 업로드
+		@PostMapping("/backImageUpload")
+		public String backImageUpload(@RequestParam("file") MultipartFile file, HttpSession session) {
+
+			String myId = (String)session.getAttribute("loginId");
+			try {
+				String dbPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\background";
+				byte[] bytes = file.getBytes();
+				String realPath = myId + "_" + file.getOriginalFilename();
+				String savePath = "/images/background/" + myId + "_" + file.getOriginalFilename();
+				memberService.changeBackImage(savePath, myId);
+				 Path path = Paths.get(dbPath, realPath);
+		         Files.write(path, bytes);
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+			 return "redirect:/main/main";
+		}
+	
+		@PostMapping("/changeInfoPassword")
+		public String changeInfoPassword(@RequestParam(value="password", defaultValue="") String password, HttpSession session) {
+			String myId = (String)session.getAttribute("loginId");
+			String secPass = bCryptPasswordEncoder.encode(password);
+			memberService.changeInfoPassword(secPass, myId);
+			return "/main/searchMember";
+		}
 }

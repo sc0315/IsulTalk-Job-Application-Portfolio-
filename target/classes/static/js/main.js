@@ -410,13 +410,6 @@ function re_replyInsert(event){
 		createRoom();
 	}
 	
-	
-	
-	
-	
-	/*----------------채팅--*/
-	
-
 
 	function commonAjax(url, parameter, type, callbak, contentType){
 		$.ajax({
@@ -455,7 +448,7 @@ function wsEvt() {
 							"<tr>" +
 						    "<td></td>" +
 						    "<td class='myNick'>" +
-						    "<span>①</span>" +
+						    "<span> &nbsp; &nbsp; &nbsp;</span>" +
 						    "<span>" + rcv_data.chatProfile.nick_name + "</span>" +
 						    "</td>" +
 						    "<td rowspan='2'>" +
@@ -487,7 +480,7 @@ function wsEvt() {
 						"			</td>" +
 						"			<td class='yourNick'>" +
 						"				<span style='text-align:left'>" + rcv_data.chatProfile.nick_name + "</span>" +
-						"				<span>①</span> " +
+						"				<span> &nbsp; &nbsp; &nbsp;</span> " +
 						"			</td>" +
 						"			<td>" +
 						"			</td>" +
@@ -615,7 +608,14 @@ function addFriend() {
 		   		 }
 		});
 		alert("친구 신청을 보냈습니다.");
-		 location.reload();
+		 $.ajax({
+		    url : "searchMember",
+		    dataType : "html",
+		    type : "get",  
+		    success : function(result){
+		        $("#chat").html(result);
+		    }
+			});
 }
 
 
@@ -632,7 +632,14 @@ function addCancle() {
 		   		 }
 		});
 		alert("친구 신청을 취소했습니다.");
-		 location.reload();
+		 $.ajax({
+		    url : "searchMember",
+		    dataType : "html",
+		    type : "get",  
+		    success : function(result){
+		        $("#chat").html(result);
+		    }
+			});
 }
 
 
@@ -666,5 +673,43 @@ function friendReject() {
 		 location.reload();
 }
 
+
+
+/*정보변경 시작*/
+function changePassword() {
+	var password = document.getElementById("password").value;
+	var checkPassword = document.getElementById("pwdCheck").value;
+	var pwdregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,14}$/;
+	
+	console.log(password);
+	console.log(checkPassword);
+	
+	if (password != checkPassword) {
+	alert("비밀번호 불일치");
+	} else if (!pwdregex.test(password)) {
+        alert("비밀번호는 8~14자 영문 대문자, 소문자, 숫자를 각 1개 이상 포함해야 합니다.");
+        document.getElementById("password").focus();
+        return false;
+    } else {
+		$.ajax({	
+			    url : "/main/changeInfoPassword",
+			    dataType : "html",
+			    type : "post",
+			    data : {password, password},
+			    success : function(result){
+			        $("#chat").html(result);
+			   		 }
+			});
+			alert("비밀번호를 변경했습니다.");
+			$.ajax({
+		    url : "modifyMyInfo",
+		    dataType : "html",
+		    type : "get",  
+		    success : function(result){
+		        $("#chat").html(result);
+		    }
+			});
+	}
+}
 
 

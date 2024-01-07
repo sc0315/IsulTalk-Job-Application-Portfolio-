@@ -12,7 +12,7 @@
 		style="height: 855px; width: 550px; background-color: white; position: relative;">
 		<div id="chatHeader">
 		
-			<div class="dropdown">
+			 <div class="dropdown"><!--
 				<button onclick="toggleDropdown()">대화방 참가자</button>
 				<div id="dropdownContent" class="dropdown-content">
 
@@ -110,19 +110,19 @@
 					</a>
 				</div>
 			</div>
-			대화내용 검색 <input type="text" style="width: 300px;"> 
-		</div>
+			대화내용 검색 <input type="text" style="width: 300px;"> -->
+		</div> 
+	
 
 
-
-		<input type="hidden" id="sessionId" th:value="${memberId}">
+		<input type="hidden" id="sessionId" th:value="${session.loginId}">
 		<input type="hidden" id="roomNumber" th:value="${roomNumber}">
 		<div id="wrap" class="wrap">
 
 			<table style="width : inherit;">
 			
 				<tr th:each="messageList : ${messageList}">
-					<td th:if="${messageList.id} != ${memberId}">
+					<td th:if="${messageList.id} != ${session.loginId}">
 						<table class='yourMessageBox'>
 							<tr>
 								<td rowspan='2'>
@@ -132,7 +132,7 @@
 								</td>
 								<td class='yourNick'>
 								<span style='text-align: left' th:text='${messageList.nick_name}'>대화명</span>
-								<span>①</span></td>
+								<span>&nbsp;&nbsp;&nbsp;</span></td>
 								<td><input type="hidden" th:value='${messageList.id}'></td>
 							</tr>
 							<tr>
@@ -145,12 +145,12 @@
 							</tr>
 						</table>
 					</td>
-					<td th:if="${messageList.id} == ${memberId}">
+					<td th:if="${messageList.id} == ${session.loginId}">
 						<table class='myMessageBox'>
 							<tr>
 						    	<td><input type="hidden" th:value="${messageList.id}"></td>
 						    	<td class='myNick'>
-						    		<span>①</span>
+						    		<span>&nbsp;&nbsp;&nbsp;</span>
 						    		<span th:text="${messageList.nick_name}">대화명</span>
 						    	</td>
 						    	<td rowspan='2'>
