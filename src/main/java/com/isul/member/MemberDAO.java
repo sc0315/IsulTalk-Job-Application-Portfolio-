@@ -71,6 +71,14 @@ public interface MemberDAO {
 		// 상태메세지 변경
 		public void changeStatusMessage (String statusMessage, String myId);
 		
+		// 프로필 이미지 변경
+		public void changeProfileImage (String savePath, String myId);
+		
+		// 프로필 배경 변경
+		public void changeBackImage (String savePath, String myId);
+		
+		// 비밀번호 변경
+		public void changeInfoPassword (String secPass, String myId);
 		
 }
 

@@ -22,7 +22,7 @@ import com.isul.dto.MemberDTO;
 import com.isul.dto.ProfileDTO;
 import com.isul.member.MemberService;
 
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
+
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -40,12 +40,27 @@ public class MemberController {
 	@PostMapping("/login")
 	public String login(MemberDTO memberDTO, HttpSession session, HttpServletResponse response, Model model) throws IOException {
 		String loginId = null;
+		String usage = null;
 		int result = memberService.loginID(memberDTO);
-		System.out.println(result);
-		
+
 		if(result ==1) { // 1: id가 있음 로그인 성공
-			
 			loginId = memberDTO.getId();
+			MemberDTO memberUsage = memberService.getMember(loginId);
+			usage = memberUsage.getUsage();
+			System.out.println("---------------------------------------" + usage);
+			if (usage.equals("2")) {
+				// 한글로 출력
+				response.setCharacterEncoding("utf-8");
+				response.setContentType("text/html; charset=utf-8");
+				
+				PrintWriter out = response.getWriter();
+				out.println("<script> alert('탈퇴한 회원입니다.');");
+				out.println("history.go(-1); </script>");
+				out.close();
+				
+				return "index"; 
+			}
+			
 			MemberDTO loginMember = memberService.getMember(loginId);
 			String loginName = loginMember.getName();
 			ProfileDTO profile = memberService.getMyProfile(loginId);
@@ -68,7 +83,7 @@ public class MemberController {
 			out.println("history.go(-1); </script>");
 			out.close();
 			
-			return "main/main"; 
+			return "index"; 
 		}
 	}
 	

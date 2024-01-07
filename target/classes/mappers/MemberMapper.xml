@@ -170,5 +170,22 @@
     	UPDATE profile SET status_message=#{statusMessage} WHERE id=#{myId}
     </update>
 	
+	<!-- 프로필 이미지변경 -->
+	<update id="changeProfileImage" parameterType="String">
+    	UPDATE profile SET profile_img=#{savePath} WHERE id=#{myId}
+    </update>
+    
+    <!-- 프로필 이미지변경 -->
+	<update id="changeBackImage" parameterType="String">
+    	UPDATE profile SET background_img=#{savePath} WHERE id=#{myId}
+    </update>
+	
+	
+	<!-- 비밀번호 변경 -->
+	<update id="changeInfoPassword" parameterType="String">
+		UPDATE member SET password=#{secPass} WHERE id=#{myId}
+	</update>
+	
+	
 	     
 </mapper>

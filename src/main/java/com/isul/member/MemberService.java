@@ -155,4 +155,19 @@ public class MemberService {
 			memberDAO.changeStatusMessage(statusMessage, myId);
 		}
 		
+		// 프로필 이미지 변경
+		public void changeProfileImage (String savePath, String myId) {
+			memberDAO.changeProfileImage(savePath, myId);
+		}
+				
+		// 프로필 배경 변경
+		public void changeBackImage (String savePath, String myId) {
+			memberDAO.changeBackImage(savePath, myId);
+		}
+		
+		// 비밀번호 변경
+		public void changeInfoPassword (String secPass, String myId) {
+			memberDAO.changeInfoPassword(secPass, myId);
+		}
+		
 }	
