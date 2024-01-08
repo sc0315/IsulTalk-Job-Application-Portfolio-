@@ -5,253 +5,249 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <div class="modifyMyInfo" th:fragment="modifyMyInfo">
-	
-      <div class="infoWrap">
-      	
-      	 <h2>가입정보 변경</h2>
-      	
-	      
-	      	<!-- 비밀번호 변경 -->
-	      	<div class='infoSection'>
-		      <table>
-		      	<tr>
-		      		<td></td>
-		      		<td colspan='3' class="sectionTitle">
-		      		비밀번호
-		      		</td>
-		      		<td></td>
-		      	</tr>
-		      	<tr>
-		      		<td style='width : 10px;'></td>
-		      		<td class="imfInput">
-		      			<img src="/images/join/password.png" width="35" height="35">
-		      		</td>
-		      		<td class="imfInput" style='width : 300px;'>
-		      			<input type="password" class="infoModifyForm" name="password" id="password" placeholder="비밀번호" autocomplete="off">
-		      			<input type="hidden" name="dbPassword" id="dbPassword" th:value="${loginMember.password}">
-		      		</td>
-		      		<td class="imfInput" style='width : 135px;'>
-		      		
-		      		</td>
-		      		<td style='width : 10px;'></td>
-		      	</tr>
-		      	<tr>
-		      		<td style='width : 10px;'></td>
-		      		<td class="imfInput">
-		      			<img src="/images/join/passwordcf.png" width="35" height="35">
-		      		</td>
-		      		<td class="imfInput">
-		      			<input type="password" id="pwdCheck" class="infoModifyForm" placeholder="비밀번호 확인" autocomplete="off">
-		      		</td>
-		      		<td class="imfInput">
-		      			<button type="button" id="changePassword" class="buttonM" onClick="changePassword()">
-			        	 변경
-			      		</button>
-			      		
-		      		</td>
-		      		<td style='width : 10px;'></td>
-		      	</tr>
-		      	<tr>
-		      		<td style='height : 5px;'></td>
-		      		<td colspan='3'></td>
-		      		<td></td>
-		      	</tr>
-		      </table>
-		     </div> 	
-		      	
-		      	
-		      	<!-- 이메일 변경 -->
-		    <div class='infoSection'> 	
-		      <table>
-		      	<tr>
-		      		<td></td>
-		      		<td colspan='3' class="sectionTitle">
-		      		이메일
-		      		</td>
-		      		<td></td>
-		      	</tr>
-		      	<tr>
-		      		<td style='width : 10px;'></td>
-		      		<td class="imfInput">
-		      			<img src="/images/join/email.png" width="35" height="35">
-		      		</td>
-		      		<td class="imfInput" style='width : 300px;'>
-		      			<input type="email" class="infoModifyForm" id="email" name="email" th:placeholder="${loginMember.email}">
-		      		</td>
-		      		<td class="imfInput" style='width : 135px;'>
-		      			<input type="hidden" id="authorizationKey" name="authorizationKey" value="11">
-			     		<button type="button" class="buttonM" id="sendEmail" onClick="#">
-			        	 메일전송
-			      		</button>
-		      		</td>
-		      		<td style='width : 10px;'></td>
-		      	</tr>
-		      	<tr>
-		      		<td style='width : 10px;'></td>
-		      		<td class="imfInput">
-		      			<img src="/images/join/emailkey.png" width="35" height="35">
-		      		</td>
-		      		<td class="imfInput">
-		      			 <input type="text" class="infoModifyForm" id=emailCheck placeholder="인증번호">
-		      		</td>
-		      		<td class="imfInput">
-		      			<button type="button" class="buttonM" id="sendEmail" onClick="#">
-			        	 변경
-			      		</button>
-		      		</td>
-		      		<td style='width : 10px;'></td>
-		      	</tr>
-		      	<tr>
-		      		<td style='height : 5px;'></td>
-		      		<td colspan='3' class="sectionTitle"></td>
-		      		<td></td>
-		      	</tr>
-		      </table>	
-		   </div>   	
-		      	
-		      	
-		      	<!-- 전화번호 변경 -->
-		   <div class='infoSection'> 	
-		      <table>
-		      	<tr>
-		      		<td style='width : 10px;'>
-		      		
-		      		</td>
-		      		<td colspan='3' class="sectionTitle">
-		      		전화번호
-		      		</td>
-		      		<td style='width : 10px;'>
-		      		
-		      		</td>
-		      	</tr>
-		      	<tr>
-		      		<td style='width : 10px;'>
-		      		
-		      		</td>
-		      		<td class="imfInput">
-		      			<img src="/images/join/phone.png" width="35" height="35">
-		      		</td>
-		      		<td class="imfInput" style='width : 300px;'>
-		      			<input type="tel" class="infoModifyForm" id="phone" name="phone" th:placeholder="${loginMember.phone + ' 번호만 입력'}">
-		      		</td>
-		      		<td class="imfInput" style='width : 135px;'>
-		      			<input type="hidden" id="phoneAuthorizationKey" name="phoneAuthorizationKey" value="11">
-					    <button type="button" class="buttonM" id="sendSMS" onClick="#">
-					         문자전송
-					    </button>
-		      		</td>
-		      		<td style='width : 10px;'>
-		      		
-		      		</td>
-		      	</tr>
-		      	<tr>
-		      		<td style='width : 10px;'>
-		      		
-		      		</td>
-		      		<td class="imfInput">
-		      			<img src="/images/join/phonecf.png" width="35" height="35">
-		      		</td>
-		      		<td class="imfInput" style='width : 300px;'>
-		      			 <input type="text" class="infoModifyForm" id="phoneCheck" placeholder="문자 인증번호">
-		      		</td>
-		      		<td class="imfInput">
-		      			<button type="button" class="buttonM" id="sendEmail" onClick="#">
-			        	 변경
-			      		</button>
-		      		</td>
-		      		<td style='width : 10px;'>
-		      		
-		      		</td>
-		      	</tr>
-		      	<tr>
-		      		<td style='height : 5px;'></td>
-		      		<td colspan='3'></td>
-		      		<td></td>
-		      	</tr>
-		      </table>	
-		    </div>    	
-		      	
-		      	
-		      	
-		      		<!-- 주소 변경 -->
-		   <div class='infoSection'>   		
-		      <table>		
-		      	<tr>
-		      		<td style='width : 10px;'>
-		      		
-		      		</td>
-		      		<td colspan='3' class="sectionTitle">
-		      		주소
-		      		</td>
-		      		<td style='width : 10px;'>
-		      		
-		      		</td>
-		      	</tr>
-		      	<tr>
-		      		<td style='width : 10px;'>
-		      		
-		      		</td>
-		      		<td class="imfInput">
-		      			<img src="/images/join/address.png" width="35" height="35">
-		      		</td>
-		      		<td class="imfInput" style='width : 300px;'>
-		      			 <input type="text" class="infoModifyForm" id="zipCode" name="zipCode" th:placeholder="${loginMember.zipCode}" readonly>
-		      		</td>
-		      		<td class="imfInput" style='width : 135px;'>
-		      			<input type="button" class="buttonM" id="searchAddress" onclick="#" value="주소검색">
-		      		</td>
-		      		<td style='width : 10px;'>
-		      		
-		      		</td>
-		      	</tr>
-		      	<tr>
-		      		<td style='width : 10px;'>
-		      		
-		      		</td>
-		      
-		      		<td class="imfInput" colspan='3'>
-		      			  <input type="text" class="infoModifyForm" id="address1" name="address1" th:placeholder="${loginMember.address1}" readonly style="width:475px;">
-		      		</td>
-		      		<td style='width : 10px;'>
-		      		
-		      		</td>
-		      	</tr>
-		      	<tr>
-		      		<td style='width : 10px;'>
-		      		
-		      		</td>
-		      		
-		      		<td class="imfInput" colspan='2'>
-		      			<input type="text"  class="infoModifyForm" id="address2" name="address2" th:placeholder="${loginMember.address2}" style="width:380px;">
-			         	<input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
-		      		</td>
-		      		<td class="imfInput">
-		      			<input type="hidden" id="phoneAuthorizationKey" name="phoneAuthorizationKey" value="11">
-					    <button type="button" class="buttonM" id="sendSMS" onClick="#">
-					         변경
-					    </button>
-		      		</td>
-		      		<td style='width : 10px;'>
-		      		
-		      		</td>
-		      	</tr>
-		      	<tr>
-		      		<td style='height : 5px;'></td>
-		      		<td colspan='3'></td>
-		      		<td></td>
-		      	</tr>
-		      </table>	
-      		</div>
-      	  <!--  확인 -->
-	      <button type="submit" id="signOk" onClick="return join()" class="buttonM"> 회원 탈퇴 </button>
-      </div>
-      
-      
+	<div class="modifyMyInfo" th:fragment="modifyMyInfo">
 
-	    
-      
-      
-   </div>
+		<div class="infoWrap">
+			<h2>가입정보 변경</h2>
+
+			<!-- 비밀번호 변경 -->
+			<div class='infoSection'>
+				<table>
+					<tr>
+						<td></td>
+						<td colspan='3' class="sectionTitle">비밀번호</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td style='width: 10px;'></td>
+						<td class="imfInput"><img src="/images/join/password.png"
+							width="35" height="35"></td>
+						<td class="imfInput" style='width: 300px;'><input
+							type="password" class="infoModifyForm" name="password"
+							id="password" placeholder="비밀번호" autocomplete="off"> <input
+							type="hidden" name="dbPassword" id="dbPassword"
+							th:value="${loginMember.password}"></td>
+						<td class="imfInput" style='width: 135px;'></td>
+						<td style='width: 10px;'></td>
+					</tr>
+					<tr>
+						<td style='width: 10px;'></td>
+						<td class="imfInput"><img src="/images/join/passwordcf.png"
+							width="35" height="35"></td>
+						<td class="imfInput"><input type="password" id="pwdCheck"
+							class="infoModifyForm" placeholder="비밀번호 확인" autocomplete="off">
+						</td>
+						<td class="imfInput">
+							<button type="button" id="changePassword" class="buttonM"
+								onClick="changePassword()">변경</button>
+
+						</td>
+						<td style='width: 10px;'></td>
+					</tr>
+					<tr>
+						<td style='height: 5px;'></td>
+						<td colspan='3'></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+
+
+			<!-- 이메일 변경 -->
+			<div class='infoSection'>
+				<table>
+					<tr>
+						<td></td>
+						<td colspan='3' class="sectionTitle">이메일</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td style='width: 10px;'></td>
+						<td class="imfInput"><img src="/images/join/email.png"
+							width="35" height="35"></td>
+						<td class="imfInput" style='width: 300px;'><input
+							type="email" class="infoModifyForm" id="email" name="email"
+							th:placeholder="${loginMember.email}"></td>
+						<td class="imfInput" style='width: 135px;'><input
+							type="hidden" id="authorizationKey" name="authorizationKey"
+							value="11">
+							<button type="button" class="buttonM" id="sendEmail" onClick="#">
+								메일전송</button></td>
+						<td style='width: 10px;'></td>
+					</tr>
+					<tr>
+						<td style='width: 10px;'></td>
+						<td class="imfInput"><img src="/images/join/emailkey.png"
+							width="35" height="35"></td>
+						<td class="imfInput"><input type="text"
+							class="infoModifyForm" id=emailCheck placeholder="인증번호">
+						</td>
+						<td class="imfInput">
+							<button type="button" class="buttonM" id="sendEmail" onClick="#">
+								변경</button>
+						</td>
+						<td style='width: 10px;'></td>
+					</tr>
+					<tr>
+						<td style='height: 5px;'></td>
+						<td colspan='3' class="sectionTitle"></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+
+
+			<!-- 전화번호 변경 -->
+			<div class='infoSection'>
+				<table>
+					<tr>
+						<td style='width: 10px;'></td>
+						<td colspan='3' class="sectionTitle">전화번호</td>
+						<td style='width: 10px;'></td>
+					</tr>
+					<tr>
+						<td style='width: 10px;'></td>
+						<td class="imfInput"><img src="/images/join/phone.png"
+							width="35" height="35"></td>
+						<td class="imfInput" style='width: 300px;'><input type="tel"
+							class="infoModifyForm" id="phone" name="phone"
+							th:placeholder="${loginMember.phone + ' 번호만 입력'}"></td>
+						<td class="imfInput" style='width: 135px;'><input
+							type="hidden" id="phoneAuthorizationKey"
+							name="phoneAuthorizationKey" value="11">
+							<button type="button" class="buttonM" id="sendSMS" onClick="#">
+								문자전송</button></td>
+						<td style='width: 10px;'></td>
+					</tr>
+					<tr>
+						<td style='width: 10px;'></td>
+						<td class="imfInput"><img src="/images/join/phonecf.png"
+							width="35" height="35"></td>
+						<td class="imfInput" style='width: 300px;'><input type="text"
+							class="infoModifyForm" id="phoneCheck" placeholder="문자 인증번호">
+						</td>
+						<td class="imfInput">
+							<button type="button" class="buttonM" id="sendEmail" onClick="#">
+								변경</button>
+						</td>
+						<td style='width: 10px;'></td>
+					</tr>
+					<tr>
+						<td style='height: 5px;'></td>
+						<td colspan='3'></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+
+
+
+			<!-- 주소 변경 -->
+			<div class='infoSection'>
+				<table>
+					<tr>
+						<td style='width: 10px;'></td>
+						<td colspan='3' class="sectionTitle">주소</td>
+						<td style='width: 10px;'></td>
+					</tr>
+					<tr>
+						<td style='width: 10px;'></td>
+						<td class="imfInput"><img src="/images/join/address.png"
+							width="35" height="35"></td>
+						<td class="imfInput" style='width: 300px;'><input type="text"
+							class="infoModifyForm" id="zipCode" name="zipCode"
+							th:placeholder="${loginMember.zipCode}" readonly></td>
+						<td class="imfInput" style='width: 135px;'><input
+							type="button" class="buttonM" id="searchAddress" onclick="#"
+							value="주소검색"></td>
+						<td style='width: 10px;'></td>
+					</tr>
+					<tr>
+						<td style='width: 10px;'></td>
+
+						<td class="imfInput" colspan='3'><input type="text"
+							class="infoModifyForm" id="address1" name="address1"
+							th:placeholder="${loginMember.address1}" readonly
+							style="width: 475px;"></td>
+						<td style='width: 10px;'></td>
+					</tr>
+					<tr>
+						<td style='width: 10px;'></td>
+
+						<td class="imfInput" colspan='2'><input type="text"
+							class="infoModifyForm" id="address2" name="address2"
+							th:placeholder="${loginMember.address2}" style="width: 380px;">
+							<input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
+						</td>
+						<td class="imfInput"><input type="hidden"
+							id="phoneAuthorizationKey" name="phoneAuthorizationKey"
+							value="11">
+							<button type="button" class="buttonM" id="sendSMS" onClick="#">
+								변경</button></td>
+						<td style='width: 10px;'></td>
+					</tr>
+					<tr>
+						<td style='height: 5px;'></td>
+						<td colspan='3'></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+			
+			
+			<!-- 회원탈퇴 -->
+			<button type="button" id="openDeleteMember"
+				class="openDeleteMember buttonM">회원 탈퇴</button>
+			<div class="modalDeleteMember hidden">
+				<input id="actionDeleteMember" type="text" placeholder="'지금탈퇴'를 입력해주세요"> &nbsp;
+				<input class="actionDeleteMember bbtn" type="button" value="확인">&nbsp;
+				<input class="closeDeleteMember bbtn" type="button" value="취소">
+			</div>
+			<script>
+					const openDeleteMember = document.querySelector('.openDeleteMember');
+					const closeDeleteMember = document.querySelector('.closeDeleteMember');
+					const modalDeleteMember = document.querySelector('.modalDeleteMember');
+					const actionDeleteMember = document.querySelector('.actionDeleteMember');
+
+					openDeleteMember.addEventListener('click', vDeleteMember);
+					closeDeleteMember.addEventListener('click', hDeleteMember);
+					actionDeleteMember.addEventListener('click', aDeleteMember);
+					
+					function aDeleteMember() {
+						var deleteCheck = document.getElementById("actionDeleteMember").value;
+						if (deleteCheck==='지금탈퇴') {
+							$.ajax({	
+								url : "/main/deleteMember",
+								dataType : "html",
+								type : "get",
+								success : function(){
+									}
+								});
+								alert("회원탈퇴 완료.");
+								  location.href = "/logout";
+						} else {
+							alert("'지금탈퇴'를 정확히 입력해 주세요.");
+						}
+						
+							
+					}
+					function vDeleteMember() {
+						modalDeleteMember.classList.remove('hidden');
+						modalDeleteMember.classList.add('visible');
+					}
+					function hDeleteMember() {
+						modalDeleteMember.classList.remove('visible');
+						modalDeleteMember.classList.add('hidden');
+					}
+					</script>
+
+		</div>
+
+
+
+
+
+
+	</div>
 </body>
 </html>

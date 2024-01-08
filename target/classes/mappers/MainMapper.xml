@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.isul.main.MainDAO">
+		
+	<!-- 로그인멤버 프로필 -->
+	<select id="getMyProfile" resultType="com.isul.dto.ProfileDTO">
+		SELECT * FROM profile WHERE id=#{id}
+	</select>
+	
+	<!-- 서로 친구 프로필목록 -->
+	<select id="getFriendList" resultType="com.isul.dto.ProfileDTO">
+		SELECT * FROM profile WHERE 
+		id IN
+		(SELECT friend_id FROM friend WHERE id=#{id} AND friend_approval=1) OR 
+		id IN 
+		(SELECT id FROM friend WHERE friend_id=#{id} AND friend_approval=1)
+	</select>
+	
+	<!-- 나를 추가한 친구 프로필목록 -->
+	<select id="getAddedMeList" resultType="com.isul.dto.ProfileDTO">
+		SELECT * FROM profile WHERE id IN (SELECT friend_id FROM friend WHERE id=#{id} AND friend_approval=0)
+	</select>
+	
+	<!-- 참가중인 방번호에 참가자한 멤버 프로필 + 마지막 메시지 -->
+	<select id="roomMemberAndProfile" resultType="com.isul.dto.ChatListDTO">
+		WITH lastMessage AS (
+    							SELECT c.room_number, c.id, p.profile_img, p.background_img, p.nick_name,
+        							p.status_message, m.message, m.message_check, m.message_createdate, 
+        							ROW_NUMBER() OVER (PARTITION BY c.id ORDER BY m.message_createdate DESC) AS lm
+   								FROM chat_member c LEFT JOIN profile p ON c.id = p.id LEFT JOIN chat_message m ON c.room_number = m.room_number
+    							WHERE c.room_number IN (SELECT room_number FROM chat_member WHERE id = #{id})
+    							AND c.id NOT IN (#{id}) AND m.id NOT IN (#{id})
+								)
+		SELECT room_number, id, profile_img, background_img, nick_name, status_message, message, message_check, message_createdate
+		  FROM lastMessage WHERE lm = 1 ORDER BY message_createdate DESC
+	</select>
+	
+	
+	
+	<!-- 추가할 친구목록 검색 하기-->
+	<select id="searchAddMember" resultType="com.isul.dto.FindMemberDTO">
+			SELECT m.id, m.name, m.phone, m.email, p.profile_img
+			FROM member m JOIN profile p ON m.id = p.id  WHERE m.id IN (SELECT id FROM 
+			(SELECT id AS id FROM friend WHERE NOT id=#{myId} AND NOT friend_id=#{myId} GROUP BY id
+			UNION
+			SELECT friend_id AS id FROM friend WHERE NOT id=#{myId} AND NOT friend_id=#{myId} GROUP BY friend_id) WHERE NOT id IN (SELECT friend_id AS id FROM friend WHERE id=#{myId}
+			UNION
+			SELECT id AS id FROM friend WHERE friend_id=#{myId}) AND ${searchCondition}=#{keyword})
+	
+	</select>
+	
+	<!-- 검색된 친구 추가 -->
+	<insert id="searchMemberAdd" parameterType="String">
+	INSERT INTO friend(id, friend_id, friend_approval, friend_block)
+            VALUES(#{yourId}, #{myId}, '0', '1')
+    </insert>
+            
+		<!-- 내가 추가한 친구 프로필목록 -->
+	<select id="getAddedFriendList" resultType="com.isul.dto.FindMemberDTO">
+		SELECT m.id, m.name, m.phone, m.email, p.profile_img
+			FROM member m JOIN profile p ON m.id = p.id  WHERE m.id IN (SELECT id FROM friend WHERE friend_id=#{myId} AND friend_approval=0)
+	</select>            
+            
+    <!-- 새로 추가한 친구 취소, 거절 -->
+    <select id="addCancle" parameterType="String">
+    	DELETE FROM friend WHERE id=#{yourId} AND friend_id=#{myId}
+    </select>    
+    
+    <!-- 나를 추가한 친구 수락 -->
+    <update id="friendAccept" parameterType="String">
+    	UPDATE friend SET friend_approval ='1' WHERE id=#{myId} AND friend_id=#{yourId}
+    </update>
+    
+    <!-- 대화명 변경 -->
+    <update id="changeNickName" parameterType="String">
+    	UPDATE profile SET nick_name=#{nickName} WHERE id=#{myId}
+    </update>
+	
+	<!-- 상태메세지 변경 -->
+    <update id="changeStatusMessage" parameterType="String">
+    	UPDATE profile SET status_message=#{statusMessage} WHERE id=#{myId}
+    </update>
+	
+	<!-- 프로필 이미지변경 -->
+	<update id="changeProfileImage" parameterType="String">
+    	UPDATE profile SET profile_img=#{savePath} WHERE id=#{myId}
+    </update>
+    
+    <!-- 프로필 이미지변경 -->
+	<update id="changeBackImage" parameterType="String">
+    	UPDATE profile SET background_img=#{savePath} WHERE id=#{myId}
+    </update>
+	
+	
+	<!-- 비밀번호 변경 -->
+	<update id="changeInfoPassword" parameterType="String">
+		UPDATE member SET password=#{secPass} WHERE id=#{myId}
+	</update>
+	
+	<!--  회원 탈퇴 -->     
+	<update id="deleteMember" parameterType="String">
+		UPDATE member SET usage=2 WHERE id=#{myId}
+	</update>     
+	     
+</mapper>

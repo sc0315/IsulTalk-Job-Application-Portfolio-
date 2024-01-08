@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+
+/* 게시판 */
+.csboard {
+	position: absolute;
+	top: 50px;
+	width: 550px;
+}
+.table-sriped {
+	border-bottom: 1px solid #adadad;
+	width: 550px;
+}
+h3 {
+	margin: 35px 25px 15px 0px;
+    border-bottom: 1px solid #DFDFE0;
+    padding-bottom: 20px;
+    width: 550px;
+    text-align: center;
+}
+
+/* 글등록 */
+.insertBoard, .updateBoard, .getBoard {
+	position: absolute;
+	top: 50px;
+	width: 550px;
+}
+
+.table-sriped th{
+	width:100px;
+}
+
+.currentPage:link,visited{
+    background-color: lightgrey;;
+    padding-left: 4px;
+}
+
+.currentPage:hover,active {
+	color:red;
+	text-decoration: none;
+}
+
+.table-sriped thead{
+	background-color:lightgrey;
+}
+.table-sriped1 td{
+	padding-left:10px;
+}
+
+.getBoardUpdate input{
+	height: 36px; 
+	font-size: small;
+	float: right;
+}
+
+.reply{
+	border-bottom: 1px solid #eee;
+}
+.reply_count{
+	margin-bottom: 5px;
+}
+.reply_box{
+	border-top: 2px solid #3b4890;
+	font-size: small;
+}
+.reply_box ul, li{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+.reply_info{
+	border-top: 1px solid #eee;
+	padding: 9px 12px 7px;
+}
+.reply_nickBox{
+    float: left;
+    width: 132px;
+    margin-right: 33px;
+    margin-top: 3px;
+    line-height: 13px
+}
+.reply_time{
+	float: right;
+	font-size: xx-small;
+}
+.reply_writeForm{
+	padding: 10px 10px 10px 0px;
+	width:1300px;
+	height:30px;
+}
+.reply_writeForm textarea{
+	width:540px;
+	height:30px;
+}
+.reply_write, .re_reply_write button{
+	float:right; 
+
+}
+.font_red{
+	color:red;
+}
+.boardList_reply_count{
+	margin-left:5px;
+	color:red;
+}
+.reply_delete, .re_replyForm{
+	width: 15px;
+    height: 20px;
+    margin-left: 5px;
+    border: 1px solid black;
+    padding: 1px 5px 3px 4px;
+  
+   background: #e86479;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+.re_reply_writeForm{
+	width:550px;
+	height:30px;
+}
+.re_reply_writeForm textarea {
+    width: 520px;
+    height: 20px;
+}
+.reply_info{
+    padding: 9px 3px 10px 5px;
+}
+
+.replay_wrap{
+	margin-top: 15px;
+}
+/* .reply2{
+	display:none;
+} */

@@ -9,183 +9,53 @@
 		SELECT * FROM profile WHERE id=#{id}
 	</select>
 	
+	<!-- 멤버 가입정보 -->
 	<select id="getMember" resultType="com.isul.dto.MemberDTO">
 		SELECT * FROM member WHERE id=#{id}
 	</select>
 
-
+	<!-- 이메일 아이디로 검색 -->
 	<select id="getMemberByIdEmail" resultType="com.isul.dto.MemberDTO">
 		SELECT * FROM member WHERE id=#{id} AND email=#{email}
 	</select>
 
-
+	<!-- 이름 전화번호로 검색 -->
 	<select id="getMemberByNamePhone" resultType="com.isul.dto.MemberDTO">
 		SELECT id FROM member WHERE name=#{name} AND phone=#{phone}
 	</select>
-
-
+	
+	<!-- 모든 회원 정보 -->
 	<select id="getMemberList" resultType="com.isul.dto.MemberDTO">
 		SELECT * FROM member
 	</select>
 
-
+	<!--  회원 가입 -->
 	<select id="insertMember" parameterType="com.isul.dto.MemberDTO">
 		INSERT ALL
 		INTO member (id, password, name, phone, email, zipCode, address1, address2, usage, contract, createDate)
 		VALUES (#{id}, #{password}, #{name}, #{phone}, #{email}, #{zipCode}, #{address1}, #{address2},'1','1',sysdate)
 		INTO profile(id, profile_img, background_img, status_message, nick_name)
-        VALUES (#{id}, '/images/profile/noimage.png','/images/background/noimage.jpg', ' ', ' ')
+        VALUES (#{id}, '/images/profile/noimage.png','/images/background/noimage.jpg', '상태 메세지가 없습니다.', ' ')
         SELECT * FROM DUAL
 	</select>
 
-
+	<!-- 아이디 중복확인 -->
 	<select id="idCheck" resultType="Integer">
 		SELECT COUNT(*) FROM member WHERE id = #{id}
 	</select>
 
-
+	<!-- 아이디로 비밀번호 불러오기 -->
 	<select id="confirmID" resultType="String" parameterType="com.isul.dto.MemberDTO">
 		SELECT password FROM member WHERE id=#{id}
 	</select>
 
-
+	<!-- 비밀번호 변경 -->
 	<update id="changePassword" parameterType="com.isul.dto.MemberDTO">
 		UPDATE member SET password=#{password} WHERE id=#{id} AND email=#{email}
 	</update>
 
-	<!-- 서로 친구 프로필목록 -->
-	<select id="getFriendList" resultType="com.isul.dto.ProfileDTO">
-		SELECT * FROM profile WHERE 
-		id IN
-		(SELECT friend_id FROM friend WHERE id=#{id} AND friend_approval=1) OR 
-		id IN 
-		(SELECT id FROM friend WHERE friend_id=#{id} AND friend_approval=1)
-	</select>
-	
-	<!-- 나를 추가한 친구 프로필목록 -->
-	<select id="getAddedMeList" resultType="com.isul.dto.ProfileDTO">
-		SELECT * FROM profile WHERE id IN (SELECT friend_id FROM friend WHERE id=#{id} AND friend_approval=0)
-	</select>
-	
-	<!-- 참가중인 방번호에 참가자한 멤버 프로필 + 마지막 메시지 -->
-	<select id="roomMemberAndProfile" resultType="com.isul.dto.ChatListDTO">
-		WITH lastMessage AS (
-    							SELECT c.room_number, c.id, p.profile_img, p.background_img, p.nick_name,
-        							p.status_message, m.message, m.message_check, m.message_createdate, 
-        							ROW_NUMBER() OVER (PARTITION BY c.id ORDER BY m.message_createdate DESC) AS lm
-   								FROM chat_member c LEFT JOIN profile p ON c.id = p.id LEFT JOIN chat_message m ON c.room_number = m.room_number
-    							WHERE c.room_number IN (SELECT room_number FROM chat_member WHERE id = #{id})
-    							AND c.id NOT IN (#{id}) AND m.id NOT IN (#{id})
-								)
-		SELECT room_number, id, profile_img, background_img, nick_name, status_message, message, message_check, message_createdate
-		  FROM lastMessage WHERE lm = 1 ORDER BY message_createdate DESC
-	</select>
-	
-	<!-- 이전 채팅 불러오기  -->
-	<select id="getChatMessage" resultType="com.isul.dto.ChatMessageDTO">
-	<![CDATA[
-		SELECT room_number, message, id, message_check, message_createdate, profile_img, nick_name
-		FROM (
-		    SELECT cm.room_number, cm.message, cm.id, cm.message_check, cm.message_createdate,
-		        p.profile_img, p.nick_name,
-		        ROW_NUMBER() OVER (ORDER BY cm.message_createdate) AS rnum
-		    FROM chat_message cm
-		    JOIN profile p ON cm.id = p.id
-		    WHERE cm.room_number = #{roomNumber}
-		)
-		WHERE rnum >= 3
-		]]>
-	</select>
-	
-	<!--  보낸 메세지 데이터 저장 -->
-	<insert id="insertChatMessage" parameterType="com.isul.dto.ChatMessageDTO">
-		INSERT INTO chat_message(room_number, message, id, message_check, message_createdate)
-		VALUES (#{room_number}, #{message}, #{id}, '1', sysdate)
-	</insert>
-	
-	<!-- 1:1대화방 조회 -->
-	<select id="findChatRoom" parameterType="String">
-		SELECT r.room_number FROM chat_room r JOIN chat_member m ON r.room_number = m.room_number WHERE r.room_number 
-	IN (SELECT r.room_number FROM chat_room r JOIN chat_member m ON r.room_number = m.room_number WHERE m.id=#{myId})  AND id IN (#{yourId})
 
-	</select>
-	
-	<!-- 1:1대화방 생성 -->
-	<insert id="createChatRoom" parameterType="String">
-		INSERT ALL
-			INTO chat_room(room_number, room_createdate)
-				VALUES(room_seq.NEXTVAL, sysdate)
-			INTO chat_member(room_number, id)
-				VALUES((SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME='ROOM_SEQ'), #{myId})
-			INTO chat_member(room_number, id)
-				VALUES((SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME='ROOM_SEQ'), #{yourId})
-			INTO chat_message(room_number, message, id, message_check, message_createdate)
-				VALUES ((SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME='ROOM_SEQ'), '상대가 대화방에 초대했습니다.', #{myId}, '1', sysdate)
-			INTO chat_message(room_number, message, id, message_check, message_createdate)
-				VALUES ((SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME='ROOM_SEQ'), '상대를 대화방에 초대했습니다.', #{yourId}, '1', sysdate)
-		SELECT * FROM DUAL
-	</insert>
-	
-	<!-- 추가할 친구목록 검색 하기-->
-	<select id="searchAddMember" resultType="com.isul.dto.FindMemberDTO">
-			SELECT m.id, m.name, m.phone, m.email, p.profile_img
-			FROM member m JOIN profile p ON m.id = p.id  WHERE m.id IN (SELECT id FROM 
-			(SELECT id AS id FROM friend WHERE NOT id=#{myId} AND NOT friend_id=#{myId} GROUP BY id
-			UNION
-			SELECT friend_id AS id FROM friend WHERE NOT id=#{myId} AND NOT friend_id=#{myId} GROUP BY friend_id) WHERE NOT id IN (SELECT friend_id AS id FROM friend WHERE id=#{myId}
-			UNION
-			SELECT id AS id FROM friend WHERE friend_id=#{myId}) AND ${searchCondition}=#{keyword})
-	
-	</select>
-	
-	<!-- 검색된 친구 추가 -->
-	<insert id="searchMemberAdd" parameterType="String">
-	INSERT INTO friend(id, friend_id, friend_approval, friend_block)
-            VALUES(#{yourId}, #{myId}, '0', '1')
-    </insert>
-            
-		<!-- 내가 추가한 친구 프로필목록 -->
-	<select id="getAddedFriendList" resultType="com.isul.dto.FindMemberDTO">
-		SELECT m.id, m.name, m.phone, m.email, p.profile_img
-			FROM member m JOIN profile p ON m.id = p.id  WHERE m.id IN (SELECT id FROM friend WHERE friend_id=#{myId} AND friend_approval=0)
-	</select>            
-            
-    <!-- 새로 추가한 친구 취소, 거절 -->
-    <select id="addCancle" parameterType="String">
-    	DELETE FROM friend WHERE id=#{yourId} AND friend_id=#{myId}
-    </select>    
-    
-    <!-- 나를 추가한 친구 수락 -->
-    <update id="friendAccept" parameterType="String">
-    	UPDATE friend SET friend_approval ='1' WHERE id=#{myId} AND friend_id=#{yourId}
-    </update>
-    
-    <!-- 대화명 변경 -->
-    <update id="changeNickName" parameterType="String">
-    	UPDATE profile SET nick_name=#{nickName} WHERE id=#{myId}
-    </update>
-	
-	<!-- 상태메세지 변경 -->
-    <update id="changeStatusMessage" parameterType="String">
-    	UPDATE profile SET status_message=#{statusMessage} WHERE id=#{myId}
-    </update>
-	
-	<!-- 프로필 이미지변경 -->
-	<update id="changeProfileImage" parameterType="String">
-    	UPDATE profile SET profile_img=#{savePath} WHERE id=#{myId}
-    </update>
-    
-    <!-- 프로필 이미지변경 -->
-	<update id="changeBackImage" parameterType="String">
-    	UPDATE profile SET background_img=#{savePath} WHERE id=#{myId}
-    </update>
-	
-	
-	<!-- 비밀번호 변경 -->
-	<update id="changeInfoPassword" parameterType="String">
-		UPDATE member SET password=#{secPass} WHERE id=#{myId}
-	</update>
-	
+
 	
 	     
 </mapper>

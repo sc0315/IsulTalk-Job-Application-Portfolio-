@@ -1,6 +1,5 @@
 package com.isul.controller;
 
-
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -23,98 +22,89 @@ import com.isul.member.MemberService;
 
 @Controller
 public class EmailController {
-	
+
 	@Autowired
 	private MemberService memberService;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	//----- 회원가입용 이메일 발송 --------------------------------------------------------
-		@PostMapping(value = "/emailAuth")
-		public String emailAuth(@RequestParam(value="email") String email,
-								@RequestParam(value="authorizationKey") String authorizationKey) {
-			 final String username = "rlatkdcjf86@naver.com";
-		     final String password = "Da357159";
-		        // SMTP 서버 설정
-		        Properties props = new Properties();
-		        props.put("mail.smtp.auth", "true");
-		        props.put("mail.smtp.starttls.enable", "true");
-		        props.put("mail.smtp.host", "smtp.naver.com");
-		        props.put("mail.smtp.port", "587");
+	// ----- 회원가입용 이메일 발송 --------------------------------------------------------
+	@PostMapping(value = "/emailAuth")
+	public String emailAuth(@RequestParam(value = "email") String email,
+			@RequestParam(value = "authorizationKey") String authorizationKey) {
+		final String username = "rlatkdcjf86@naver.com";
+		final String password = "Da357159";
+		// SMTP 서버 설정
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.naver.com");
+		props.put("mail.smtp.port", "587");
 
-		        // 세션 생성
-		        Session session = Session.getInstance(props, new Authenticator() {
-		            protected PasswordAuthentication getPasswordAuthentication() {
-		                return new PasswordAuthentication(username, password);
-		            }
-		        });
+		// 세션 생성
+		Session session = Session.getInstance(props, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
 
-		        try {
-		            // 메시지 생성
-		            Message message = new MimeMessage(session);
-		            message.setFrom(new InternetAddress(username));
-		            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-		            message.setSubject("이메일 테스트");
-		            message.setText("인증번호6자리"
-		            		+ "["+ authorizationKey +"]");
+		try {
+			// 메시지 생성
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(username));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+			message.setSubject("이메일 테스트");
+			message.setText("인증번호6자리" + "[" + authorizationKey + "]");
 
-		            // 메시지 전송
-		            Transport.send(message);
-		            System.out.println("메일 보내기 성공 " + email + " 로 인증번호 [" + authorizationKey +"]");
-		            
-		        } catch (MessagingException e) {
-		            e.printStackTrace();
-		        }
-		        return "redirect:member/join";
+			// 메시지 전송
+			Transport.send(message);
+
+		} catch (MessagingException e) {
+			e.printStackTrace();
 		}
-		
-	//----- 비밀번호 찾기 이메일 발송 --------------------------------------------------------
+		return "redirect:member/join";
+	}
+
+	// ----- 비밀번호 찾기 이메일 발송 --------------------------------------------------------
 	@PostMapping(value = "/findEmailAuth")
-	public String findemailAuth(@RequestParam(value="find_id") String id,
-								@RequestParam(value="find_email") String email,
-							@RequestParam(value="findauthorizationKey") String authorizationKey,
-							MemberDTO memberDTO) {
-		System.out.println("이메일 페이지 도착");
-		 final String username = "rlatkdcjf86@naver.com";
-	     final String password = "Da357159";
-	        // SMTP 서버 설정
-	        Properties props = new Properties();
-	        props.put("mail.smtp.auth", "true");
-	        props.put("mail.smtp.starttls.enable", "true");
-	        props.put("mail.smtp.host", "smtp.naver.com");
-	        props.put("mail.smtp.port", "587");
+	public String findemailAuth(@RequestParam(value = "find_id") String id,
+			@RequestParam(value = "find_email") String email,
+			@RequestParam(value = "findauthorizationKey") String authorizationKey, MemberDTO memberDTO) {
+		final String username = "rlatkdcjf86@naver.com";
+		final String password = "Da357159";
+		// SMTP 서버 설정
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.naver.com");
+		props.put("mail.smtp.port", "587");
 
-	        // 세션 생성
-	        Session session = Session.getInstance(props, new Authenticator() {
-	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication(username, password);
-	            }
-	        });
+		// 세션 생성
+		Session session = Session.getInstance(props, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
 
-	        try {
-	            // 메시지 생성
-	            Message message = new MimeMessage(session);
-	            message.setFrom(new InternetAddress(username));
-	            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-	            message.setSubject("이메일 테스트");
-	            message.setText("임시 비밀번호"
-	            		+ "["+ authorizationKey +"]" + " 로그인 후에 비밀번호를 변경을 해주세요");
-	           
-	            // 기존 비밀번호를 임시 비밀번호로 변경
-	            MemberDTO member = memberService.getMemberByIdEmail(id, email);
-	            System.out.println(email);
-	            member.setPassword(bCryptPasswordEncoder.encode(authorizationKey));
-	            memberService.changePassword(member);
-	            System.out.println(member.getPassword());
-	           
-	            // 메시지 전송
-	            Transport.send(message);
-	            System.out.println("메일 보내기 성공 " + email + " 로 인증번호 [" + authorizationKey +"]");
-	         
-	           
-	        } catch (MessagingException e) {
-	            e.printStackTrace();
-	        }
-	        return "redirect:/";
+		try {
+			// 메시지 생성
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(username));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+			message.setSubject("이메일 테스트");
+			message.setText("임시 비밀번호" + "[" + authorizationKey + "]" + " 로그인 후에 비밀번호를 변경을 해주세요");
+
+			// 기존 비밀번호를 임시 비밀번호로 변경
+			MemberDTO member = memberService.getMemberByIdEmail(id, email);
+			member.setPassword(bCryptPasswordEncoder.encode(authorizationKey));
+			memberService.changePassword(member);
+		
+			// 메시지 전송
+			Transport.send(message);
+	
+		} catch (MessagingException e) {
+			e.printStackTrace();
 		}
+		return "redirect:/";
+	}
 }
