@@ -31,20 +31,25 @@ public class BoardController {
 	@Autowired
 	public ReplyService replyService;
 
-	@GetMapping("/csboard")
-	public String csBoardView(BoardDTO boardDTO, Model model, Criteria cri, HttpSession session) {
-		System.out.println("boardList controller");
-		List<BoardDTO> boardList = boardService.getBoardList(cri);
+	@RequestMapping("/csboard")
+	public String csBoardView(BoardDTO boardDTO, Model model, Criteria cri, HttpSession session,
+			@RequestParam(value="condition", defaultValue="board_title") String condition,
+			@RequestParam(value="keyword", defaultValue="") String keyword) {
 		
-		int total = boardService.totalCnt();
+		
+		System.out.println("boardList controller");
+		System.out.println("con= "+condition +", key= "+keyword);
+		
+		List<BoardDTO> boardList = boardService.getBoardList(cri, condition, keyword);
+		session.setAttribute("keyword", keyword);
+		session.setAttribute("condition", condition);
+		session.setAttribute("getPageNum", cri.getPageNum());
+		
+		int total = boardService.totalCnt(condition, keyword);
 		PageMaker pageMaker = new PageMaker(cri, total);
 		System.out.println(boardList);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("paging", pageMaker);
-		System.out.println(pageMaker);
-	//	String countReply = replyService.countReply();
-		
-		//model.addAttribute("countReply", countReply);
 		return "board/csboard";
 
 	}
@@ -57,11 +62,13 @@ public class BoardController {
 		BoardDTO board = boardService.getBoard(board_number);
 		List<ReplyDTO> replyList = replyService.getReplyList(board_number);
 		String countReply = replyService.countReply(board_number);
+		
 
 		// 댓글 수 업데이트
 		boardService.updateReplyCount(board_number);
 		
 		session.setAttribute("board_number", board_number);
+		session.getAttribute(countReply);
 		
 		// 글 상세정보 저장
 		model.addAttribute("board", board);
@@ -89,9 +96,11 @@ public class BoardController {
 		boardDTO.setBoard_writer(id);
 
 		boardService.insertBoard(boardDTO);
-
-		List<BoardDTO> boardList = boardService.getBoardList(cri);
-		int total = boardService.totalCnt();
+		String condition = (String)session.getAttribute("condition");
+		String keyword = (String)session.getAttribute("keyword");
+		
+		List<BoardDTO> boardList = boardService.getBoardList(cri, condition, keyword);
+		int total = boardService.totalCnt(condition, keyword);
 		PageMaker pageMaker = new PageMaker(cri, total);
 
 		model.addAttribute("boardList", boardList);
@@ -113,9 +122,11 @@ public class BoardController {
 		boardDTO.setBoard_number((String) session.getAttribute("board_number"));
 		boardService.updateBoard(boardDTO);
 		String board_number = (String)session.getAttribute("board_number");
+		String condition = (String)session.getAttribute("condition");
+		String keyword = (String)session.getAttribute("keyword");
 		
-		List<BoardDTO> boardList = boardService.getBoardList(cri);
-		int total = boardService.totalCnt();
+		List<BoardDTO> boardList = boardService.getBoardList(cri, condition, keyword);
+		int total = boardService.totalCnt(condition, keyword);
 		PageMaker pageMaker = new PageMaker(cri, total);
 
 		model.addAttribute("boardList", boardList);
@@ -128,9 +139,11 @@ public class BoardController {
 	public String deleteBoard(BoardDTO boardDTO, HttpSession session, Model model, Criteria cri) {
 		boardDTO.setBoard_number((String) session.getAttribute("board_number"));
 		boardService.deleteBoard(boardDTO);
-
-		List<BoardDTO> boardList = boardService.getBoardList(cri);
-		int total = boardService.totalCnt();
+		String condition = (String)session.getAttribute("condition");
+		String keyword = (String)session.getAttribute("keyword");
+		
+		List<BoardDTO> boardList = boardService.getBoardList(cri, condition, keyword);
+		int total = boardService.totalCnt(condition, keyword);
 		PageMaker pageMaker = new PageMaker(cri, total);
 
 		model.addAttribute("boardList", boardList);

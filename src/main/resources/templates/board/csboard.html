@@ -26,6 +26,17 @@
 
 		<table class="table-sriped" style="margin-bottom: 20px;">
 			<thead>
+				<tr class="boardSearch" style="text-align: center;">
+					<td colspan="4">
+						<select class="searchBoardcondition" name="searchBoardcondition" id="searchBoardcondition">
+						    <option value="board_title">제목</option>
+						    <option value="board_writer">작성자</option>
+						    <option value="board_content">내용</option>
+				  		</select>
+						<input type="text" class="keyword" id="keyword" name="keyword">
+						<button type="button" class="button1" style="height: 30px; font-size: small;" onclick="searchBoardButton()">검색</button>
+					</td>
+				</tr>
 				<tr>
 					<td style="width: 40px; text-align: center;" scope="col">No</td>
 					<td style="width: 300px; text-align: center;" scope="col">제목</td>

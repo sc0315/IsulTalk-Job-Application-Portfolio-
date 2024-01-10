@@ -140,32 +140,55 @@ function goMyFriendProfile() {
 /**------------------------------------------------------------------------------------------------------------------------------------
  *	 게시판 (고객센터)
  */
- 
-	function csboardView() {
-	
-			$.ajax({
-		    url : "csboard",
-		    dataType : "html",
-		    type : "get",  
-		    success : function(result){
-				
-		        $("#chat").html(result);
-		    }
-			});
+ 	
+// 게시판 검색
+	function searchBoardButton() {
 		
-	}	
+	    var condition = document.getElementById("searchBoardcondition").value;
+	    var keyword = document.getElementById("keyword").value;   
+   		csboardView(condition, keyword);
+// 검색용 게시판 리스트
+	function csboardView(condition, keyword) {  
+		console.log();
+	    $.ajax({
+	        url: "csboard",
+	        dataType: "html",
+	        type: "post",
+	        data:{condition:condition, keyword:keyword},
+	        success: function (result) {
+	            $("#chat").html(result);
+	        }
+	        
+	    });
+	}   
+	}
+	
+// 게시판 화면
+	function csboardView(condition, keyword, pageNum) {
+		console.log();
+	    $.ajax({
+	        url: "csboard",
+	        dataType: "html",
+	        type: "post",
+	        data:{condition:condition, keyword:keyword, pageNum:pageNum},
+	        success: function (result) {
+	            $("#chat").html(result);
+	        }
+	        
+	    });
+	}
 
 // 글 상세정보
 	function getBoardForm(event){
 	var clickedRow = event.currentTarget;
 	
 	var board_number = clickedRow.querySelector(".board_number").value;
-    	console.log(board_number);
+	
 		$.ajax({
 		    url : "getBoardForm",
 		    dataType : "text",
 		    type : "get",  
-		    data : {board_number:board_number },   // 호출할 url 에 있는 페이지로 넘길 파라메터
+		    data : {board_number:board_number},   // 호출할 url 에 있는 페이지로 넘길 파라메터
 		    success : function(result){
 				
 		        $("#chat").html(result);
@@ -194,14 +217,14 @@ function goMyFriendProfile() {
             type: "post",
             data: $('#insertform').serialize(),
             
-            success: function(result){
+            success: function(){
 				
                alert("글이 등록되었습니다.");
              	
             $.ajax({
 			    url : "csboard",
 			    dataType : "html",
-			    type : "get",  
+			    type : "get", 
 			    success : function(result){
 			        $("#chat").html(result);
 			    }

@@ -6,16 +6,25 @@
   <mapper namespace="com.isul.board.BoardDAO">
   
   	<select id="getBoardList" resultType="com.isul.dto.BoardDTO">
-		 <![CDATA[
-			SELECT rn, board_number, board_title, board_content, board_writer,
-						 board_createdate, board_updatedate, reply_count
-			FROM	(SELECT
-						rownum rn, board_number, board_title, board_content, board_writer,
-						 board_createdate, board_updatedate, reply_count
-					from csboard where rownum <= #{pageNum} * #{amount} ORDER BY board_number DESC)
-			where rn > (#{pageNum}-1) * #{amount}
-			ORDER BY board_number DESC
-		]]>
+	    <![CDATA[
+	    SELECT rn, board_number, board_title, board_content, board_writer,
+	           board_createdate, board_updatedate, reply_count
+	    FROM (
+	        SELECT rownum rn, board_number, board_title, board_content, board_writer,
+	               board_createdate, board_updatedate, reply_count
+	        FROM (
+	            SELECT board_number, board_title, board_content, board_writer,
+	                   board_createdate, board_updatedate, reply_count
+	            FROM csboard
+	            WHERE rownum <= #{cri.pageNum} * #{cri.amount}
+	            AND ${condition} LIKE '%'||#{keyword}||'%'
+	            ORDER BY board_number DESC
+	        )
+	        WHERE rownum <= (#{cri.pageNum} * #{cri.amount})
+	    )
+	    WHERE rn > (#{cri.pageNum} - 1) * #{cri.amount}
+	    ORDER BY board_number DESC
+	    ]]>
 	</select>
 	
  	<select id="getBoard" resultType="com.isul.dto.BoardDTO">
@@ -43,11 +52,18 @@
 	<select id="totalCnt" resultType="int">
 		SELECT count(*)
 		FROM csboard
+		WHERE #{condition} LIKE '%'||#{keyword}||'%'
 	</select>
 	
 	<update id="updateReplyCount" parameterType="string">
-	update csboard b
-	set b.reply_count = (select count(reply_number) from csreply where board_number = #{board_number})
-	where b.board_number = #{board_number}
-</update>
+	UPDATE csboard b
+	SET b.reply_count = (SELECT count(reply_number) FROM csreply WHERE board_number = #{board_number})
+	WHERE b.board_number = #{board_number}
+	</update>
+	
+	<select id="searchBoard" resultType="com.isul.dto.BoardDTO">
+		SELECT board_number, board_title, board_writer, board_updatedate 
+		FROM csboard 
+		WHERE ${condition} LIKE '%' || #{keyword} }} '%' 
+	</select>
   </mapper>

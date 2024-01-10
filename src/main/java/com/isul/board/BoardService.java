@@ -15,8 +15,8 @@ public class BoardService {
 	@Autowired
 	public BoardDAO boardDAO;
 	
-	public List<BoardDTO> getBoardList(Criteria paging){
-		return boardDAO.getBoardList(paging);
+	public List<BoardDTO> getBoardList(Criteria cri, String condition, String keyword){
+		return boardDAO.getBoardList(cri, condition, keyword);
 	}
 	
 	public BoardDTO getBoard(String board_number) {
@@ -34,11 +34,14 @@ public class BoardService {
 	public void deleteBoard(BoardDTO boardDTO) {
 		boardDAO.deleteBoard(boardDTO);
 	}
-	public int totalCnt() {
-		return boardDAO.totalCnt();
+	public int totalCnt(String condition, String keyword) {
+		return boardDAO.totalCnt(condition, keyword);
 	}
 	public void updateReplyCount(String board_number) {
 		 boardDAO.updateReplyCount(board_number);
 	}
 	
+	public List<BoardDTO> searchBoard(String condition, String keyword){
+		return boardDAO.searchBoard(condition, keyword);
+	}
 }
