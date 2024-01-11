@@ -44,4 +44,8 @@ public class BoardService {
 	public List<BoardDTO> searchBoard(String condition, String keyword){
 		return boardDAO.searchBoard(condition, keyword);
 	}
+	
+	public int boardViewCount(String board_number) {
+		return boardDAO.boardViewCount(board_number);
+	}
 }

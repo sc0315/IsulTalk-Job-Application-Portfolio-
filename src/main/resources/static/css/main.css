@@ -556,6 +556,13 @@ h3 {
 	width:100px;
 }
 
+.text{
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    display: inline-block;
+}
 .currentPage:link,visited{
     background-color: lightgrey;;
     padding-left: 4px;

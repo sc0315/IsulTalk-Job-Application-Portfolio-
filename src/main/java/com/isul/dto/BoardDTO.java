@@ -15,5 +15,6 @@ public class BoardDTO {
 	private Date board_updatedate;        
 	private String board_secret;  
 	private int reply_count;
+	private int board_viewcount;
 	
 }

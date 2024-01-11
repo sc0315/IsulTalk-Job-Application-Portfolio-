@@ -21,4 +21,5 @@ public interface BoardDAO {
 	int totalCnt(String condition, String keyword);
 	public void updateReplyCount(String board_number);
 	public List<BoardDTO> searchBoard(String condition, String keyword);
+	public int boardViewCount(String board_number);
 }

@@ -8,13 +8,13 @@
   	<select id="getBoardList" resultType="com.isul.dto.BoardDTO">
 	    <![CDATA[
 	    SELECT rn, board_number, board_title, board_content, board_writer,
-	           board_createdate, board_updatedate, reply_count
+	           board_createdate, board_updatedate, reply_count, board_viewcount
 	    FROM (
 	        SELECT rownum rn, board_number, board_title, board_content, board_writer,
-	               board_createdate, board_updatedate, reply_count
+	               board_createdate, board_updatedate, reply_count, board_viewcount
 	        FROM (
 	            SELECT board_number, board_title, board_content, board_writer,
-	                   board_createdate, board_updatedate, reply_count
+	                   board_createdate, board_updatedate, reply_count, board_viewcount
 	            FROM csboard
 	            WHERE rownum <= #{cri.pageNum} * #{cri.amount}
 	            AND ${condition} LIKE '%'||#{keyword}||'%'
@@ -66,4 +66,10 @@
 		FROM csboard 
 		WHERE ${condition} LIKE '%' || #{keyword} }} '%' 
 	</select>
+	
+	<update id="boardViewCount">
+		UPDATE csboard
+		SET board_viewcount = board_viewcount+1
+		WHERE board_number = #{board_number}
+	</update>
   </mapper>

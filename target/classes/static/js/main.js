@@ -145,7 +145,7 @@ function goMyFriendProfile() {
 	function searchBoardButton() {
 		
 	    var condition = document.getElementById("searchBoardcondition").value;
-	    var keyword = document.getElementById("keyword").value;   
+	    var keyword = document.getElementById("keyword").value;
    		csboardView(condition, keyword);
 // 검색용 게시판 리스트
 	function csboardView(condition, keyword) {  
@@ -165,7 +165,6 @@ function goMyFriendProfile() {
 	
 // 게시판 화면
 	function csboardView(condition, keyword, pageNum) {
-		console.log();
 	    $.ajax({
 	        url: "csboard",
 	        dataType: "html",
@@ -270,7 +269,7 @@ function goMyFriendProfile() {
 			dataType:"html",
 			type:"get",
 			data:$("updateform").serialize(),
-			success : function(result){
+			success : function(){
 				alert("글이 삭제되었습니다.");
 				
 		$.ajax({

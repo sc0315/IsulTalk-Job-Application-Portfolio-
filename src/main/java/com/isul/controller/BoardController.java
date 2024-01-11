@@ -2,6 +2,9 @@ package com.isul.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,14 +59,40 @@ public class BoardController {
 
 	@GetMapping("/getBoardForm")
 	public String getBoard(BoardDTO boardDTO, Model model, @RequestParam("board_number") String board_number,
-			HttpSession session, ReplyDTO replyDTO) {
+			HttpSession session, ReplyDTO replyDTO, HttpServletRequest request, HttpServletResponse response) {
 		
 		System.out.println("getBoard controller");
 		BoardDTO board = boardService.getBoard(board_number);
 		List<ReplyDTO> replyList = replyService.getReplyList(board_number);
 		String countReply = replyService.countReply(board_number);
 		
+		Cookie oldCookie = null;
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+		    for (Cookie cookie : cookies) {
+		        if (cookie.getName().equals("postView")) {
+		            oldCookie = cookie;
+		        }
+		    }
+		}
 
+		if (oldCookie != null) {
+		    if (!oldCookie.getValue().contains("[" + board_number.toString() + "]")) {
+		        boardService.boardViewCount(board_number);
+		        oldCookie.setValue(oldCookie.getValue() + "_[" + board_number + "]");
+		        oldCookie.setPath("/");
+		        oldCookie.setMaxAge(60 * 60 * 24);
+		        response.addCookie(oldCookie);
+		    }
+		} else {
+		    boardService.boardViewCount(board_number);
+		    Cookie newCookie = new Cookie("postView", "[" + board_number + "]");
+		    newCookie.setPath("/");
+		    newCookie.setMaxAge(60 * 60 * 24);
+		    response.addCookie(newCookie);
+		}
+
+	        
 		// 댓글 수 업데이트
 		boardService.updateReplyCount(board_number);
 		
