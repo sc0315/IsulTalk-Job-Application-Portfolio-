@@ -38,10 +38,14 @@ public class ReplyController {
 		replyDTO.setReply_writer(id);
 		replyService.insertReply(replyDTO);
 
-		List<BoardDTO> boardList = boardService.getBoardList(cri);
-		int total = boardService.totalCnt();
-		PageMaker pageMaker = new PageMaker(cri, total);
+		String condition = (String)session.getAttribute("condition");
+		String keyword = (String)session.getAttribute("keyword");
+		
+		List<BoardDTO> boardList = boardService.getBoardList(cri, condition, keyword);
+		int total = boardService.totalCnt(condition, keyword);
 
+		PageMaker pageMaker = new PageMaker(cri, total);
+	
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("paging", pageMaker);
 		System.out.println("인설트 끝");
@@ -58,8 +62,9 @@ public class ReplyController {
 	}
 
 	@PostMapping("/reinsertReply")
-	public String reinsertReply(ReplyDTO replyDTO, HttpSession session, Model model, Criteria cri,
-			@RequestParam("board_number") String board_number) {
+
+	public String reinsertReply(ReplyDTO replyDTO, HttpSession session, Model model, Criteria cri, @RequestParam("board_number") String board_number){
+
 		System.out.println("대댓글insertReply controller");
 		String id = (String) session.getAttribute("loginId");
 
@@ -67,8 +72,11 @@ public class ReplyController {
 
 		replyService.reinsertReply(replyDTO);
 		System.out.println(replyDTO.getReply_level());
-		List<BoardDTO> boardList = boardService.getBoardList(cri);
-		int total = boardService.totalCnt();
+		String condition = (String)session.getAttribute("condition");
+		String keyword = (String)session.getAttribute("keyword");
+		
+		List<BoardDTO> boardList = boardService.getBoardList(cri, condition, keyword);
+		int total = boardService.totalCnt(condition, keyword);
 		PageMaker pageMaker = new PageMaker(cri, total);
 
 		model.addAttribute("boardList", boardList);
