@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div th:fragment="profile"
-		style="height: 855px; width: 550px; background-color: white; position: relative;">
+		style="height: 855px; width: 545px; background-color: white; position: relative;">
 		<div class="profileBackImage"
 			th:style="'background-image:url('+ ${profile.background_img} +');'">
 
@@ -18,9 +18,9 @@
 			<div class="profileStatusChat">
 				<div class="openChatName" th:if="${profile.id == session.loginId}" >대화명<br>변경</div>
 					<div class="modalChatName hidden">
-					 	<input id="changeChatName" type="text">
-					 	<input class="changeChatName" type="button" value="확인">
-					 	<input class="closeChatName" type="button" value="취소">
+					 	<input id="changeChatName" type="text"> &nbsp;
+					 	<input class="changeChatName bbtn" type="button" value="확인"> &nbsp;
+					 	<input class="closeChatName bbtn" type="button" value="취소">
 					</div>
 					<script>
 					const openChatName = document.querySelector('.openChatName');
@@ -58,9 +58,9 @@
 				
 				<div class="openStatusMessage" th:if="${profile.id == session.loginId}">상태메세지<br>변경</div>
 					<div class="modalStatusMessage hidden">
-					 	<input id="changeStatusMessage"type="text">
-					 	<input class="changeStatusMessage"type="button" value="확인">
-					 	<input class="closeStatusMessage" type="button" value="취소">
+					 	<input id="changeStatusMessage" type="text"> &nbsp;
+					 	<input class="changeStatusMessage bbtn"type="button" value="확인"> &nbsp;
+					 	<input class="closeStatusMessage bbtn" type="button" value="취소">
 					</div>
 					<script>
 					const openStatusMessage = document.querySelector('.openStatusMessage');
@@ -95,8 +95,119 @@
 						modalStatusMessage.classList.add('hidden');
 					}
 					</script>
-				<div class="profileStatusChatChild" th:if="${profile.id == session.loginId}" onclick="changeProfileImg()">프로필사진<br>변경</div>
-				<div class="profileStatusChatChild" th:if="${profile.id == session.loginId}" onclick="changeBackImg()">배경사진<br>변경</div>
+					
+					
+					
+					
+				<div class="openProfileImage" th:if="${profile.id == session.loginId}" >프로필사진<br>변경</div>
+					<div class="modalProfileImage hidden">	
+						<form th:action="@{main/profileImageUpload}" method="post" enctype="multipart/form-data">
+					       <input id="changeProfileImage" type="file" name="profileImageFile" accept=".jpg,.png,.gif,.jpeg">
+					       <input class="changeProfileImage bbtn" type="button" value="확인">
+					       <input class="closeProfileImage bbtn" type="button" value="취소">
+					       
+					    </form>
+					</div>
+				
+				<script>
+					const openProfileImage = document.querySelector('.openProfileImage');
+					const closeProfileImage = document.querySelector('.closeProfileImage');
+					const modalProfileImage = document.querySelector('.modalProfileImage');
+					const changeProfileImage = document.querySelector('.changeProfileImage');
+					
+					openProfileImage.addEventListener('click', vProfileImage);
+					closeProfileImage.addEventListener('click', hProfileImage);
+					changeProfileImage.addEventListener('click', aProfileImage);
+					
+					function aProfileImage() {
+						var fileInput = document.querySelector('input[name="profileImageFile"]');
+				        var file = fileInput.files[0];
+
+				        if (file) {
+				            var formData = new FormData();
+				            formData.append('file', file);
+				            $.ajax({
+				                url: '/main/profileImageUpload',
+				                type: 'POST',
+				                data: formData,
+				                processData: false,
+				                contentType: false,
+				                success: function () {
+				                },
+				                error: function (error) {
+				                    // 업로드 실패 시 처리
+				                    console.error('프로필 이미지 업로드 오류:', error);
+				                }
+				            });
+				            alert("프로필 이미지를 변경했습니다.");
+							location.reload();
+				        }
+					}
+					function vProfileImage() {
+						modalProfileImage.classList.remove('hidden');
+						modalProfileImage.classList.add('visible');
+					}
+					function hProfileImage() {
+						modalProfileImage.classList.remove('visible');
+						modalProfileImage.classList.add('hidden');
+					}
+					</script>
+					
+					
+					
+					
+				<div class="openBackImage" th:if="${profile.id == session.loginId}" >배경사진<br>변경</div>
+					<div class="modalBackImage hidden">
+						<form th:action="@{main/backImageUpload}" method="post" enctype="multipart/form-data">
+					        <input id="changeBackImage" type="file" name="backImageFile" accept=".jpg,.png,.gif,.jpeg">
+					       <input class="changeBackImage bbtn" type="button" value="확인">
+					       <input class="closeBackImage bbtn" type="button" value="취소">
+					    </form>
+					</div>	
+				
+				<script>
+					const openBackImage = document.querySelector('.openBackImage');
+					const closeBackImage = document.querySelector('.closeBackImage');
+					const modalBackImage = document.querySelector('.modalBackImage');
+					const changeBackImage = document.querySelector('.changeBackImage');
+					
+					openBackImage.addEventListener('click', vBackImage);
+					closeBackImage.addEventListener('click', hBackImage);
+					changeBackImage.addEventListener('click', aBackImage);
+					
+					function aBackImage() {
+						var fileInput = document.querySelector('input[name="backImageFile"]');
+						var file = fileInput.files[0];
+
+					        if (file) {
+					            var formData = new FormData();
+					            formData.append('file', file);
+					            $.ajax({
+					                url: '/main/backImageUpload',
+					                type: 'POST',
+					                data: formData,
+					                processData: false,
+					                contentType: false,
+					                success: function () {
+					                },
+					                error: function (error) {
+					                    // 업로드 실패 시 처리
+					                    console.error('프로필 이미지 업로드 오류:', error);
+					                } 
+					            });     
+					            alert("배경 이미지를 변경했습니다.");
+								location.reload();
+					        }
+					}
+					function vBackImage() {
+						modalBackImage.classList.remove('hidden');
+						modalBackImage.classList.add('visible');
+					}
+					function hBackImage() {
+						modalBackImage.classList.remove('visible');
+						modalBackImage.classList.add('hidden');
+					}
+					</script>
 			</div>
 			<div class="profileStatusNick" th:text="${profile.nick_name}">
 				대화명 

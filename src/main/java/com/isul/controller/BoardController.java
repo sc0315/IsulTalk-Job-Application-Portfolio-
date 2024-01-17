@@ -41,6 +41,7 @@ public class BoardController {
 		
 		
 		System.out.println("boardList controller");
+
 		System.out.println("con= "+condition +", key= "+keyword);
 		
 		List<BoardDTO> boardList = boardService.getBoardList(cri, condition, keyword);
@@ -49,18 +50,22 @@ public class BoardController {
 		session.setAttribute("getPageNum", cri.getPageNum());
 		
 		int total = boardService.totalCnt(condition, keyword);
+
 		PageMaker pageMaker = new PageMaker(cri, total);
 		System.out.println(boardList);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("paging", pageMaker);
+
 		return "board/csboard";
 
 	}
 
 	@GetMapping("/getBoardForm")
 	public String getBoard(BoardDTO boardDTO, Model model, @RequestParam("board_number") String board_number,
+
 			HttpSession session, ReplyDTO replyDTO, HttpServletRequest request, HttpServletResponse response) {
 		
+
 		System.out.println("getBoard controller");
 		BoardDTO board = boardService.getBoard(board_number);
 		List<ReplyDTO> replyList = replyService.getReplyList(board_number);
@@ -95,18 +100,20 @@ public class BoardController {
 	        
 		// 댓글 수 업데이트
 		boardService.updateReplyCount(board_number);
-		
+
 		session.setAttribute("board_number", board_number);
+
 		session.getAttribute(countReply);
 		
+
 		// 글 상세정보 저장
 		model.addAttribute("board", board);
 		model.addAttribute("replyList", replyList);
 		model.addAttribute("countReply", countReply);
-		
+
 		// 로그인 아이디랑 일치 시 수정/삭제 버튼 보이게
 		model.addAttribute("loginId", session.getAttribute("loginId"));
-	
+
 		System.out.println(replyList);
 
 		return "board/getBoard";
@@ -150,18 +157,20 @@ public class BoardController {
 	public String updateBoard(BoardDTO boardDTO, HttpSession session, Model model, Criteria cri) {
 		boardDTO.setBoard_number((String) session.getAttribute("board_number"));
 		boardService.updateBoard(boardDTO);
+
 		String board_number = (String)session.getAttribute("board_number");
 		String condition = (String)session.getAttribute("condition");
 		String keyword = (String)session.getAttribute("keyword");
 		
 		List<BoardDTO> boardList = boardService.getBoardList(cri, condition, keyword);
 		int total = boardService.totalCnt(condition, keyword);
+
 		PageMaker pageMaker = new PageMaker(cri, total);
 
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("paging", pageMaker);
 
-		return "redirect:/main/getBoardForm?"+ "board_number="+board_number;
+		return "redirect:/main/getBoardForm?" + "board_number=" + board_number;
 	}
 
 	@GetMapping("/deleteBoard")

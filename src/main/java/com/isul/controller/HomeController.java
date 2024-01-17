@@ -14,8 +14,6 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String check(BoardDTO boardDTO) {
-		System.out.println("확인");
-
 		return "index";
 	}
 	

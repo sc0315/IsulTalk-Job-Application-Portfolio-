@@ -1,0 +1,188 @@
+@charset "UTF-8";
+
+
+/* 채팅 방 목록 */
+.chatListTable {
+	  position: absolute;
+	  top : 132px;
+}
+#chatListTitle {
+	margin-left : 15px;
+}
+
+/*채팅창 (인풋부터 시작) */
+.messegeInput {
+	width : 510px;
+	height: 100px;
+	border: 1px solid lightgray;
+    border-radius:5px;
+    position: absolute;
+    bottom : 10px;
+    left : 19px;
+}
+/* 버튼 */
+.button {
+	position: absolute;
+    bottom : 0px;
+    right : 5px;
+	margin : 5px;
+    background-color: #e86479;
+    width : 60px;
+    height : 25px;
+    font-weight: 900;
+    color: #fff;
+    border:none;
+    border-radius:5px;
+ }.button1 {
+	background-color: #e86479;
+	color: #fff;
+	border:none;
+    border-radius:5px;
+    margin: 5px 5px 0px 0px;
+}
+.button:hover {
+	background-color: #ffb6c4;
+	border: 1px solid #e86479;
+}
+.button:active {
+	background-color: #ffb6c4;
+	border: 2px solid #e86479;
+}
+/* 버튼 클래스값으로 불러와야해서 2개로 나눔*/
+.button1:hover {
+	background-color: #ffb6c4;
+	border: 1px solid #e86479;
+}
+.button1:active {
+	background-color: #ffb6c4;
+	border: 2px solid #e86479;
+}
+
+/* 채팅메시지 말풍선 등*/
+.messegeInputArea {
+    width: 500px;
+    border: none;
+    outline: none;
+    resize: none;
+    position: absolute;
+    top : 2px;
+    left : 2px;
+}
+.wrap {
+overflow: scroll;
+overflow-x: hidden;
+width: 550px;
+height: 660px;
+}
+
+.wrap .chatting .textbox {
+    position: relative;
+    display: inline-block;
+    max-width: calc(100% - 70px);
+    padding: 10px;
+    margin-top: 3px;
+    font-size: 13px;
+    border-radius: 15px;
+}
+.wrap .chatting .textbox::before {
+    position: absolute;
+    display: block;
+    top: 0;
+    font-size: 1.5rem;
+}
+.wrap .ch1 .textbox {
+    margin-left: 20px;
+    max-width:300px;
+    background-color: #f2f2f2;
+}
+.wrap .ch1 .textbox::before {
+    left: -15px;
+    content: "◀";
+    color: #f2f2f2;
+}
+.wrap .ch2 {
+    flex-direction: row-reverse;
+	text-align : right;
+}
+.wrap .ch2 .textbox {
+    margin-right: 20px;
+    max-width:300px;
+    background-color: #e86479;
+    color : white;
+}
+.wrap .ch2 .textbox::before {
+    right: -15px;
+    content: "▶";
+    color: #e86479;
+}
+#chatHeader {
+	height : 75px;
+	border-bottom : 1px solid #dee0e6;
+}
+.chatTime {
+	font-size : 10px;
+}
+.timeAlign{
+	vertical-align : bottom;
+}
+.myNick {
+	font-size : 13px;
+	font-weight: bolder;
+	text-align : right;
+	padding-right : 30px;
+	vertical-align : bottom;
+}
+.yourNick {
+	font-size : 13px;
+	font-weight: bolder;
+	text-align : left;
+	padding-left : 30px;
+	vertical-align : bottom;
+}
+.myMessageBox {
+	float : right;
+	margin-right : 15px;
+}
+.yourMessageBox {
+	float : left;
+	margin-left : 10px;
+}	
+
+
+
+/*채팅창 상단 드롭다운*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 545px;
+  height : 75px;
+}
+/* 버튼 */
+.dropdown button {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+/*내용*/
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+/* 내용링크 색변화 */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+/* Change color on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+    
