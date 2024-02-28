@@ -3,7 +3,7 @@
 * {
 	border-collapse: collapse;
 	border-spacing: 0;
-	/*border : 1px solid black;*/ /*간격조절용*/
+	/*border : 1px solid black;*/  /*간격조절용 선 보이기*/
 }
 body {
 	margin : 0px;
