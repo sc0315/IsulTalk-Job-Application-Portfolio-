@@ -341,6 +341,7 @@ a:hover, a:active {
     box-shadow: 0px 0px 10px gray;
     border-radius: 5px;
 }
+
 #changeStatusMessage {
 	color : black;
 }
@@ -358,6 +359,7 @@ a:hover, a:active {
     justify-content: center;
     box-shadow: 0px 0px 10px gray;
     border-radius: 5px;
+
 }
 #changeProfileImage {
 	color : black;

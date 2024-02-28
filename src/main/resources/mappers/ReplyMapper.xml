@@ -32,7 +32,8 @@
   	
   	<!-- 댓글 삭제 -->
   	<delete id="deleteReply">
-		DELETE csreply
+		UPDATE csreply
+		SET reply_writer = '', reply_content = '삭제된 메시지 입니다.', reply_createdate = '', reply_updatedate = ''
 		WHERE reply_number = #{reply_number}
 	</delete>
 	

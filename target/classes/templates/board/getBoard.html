@@ -34,8 +34,9 @@
 		<!-- 글쓴이와 로그인ID가 일치하면 보이는 기능 -->
 		<div class="getBoardUpdate" 
 		 	th:if="${loginId} == ${board.board_writer}">
-			<input type="button" id="button1" class="button1" onclick="csboardView()"
-				value="뒤로가기">
+			<input type="button" id="button1" class="button1"
+		        th:attr="onclick='csboardView(\'' + ${#session.getAttribute('condition')} + '\', \'' + ${#session.getAttribute('keyword')} + '\', ' + ${#session.getAttribute('getPageNum')} + ')'"
+		       value="뒤로가기">
 			<input type="button" id="button1" class="button1" onclick="boardDelete()"
 				value="삭제">
 			<input type="button" id="button1" class="button1" onclick="updateBoardForm()"
@@ -45,7 +46,8 @@
 		<!-- 글쓴이와 로그인ID가 다를 경우 -->
 		<div class="getBoardUpdate" 
 				th:unless="${loginId} == ${board.board_writer}">
-			<input type="button" id="button1" class="button1" onclick="csboardView()"
+			<input type="button" id="button1" class="button1"  
+				th:attr="onclick='csboardView(\'' + ${#session.getAttribute('condition')} + '\', \'' + ${#session.getAttribute('keyword')} + '\', ' + ${#session.getAttribute('getPageNum')} + ')'"
 				value="뒤로가기">
 		</div> 
 		
@@ -72,10 +74,9 @@
 							    [[${replyList.reply_content}]]
 							    <div class="reply_time"> 
 							        [[${#dates.format(replyList.reply_updateDate, 'yy-MM-dd HH:mm')}]]
-							        <a href="#" style="color:white; margin:0px;" class="reply_delete" onclick="return reply_delete(event)">
+							        <a href="#" th:if="${loginId} == ${replyList.reply_writer}" style="color:white; margin:0px;" class="reply_delete" onclick="return reply_delete(event)">
 							            <input type="hidden" class="reply_number" th:value="${replyList.reply_number}" />
 							            <input type="hidden" id="reply_writer" class="reply_writer" th:value="${replyList.reply_writer}" />
-							       
 							            삭제
 							        </a>
 							    </div>
@@ -85,10 +86,9 @@
 							    [[${replyList.reply_content}]]
 							    <div class="reply_time"> 
 							        [[${#dates.format(replyList.reply_updateDate, 'yy-MM-dd HH:mm')}]]
-							        <a href="#" style="color:white; margin:0px;" class="reply_delete" onclick="return reply_delete(event)">
+							        <a href="#" th:if="${loginId} == ${replyList.reply_writer}" style="color:white; margin:0px;" class="reply_delete" onclick="return reply_delete(event)">
 							            <input type="hidden" class="reply_number" id="reply_number" th:value="${replyList.reply_number}" />
 							            <input type="hidden" id="reply_writer" class="reply_writer" th:value="${replyList.reply_writer}" />
-							           
 							            삭제
 							        </a>
 							    </div>

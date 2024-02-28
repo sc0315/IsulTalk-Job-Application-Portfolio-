@@ -13,11 +13,13 @@ import utils.Criteria;
 @Repository
 public interface BoardDAO {
 
-	public List<BoardDTO> getBoardList(Criteria paging );
+	public List<BoardDTO> getBoardList(Criteria cri, String condition, String keyword);
 	public BoardDTO getBoard(String board_number);
 	public void insertBoard(BoardDTO boardDTO);
 	public void updateBoard(BoardDTO boardDTO);
 	public void deleteBoard(BoardDTO boardDTO);
-	int totalCnt();
+	int totalCnt(String condition, String keyword);
 	public void updateReplyCount(String board_number);
+	public List<BoardDTO> searchBoard(String condition, String keyword);
+	public int boardViewCount(String board_number);
 }

@@ -2,6 +2,9 @@ package com.isul.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,37 +34,77 @@ public class BoardController {
 	@Autowired
 	public ReplyService replyService;
 
-	@GetMapping("/csboard")
-	public String csBoardView(BoardDTO boardDTO, Model model, Criteria cri, HttpSession session) {
+	@RequestMapping("/csboard")
+	public String csBoardView(BoardDTO boardDTO, Model model, Criteria cri, HttpSession session,
+			@RequestParam(value="condition", defaultValue="board_title") String condition,
+			@RequestParam(value="keyword", defaultValue="") String keyword) {
+		
+		
 		System.out.println("boardList controller");
-		List<BoardDTO> boardList = boardService.getBoardList(cri);
 
-		int total = boardService.totalCnt();
+		System.out.println("con= "+condition +", key= "+keyword);
+		
+		List<BoardDTO> boardList = boardService.getBoardList(cri, condition, keyword);
+		session.setAttribute("keyword", keyword);
+		session.setAttribute("condition", condition);
+		session.setAttribute("getPageNum", cri.getPageNum());
+		
+		int total = boardService.totalCnt(condition, keyword);
+
 		PageMaker pageMaker = new PageMaker(cri, total);
 		System.out.println(boardList);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("paging", pageMaker);
-		System.out.println(pageMaker);
-		// String countReply = replyService.countReply();
 
-		// model.addAttribute("countReply", countReply);
 		return "board/csboard";
 
 	}
 
 	@GetMapping("/getBoardForm")
 	public String getBoard(BoardDTO boardDTO, Model model, @RequestParam("board_number") String board_number,
-			HttpSession session, ReplyDTO replyDTO) {
+
+			HttpSession session, ReplyDTO replyDTO, HttpServletRequest request, HttpServletResponse response) {
+		
 
 		System.out.println("getBoard controller");
 		BoardDTO board = boardService.getBoard(board_number);
 		List<ReplyDTO> replyList = replyService.getReplyList(board_number);
 		String countReply = replyService.countReply(board_number);
+		
+		Cookie oldCookie = null;
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+		    for (Cookie cookie : cookies) {
+		        if (cookie.getName().equals("postView")) {
+		            oldCookie = cookie;
+		        }
+		    }
+		}
 
+		if (oldCookie != null) {
+		    if (!oldCookie.getValue().contains("[" + board_number.toString() + "]")) {
+		        boardService.boardViewCount(board_number);
+		        oldCookie.setValue(oldCookie.getValue() + "_[" + board_number + "]");
+		        oldCookie.setPath("/");
+		        oldCookie.setMaxAge(60 * 60 * 24);
+		        response.addCookie(oldCookie);
+		    }
+		} else {
+		    boardService.boardViewCount(board_number);
+		    Cookie newCookie = new Cookie("postView", "[" + board_number + "]");
+		    newCookie.setPath("/");
+		    newCookie.setMaxAge(60 * 60 * 24);
+		    response.addCookie(newCookie);
+		}
+
+	        
 		// 댓글 수 업데이트
 		boardService.updateReplyCount(board_number);
 
 		session.setAttribute("board_number", board_number);
+
+		session.getAttribute(countReply);
+		
 
 		// 글 상세정보 저장
 		model.addAttribute("board", board);
@@ -89,9 +132,11 @@ public class BoardController {
 		boardDTO.setBoard_writer(id);
 
 		boardService.insertBoard(boardDTO);
-
-		List<BoardDTO> boardList = boardService.getBoardList(cri);
-		int total = boardService.totalCnt();
+		String condition = (String)session.getAttribute("condition");
+		String keyword = (String)session.getAttribute("keyword");
+		
+		List<BoardDTO> boardList = boardService.getBoardList(cri, condition, keyword);
+		int total = boardService.totalCnt(condition, keyword);
 		PageMaker pageMaker = new PageMaker(cri, total);
 
 		model.addAttribute("boardList", boardList);
@@ -112,10 +157,14 @@ public class BoardController {
 	public String updateBoard(BoardDTO boardDTO, HttpSession session, Model model, Criteria cri) {
 		boardDTO.setBoard_number((String) session.getAttribute("board_number"));
 		boardService.updateBoard(boardDTO);
-		String board_number = (String) session.getAttribute("board_number");
 
-		List<BoardDTO> boardList = boardService.getBoardList(cri);
-		int total = boardService.totalCnt();
+		String board_number = (String)session.getAttribute("board_number");
+		String condition = (String)session.getAttribute("condition");
+		String keyword = (String)session.getAttribute("keyword");
+		
+		List<BoardDTO> boardList = boardService.getBoardList(cri, condition, keyword);
+		int total = boardService.totalCnt(condition, keyword);
+
 		PageMaker pageMaker = new PageMaker(cri, total);
 
 		model.addAttribute("boardList", boardList);
@@ -128,9 +177,11 @@ public class BoardController {
 	public String deleteBoard(BoardDTO boardDTO, HttpSession session, Model model, Criteria cri) {
 		boardDTO.setBoard_number((String) session.getAttribute("board_number"));
 		boardService.deleteBoard(boardDTO);
-
-		List<BoardDTO> boardList = boardService.getBoardList(cri);
-		int total = boardService.totalCnt();
+		String condition = (String)session.getAttribute("condition");
+		String keyword = (String)session.getAttribute("keyword");
+		
+		List<BoardDTO> boardList = boardService.getBoardList(cri, condition, keyword);
+		int total = boardService.totalCnt(condition, keyword);
 		PageMaker pageMaker = new PageMaker(cri, total);
 
 		model.addAttribute("boardList", boardList);

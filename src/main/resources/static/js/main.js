@@ -85,8 +85,6 @@ function goMyFriendProfile() {
 		
 	}	
 		
-
-
 /* 새로운 친구 검색 */
 function searchAddMember() {
 		var condition = document.getElementById("searchCondition").value;
