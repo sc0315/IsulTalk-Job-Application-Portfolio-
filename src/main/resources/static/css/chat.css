@@ -74,7 +74,9 @@ overflow-x: hidden;
 width: 550px;
 height: 660px;
 }
-
+.chatting {
+	min-width:160px;
+}
 .wrap .chatting .textbox {
     position: relative;
     display: inline-block;

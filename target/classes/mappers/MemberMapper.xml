@@ -35,9 +35,9 @@
 		INTO member (id, password, name, phone, email, zipCode, address1, address2, usage, contract, createDate)
 		VALUES (#{id}, #{password}, #{name}, #{phone}, #{email}, #{zipCode}, #{address1}, #{address2},'1','1',sysdate)
 		INTO profile(id, profile_img, background_img, status_message, nick_name)
-
         VALUES (#{id}, '/images/profile/noimage.png','/images/background/noimage.jpg', '상태 메세지가 없습니다.', ' ')
-
+        INTO friend(id, friend_id, friend_approval, friend_block)
+        VALUES(#{id}, #{id}, '1', '0')
         SELECT * FROM DUAL
 	</select>
 

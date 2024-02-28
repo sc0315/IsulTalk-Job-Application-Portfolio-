@@ -45,7 +45,7 @@ function wsEvt() {
 							"<tr>" +
 						    "<td></td>" +
 						    "<td class='myNick'>" +
-						    "<span> &nbsp; &nbsp; &nbsp;</span>" +
+						    "<span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>" +
 						    "<span>" + rcv_data.chatProfile.nick_name + "</span>" +
 						    "</td>" +
 						    "<td rowspan='2'>" +
@@ -77,7 +77,7 @@ function wsEvt() {
 						"			</td>" +
 						"			<td class='yourNick'>" +
 						"				<span style='text-align:left'>" + rcv_data.chatProfile.nick_name + "</span>" +
-						"				<span> &nbsp; &nbsp; &nbsp;</span> " +
+						"				<span> &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;</span> " +
 						"			</td>" +
 						"			<td>" +
 						"			</td>" +

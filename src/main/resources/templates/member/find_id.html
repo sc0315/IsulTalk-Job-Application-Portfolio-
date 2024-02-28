@@ -8,7 +8,12 @@
 <script type="text/javascript" src="/js/login.js"></script>
 
 <style>
-
+a:link, a:visited {
+	text-decoration: none;
+}
+a:hover, a:active {
+	text-decoration: none;
+}
 	
 .head{
 	height: 50px; 
@@ -82,7 +87,7 @@ table{
 </style>
 </head>
 <body style="margin:0px; padding:0px;">
-	<div class="head"><b>아이디/비밀번호 찾기</b></div>
+	<div class="head"><b><a href="/logout" style="color : black;">아이디/비밀번호 찾기</a></b></div>
 	<form action="findphone" id="findphone_id" name="findphone_id" method="post">
 
 		<hr style="margin:0px; padding:0px">

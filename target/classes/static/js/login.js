@@ -2,43 +2,48 @@
  /*
   *	아이디 쿠키 생성,삭제 
   */
- $(document).ready(function(){
-       var key = getCookie("key");	// 쿠키 저장해서 id칸에 넣어줌
-       $("#id").val(key);
-       
-       if ($("#id").val() !== "") {	// id칸이 채워져 있다면 체크박스를 체크 상태로 두기
-           $("#check").attr("checked", true);
-       }
-		// 체크박스에 변화가 있거나 체크박스 체크되어있을때 쿠키 생성
-       $("#check").change(function(){	
-           if ($("#check").is(":checked")) { 
-               setCookie("key", $("#id").val(), 7); // 7일동안 쿠키 보관
-           } else {		// 체크박스 체크 해제 시 쿠키 삭제
-               deleteCookie("key"); 
-           }
-       });
-		var loginId = document.getElementById(loginId);
-		// 아이디저장 체크한 상태에서 id 입력하는 경우 쿠키 생성
-       $("#id").keyup(function(){
-           if ($("#check").is(":checked")) {
-               setCookie("key", $("#id").val(), 7);
-           }
-       }); 
-   });
+document.addEventListener("DOMContentLoaded", function() {
+    var key = getCookie("key");  // 쿠키 저장해서 id칸에 넣어줌
+    var idInput = document.getElementById("id");
+    idInput.value = key;
 
+    if (idInput.value !== "") {  // id칸이 채워져 있다면 체크박스를 체크 상태로 두기
+        document.getElementById("check").checked = true;
+    }
+
+    // 체크박스에 변화가 있거나 체크박스 체크되어있을때 쿠키 생성
+    document.getElementById("check").addEventListener("change", function() {
+        if (document.getElementById("check").checked) {
+            setCookie("key", idInput.value, 7); // 7일동안 쿠키 보관
+        } else {   
+            deleteCookie("key");
+        }
+    });
+
+    // 아이디저장 체크한 상태에서 id 입력하는 경우 쿠키 생성
+    idInput.addEventListener("keyup", function() {
+        if (document.getElementById("check").checked) {
+            setCookie("key", idInput.value, 7);
+        }
+    });
+});
+	
+	// 쿠키 수정
    function setCookie(cookieName, value, exdays) {
        var exdate = new Date();
        exdate.setDate(exdate.getDate() + exdays);
        var cookieValue = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toGMTString());
        document.cookie = cookieName + "=" + cookieValue;
    }
-
+	
+	// 쿠키 삭제
    function deleteCookie(cookieName) {
        var expireDate = new Date();
        expireDate.setDate(expireDate.getDate() - 1);
        document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
    }
-
+   
+	// 쿠키 불러오기
    function getCookie(cookieName) {
        cookieName = cookieName + '=';
        var cookieData = document.cookie;
@@ -132,7 +137,7 @@ function find_send_email() {
             console.error("Error: " + error);
         }
     });
-    alert('인증번호가 전송되었습니다.');
+    alert('임시 비밀번호가 전송되었습니다.');
 }
 function find_id_phone(){
 	var find_phoneCheck = document.getElementById("find_phoneCheck");
